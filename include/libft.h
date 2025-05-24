@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:27:24 by flima             #+#    #+#             */
-/*   Updated: 2025/03/10 15:33:58 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/24 16:48:52 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <stdbool.h>
 # include <stdint.h>
 # include <limits.h>
+# include <stdio.h>
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000
 # endif
