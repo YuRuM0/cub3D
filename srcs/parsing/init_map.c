@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:24:25 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/24 19:18:28 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/24 19:21:58 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ char **read_mapfile(char **argv)
 	return (wholemap);
 }
 
-void grep_map()
+void grep_map(char **wholemap)
 {
-	
+	while (wholemap)
+
 }
 //int main(int argc, char **argv)
 //{

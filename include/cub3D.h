@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/24 16:47:45 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/24 19:23:07 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ typedef struct s_texture
 	char *EA;
 }	t_texture;
 
+//parsing
+//utils
+void free_double(char **s);
+
+//init_map
+char **read_mapfile(char **argv);
 
 
 
