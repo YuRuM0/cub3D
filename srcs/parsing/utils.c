@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/24 21:22:50 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/24 21:49:42 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,26 @@ void struct_init(t_cub_data *data)
 	data->texture->WE = NULL;
 	data->map_info = NULL;
 	data->wholemap = NULL;
+}
+
+t_errno	validate_RGB_values(char **color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (color[i])
+	{
+		j = 0;
+		while (color[i][j])
+		{
+			if (!ft_isdigit(color[i][j]))
+				return (1);//invalid RGB values
+			j++;
+		}
+		i++;			
+	}
+	return (SUCCESS);
 }
 
 void free_double(char **s)

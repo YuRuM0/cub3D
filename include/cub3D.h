@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/24 21:17:01 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/24 21:48:40 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_cub_data
 //utils
 void free_double(char **s);
 void struct_init(t_cub_data *data);
+t_errno	validate_RGB_values(char **color);
 
 //init_map_rep_texture
 void read_mapfile(char **argv, t_cub_data *data);
