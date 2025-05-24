@@ -6,20 +6,22 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:24:25 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/24 21:17:21 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/24 21:58:44 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
+//maybe split
+
 static t_errno grep_text_WE(t_cub_data *data)
 {
 	int	i;
-	
+
 	i = -1;
 	while (data->wholemap[++i])
 	{
-		if (ft_strncmp(data->wholemap[i], "WE", 2) == 0)
+		if (ft_strncmp(data->wholemap[i], "WE ", 3) == 0)
 		{
 			if (data->texture->WE == NULL)
 			{
@@ -41,7 +43,7 @@ static t_errno grep_text_SO(t_cub_data *data)
 	i = -1;
 	while (data->wholemap[++i])
 	{
-		if (ft_strncmp(data->wholemap[i], "SO", 2) == 0)
+		if (ft_strncmp(data->wholemap[i], "SO ", 3) == 0)
 		{
 			if (data->texture->SO == NULL)
 			{
@@ -63,7 +65,7 @@ static t_errno grep_text_NO(t_cub_data *data)
 	i = -1;
 	while (data->wholemap[++i])
 	{
-		if (ft_strncmp(data->wholemap[i], "NO", 2) == 0)
+		if (ft_strncmp(data->wholemap[i], "NO ", 3) == 0)
 		{
 			if (data->texture->NO == NULL)
 			{
@@ -85,7 +87,7 @@ static t_errno grep_text_EA(t_cub_data *data)
 	i = -1;
 	while (data->wholemap[++i])
 	{
-		if (ft_strncmp(data->wholemap[i], "EA", 2) == 0)
+		if (ft_strncmp(data->wholemap[i], "EA ", 3) == 0)
 		{
 			if (data->texture->EA == NULL)
 			{
