@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/24 19:23:07 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/24 20:12:38 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 # define CUB3D_H
 
 #include "libft.h"
+typedef enum e_errno
+{
+	SUCCESS,
+	ERR_MEM_ALLOC
+} 	t_errno;
 
 typedef struct s_cub_data
 {
-	int row;
-	int col;
+	char **wholemap;
+	t_texture *texture;
+	t_colours *colours;
+	t_map	*map_info;
 }	t_cub_data;
 
 typedef struct s_colours
@@ -31,7 +38,6 @@ typedef struct s_colours
 
 typedef struct s_map
 {
-	t_colours	*colours;
 	char		**map_grid;
 }	t_map;
 
@@ -46,11 +52,13 @@ typedef struct s_texture
 //parsing
 //utils
 void free_double(char **s);
+void struct_init(t_cub_data *data);
 
 //init_map
-char **read_mapfile(char **argv);
+char **read_mapfile(char **argv, t_cub_data *data);
 
 
-
+//parse
+void parse(char **argv, t_cub_data *data);
 
 #endif

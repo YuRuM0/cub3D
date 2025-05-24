@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:24:25 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/24 19:21:58 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/24 20:12:48 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int get_file_rows(char **argv)
 	return (i);
 }
 
-char **read_mapfile(char **argv)
+void read_mapfile(char **argv, t_cub_data *data)
 {
 	char **wholemap;
 	int rows;
@@ -53,14 +53,40 @@ char **read_mapfile(char **argv)
 	}
 	wholemap[i] = NULL;
 	close(fd);
-	return (wholemap);
+	data->wholemap = wholemap;
 }
 
-void grep_map(char **wholemap)
+void grep_tex_NO_SO(t_cub_data *data)
 {
-	while (wholemap)
+	int	i;
+	int errno;
+
+	i = -1;
+	while (data->wholemap[++i])
+	{
+		if (data->wholemap[i][0] == '\n')
+			continue;
+		if (ft_strncmp(data->wholemap[i], "NO", 2) == 0)
+		{
+			if (data->texture->NO == NULL)
+				data->texture->NO = ft_strdup(data->wholemap[i]);
+			else
+				
+		}
+		else if (ft_strncmp(data->wholemap[i], "SO", 2) == 0)
+		{
+
+		}
+			data->texture->SO = ft_strdup(data->wholemap[i]);
+		else if (ft_strncmp(data->wholemap[i], "WE", 2) == 0)
+			data->texture->WE = ft_strdup(data->wholemap[i]);
+		else if (ft_strncmp(data->wholemap[i], "EA", 2) == 0)
+			data->texture->EA = ft_strdup(data->wholemap[i]);
+	}
 
 }
+
+
 //int main(int argc, char **argv)
 //{
 //	char **wholemap = read_mapfile(argv);
