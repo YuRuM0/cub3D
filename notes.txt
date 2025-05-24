@@ -2,5 +2,3 @@
 Check C/F colour if b/w range [0, 255]
 Replace space with 1 or let mlx handle (if possible)
 
-Input Checker:
-

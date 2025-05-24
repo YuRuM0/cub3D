@@ -6,7 +6,7 @@
 #    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 21:12:39 by flima             #+#    #+#              #
-#    Updated: 2025/04/04 20:16:54 by yulpark          ###   ########.fr        #
+#    Updated: 2025/05/24 21:12:47 by yulpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ GREEN   = \033[32m
 CC= cc
 
 OBJ_DIR = objs
-CFLAGS = -Wall -Wextra -Werror -g -I../includes
+CFLAGS = -Wall -Wextra -Werror -g -I../include
 
 SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 		ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c \

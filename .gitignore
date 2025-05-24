@@ -1,0 +1,8 @@
+# ignore diff types of binaries
+*.out
+*.o
+*.a
+.vscode
+cub3D
+# ignore any files or testing folders
+/maps/*

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: filipe <filipe@student.42.fr>              +#+  +:+       +#+         #
+#    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/04/26 23:33:49 by filipe           ###   ########.fr        #
+#    Updated: 2025/05/24 21:16:20 by yulpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,31 +17,38 @@ GREEN   = \033[32m
 YELLOW  = \033[33m
 BLUE    = \033[34m
 
-CFLAGS = -Wall -Werror -Wextra -g CFLAGS += -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 
 LIBFT_DIR = Libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-MLX = mlx/libmlx.a
-MLX_FLAGS = -I$(INCLUDES_DIR) -L./mlx -lmlx -lX11 -lXext -lm
-
-INCLUDE = includes
+INCLUDE = include
 HEADERS = $(INCLUDE)/libft.h \
+			$(INCLUDE)/cub3D.h
 
+MLX = mlx/libmlx.a
+MLX_FLAGS = -I$(INCLUDE) #-L./mlx -lmlx -lX11 -lXext -lm
 
-SCRS_DIR = srcs
-SRCS_FILES = 
+SRCS_DIR = srcs
+PARSE_DIR = $(SRCS_DIR)/parsing
+PARSE_FILES = $(PARSE_DIR)/grep_map.c\
+				$(PARSE_DIR)/grep_texture.c\
+				$(PARSE_DIR)/utils.c\
+				$(PARSE_DIR)/parse.c
+
+SRCS_FILES = $(PARSE_FILES) \
+			$(SRCS_DIR)/main.c
 
 OBJS_DIR = objs
-OBJS = $(patsubst $(SCRS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRC_FILES))
+OBJS = $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS_FILES))
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(MLX) $(OBJS) Makefile
+$(NAME): $(LIBFT) $(OBJS) Makefile
 	@$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) $(LIBFT) -I$(INCLUDE) -lreadline -o $(NAME)
 	@echo "\n$(GREEN)minishell  ✅$(RESET)\n"
 
-$(OBJS_DIR)/%.o: $(SCRS_DIR)/%.c $(HEADERS)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(MLX_FLAGS) -I$(INCLUDE) -c $< -o $@
 	@echo "$(GREEN)Compiling: $< into $@$(RESET)"
@@ -54,16 +61,17 @@ $(MLX):
     git clone https://github.com/42Paris/minilibx-linux.git mlx; \
 	fi
 	@$(MAKE) -C mlx
-	
+
 clean:
-	@$(MAKE) --no-print-directory clean -C Libft mlx
+	@$(MAKE) --no-print-directory clean -C Libft
 	@if [ -d $(OBJS_DIR) ]; then \
 		echo "$(YELLOW)Object files have been removed   ✅$(RESET)"; \
 	fi
 	@rm -rf $(OBJS_DIR)
 
 fclean: clean
-	@$(MAKE) --no-print-directory fclean -C Libft mlx
+	@$(MAKE) --no-print-directory fclean -C Libft
+	@$(MAKE) clean -C mlx
 	@rm -f $(NAME)
 	@echo "$(YELLOW)Executable file has been removed ✅$(RESET)"
 

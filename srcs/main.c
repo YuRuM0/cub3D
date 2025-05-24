@@ -6,16 +6,25 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:00:28 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/24 20:00:38 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/24 21:21:04 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3D.h"
+#include "cub3D.h"
 
 int main(int argc, char **argv)
 {
 	t_cub_data *data;
 
+	data = malloc(sizeof(t_cub_data));
+	if (!data)
+		return (ERR_MEM_ALLOC);
+	(void) argc;
+	//check if argv[1] ends with .cub?
 	struct_init(data);
 	parse(argv, data);
+	grep_texture(data);
+	printf("%s\n", data->texture->NO);
+	free(data);
+	return (0);
 }

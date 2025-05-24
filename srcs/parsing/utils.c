@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/24 19:56:40 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/24 21:22:50 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void struct_init(t_cub_data *data)
 {
+	data->colours = malloc(sizeof(t_colours));
+	data->texture = malloc(sizeof(t_texture));
+	if (data->colours == NULL || data->texture == NULL)
+		;
+		//errhandle (ERR_MEM_ALLOC)
 	data->colours->c_colour_str = NULL;
 	data->colours->f_colour_str = NULL;
 	data->texture->EA = NULL;

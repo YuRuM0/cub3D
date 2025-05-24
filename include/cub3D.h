@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/24 20:12:38 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/24 21:17:01 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,12 @@
 typedef enum e_errno
 {
 	SUCCESS,
-	ERR_MEM_ALLOC
+	ERR_MEM_ALLOC,
+	ERR_DUPLICATE,
+	ERR_INVALID_MAP
 } 	t_errno;
 
-typedef struct s_cub_data
-{
-	char **wholemap;
-	t_texture *texture;
-	t_colours *colours;
-	t_map	*map_info;
-}	t_cub_data;
+
 
 typedef struct s_colours
 {
@@ -49,16 +45,26 @@ typedef struct s_texture
 	char *EA;
 }	t_texture;
 
+typedef struct s_cub_data
+{
+	char **wholemap;
+	t_texture *texture;
+	t_colours *colours;
+	t_map	*map_info;
+}	t_cub_data;
+
 //parsing
 //utils
 void free_double(char **s);
 void struct_init(t_cub_data *data);
 
-//init_map
-char **read_mapfile(char **argv, t_cub_data *data);
-
+//init_map_rep_texture
+void read_mapfile(char **argv, t_cub_data *data);
+t_errno grep_texture(t_cub_data *data);
 
 //parse
 void parse(char **argv, t_cub_data *data);
 
+//main
+int main(int argc, char **argv);
 #endif
