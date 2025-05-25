@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:58:51 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/24 21:24:31 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/25 19:31:11 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ void read_mapfile(char **argv, t_cub_data *data)
 	wholemap[i] = NULL;
 	close(fd);
 	data->wholemap = wholemap;
+
 }
 
 void parse(char **argv, t_cub_data *data)
 {
+	t_errno	status;
+	
 	read_mapfile(argv, data);
-	//check return errors
-	if (grep_texture(data) != SUCCESS)
-		//error
-		;
-	//grep_col;
-	//grep_map;
+	status = get_colors(data);
+	if (status != SUCCESS)
+		status_error_handler(data, status);
 }

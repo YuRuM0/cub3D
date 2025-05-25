@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:30:45 by flima             #+#    #+#             */
-/*   Updated: 2025/05/25 17:41:36 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/25 19:40:12 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static t_errno	grep_colors(t_cub_data *data)
 		}
 	}
 	if (data->colours->c_colour_str == NULL || data->colours->f_colour_str == NULL)
-		return (ERR_MISSING_COLOR);
+		return (ERR_MISSING_MAP_ELEMENT);
 	return (SUCCESS);
 }
 
-static t_errno	split_color_values(char *color, char **_color)
+static t_errno	split_color_values(char *color, char ***_color)
 {
 	char	**color_values;
 	int		i;
@@ -53,42 +53,44 @@ static t_errno	split_color_values(char *color, char **_color)
 	while (color_values[i])
 		i++;
 	if (i != 2)
-		return (free_double, ERR_INVALID_COLORS);
-	_color = ft_split(color_values[1], ',');
+		return (free_double(color_values), ERR_INVALID_COLORS);
+	*_color = ft_split(color_values[1], ',');
 	free_double(color_values);
-	if (_color == NULL)
+	if (*_color == NULL)
 		return (ERR_MEM_ALLOC);
 	i = 0;
-	while (_color[i])
+	while ((*_color)[i])
 		i++;
 	if (i != 3)
 		return (ERR_INVALID_COLORS);
 	return (SUCCESS);
 }
 
-t_errno	convert_color_type(int *array, char **color)
+t_errno	convert_color_type(long *array, char ***color)
 {
 	int i;
-	int	j;
 
 	i = -1;
-	if (validate_RGB_values(color) != SUCCESS)
-		return (free_double(color), ERR_INVALID_RBG_VALUES);
-	while (color[++i])
+	if (validate_RGB_values(*color) != SUCCESS)
+		return (free_double(*color), ERR_INVALID_RBG_VALUES);
+	while ((*color)[++i])
 	{
-		array[i] = ft_atoi(color[i]);
-		if (array[i] > INT_MAX || array[i] < INT_MIN)
-			return (free_double(color), ERR_INVALID_RBG_VALUES);
+		array[i] = ft_atol((*color)[i]);
+		if (array[i] > 255 || array[i] < 0)
+			return (free_double(*color), ERR_INVALID_RBG_VALUES);
 	}
-	return (free_double(color), SUCCESS);
+	return (free_double(*color), SUCCESS);
 	
 }
+
 t_errno get_RGB_values(t_cub_data *data)
 {
 	t_errno	status;
 	char	**floor_color;
 	char	**celling_color;
-
+	
+	floor_color = NULL;
+	celling_color = NULL;
 	status = split_color_values(data->colours->f_colour_str, &floor_color);
 	if (status != SUCCESS)
 		return (status);
@@ -101,6 +103,7 @@ t_errno get_RGB_values(t_cub_data *data)
 	status = convert_color_type(data->colours->c_colour, &celling_color);
 	if (status != SUCCESS)
 		return (status);
+	return (SUCCESS);
 }
 
 t_errno get_colors(t_cub_data *data)

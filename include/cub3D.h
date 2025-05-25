@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/25 17:44:41 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/25 20:00:48 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef enum e_errno
 	ERR_MEM_ALLOC,
 	ERR_DUPLICATE, // there more than two required element in map
 	ERR_INVALID_MAP,
-	ERR_MISSING_COLOR, //did not find the one or more color in the map
+	ERR_MISSING_MAP_ELEMENT, //did not find the one or more color in the map
 	ERR_INVALID_COLORS, // colors are not in the format F 000,000,000 (there is sometging else )
 	ERR_INVALID_RBG_VALUES
 } 	t_errno;
@@ -31,8 +31,8 @@ typedef struct s_colours
 {
 	char *f_colour_str;
 	char *c_colour_str;
-	int f_colour[3];
-	int c_colour[3];
+	long f_colour[3];
+	long c_colour[3];
 }	t_colours;
 
 typedef struct s_map
@@ -40,7 +40,7 @@ typedef struct s_map
 	char		**map_grid;
 	int			player_row;
 	int			player_col;
-	int			player_dir;
+	char		player_dir;
 }	t_map;
 
 typedef struct s_texture
@@ -72,6 +72,10 @@ t_errno grep_texture(t_cub_data *data);
 //parse
 void parse(char **argv, t_cub_data *data);
 t_errno get_colors(t_cub_data *data);
+
+//free and error_handlers
+void	status_error_handler(t_cub_data *data, t_errno status);
+void	free_all_data(t_cub_data *data);
 
 //main
 int main(int argc, char **argv);

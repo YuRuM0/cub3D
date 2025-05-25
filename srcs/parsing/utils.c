@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/25 17:45:56 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/25 18:32:17 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void struct_init(t_cub_data *data)
 	data->texture->WE = NULL;
 	data->map_info = NULL;
 	data->wholemap = NULL;
-	data->map_info->player_dir = '0';
+	// data->map_info->player_dir = '0';
 }
 
 t_errno	validate_RGB_values(char **color)
@@ -41,6 +41,8 @@ t_errno	validate_RGB_values(char **color)
 		j = 0;
 		while (color[i][j])
 		{
+			if (j == 3 && color[2][j] == '\n' && color[2][j + 1] == '\0')
+				return (SUCCESS);
 			if (!ft_isdigit(color[i][j]))
 				return (ERR_INVALID_RBG_VALUES);
 			j++;
