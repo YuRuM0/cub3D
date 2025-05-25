@@ -6,12 +6,11 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:30:45 by flima             #+#    #+#             */
-/*   Updated: 2025/05/25 17:37:17 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/25 17:41:36 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-#include <errno.h>
 
 static t_errno	grep_colors(t_cub_data *data)
 {
@@ -24,7 +23,7 @@ static t_errno	grep_colors(t_cub_data *data)
 			return (ERR_MEM_ALLOC);
 		else if (ft_strncmp(data->wholemap[i], "F", 1) == 0)
 		{
-			if (data->colours->f_colour_str == NULL) 
+			if (data->colours->f_colour_str == NULL)
 				data->colours->f_colour_str = ft_strdup(data->wholemap[i]);
 			else
 				return (ERR_DUPLICATE);
@@ -46,7 +45,7 @@ static t_errno	split_color_values(char *color, char **_color)
 {
 	char	**color_values;
 	int		i;
-	
+
 	i = 0;
 	color_values = ft_split(color, ' ');
 	if (color_values == NULL)
@@ -89,7 +88,7 @@ t_errno get_RGB_values(t_cub_data *data)
 	t_errno	status;
 	char	**floor_color;
 	char	**celling_color;
-	
+
 	status = split_color_values(data->colours->f_colour_str, &floor_color);
 	if (status != SUCCESS)
 		return (status);
@@ -116,3 +115,4 @@ t_errno get_colors(t_cub_data *data)
 		return (status);
 	return (SUCCESS);
 }
+
