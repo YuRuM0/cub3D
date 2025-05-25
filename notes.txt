@@ -2,3 +2,10 @@
 Check C/F colour if b/w range [0, 255]
 Replace space with 1 or let mlx handle (if possible)
 
+f0r6s2% ./cub3D maps/best_map.cub
+zsh: segmentation fault (core dumped)  ./cub3D maps/best_map.cub
+	(when no map)
+
+1111
+1EA1   => still valid map, it should detect A.....
+11110ewns

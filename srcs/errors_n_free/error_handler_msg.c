@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 19:00:20 by flima             #+#    #+#             */
-/*   Updated: 2025/05/25 20:01:02 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/25 20:31:03 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void error_msg_strs(char **str)
 {
 	str[0] = "Each identifier (NO, SO, WE, EA, F, C) must appear only once.\n"; //ERR_DUPLICATE
-	str[1] = NULL; //ERR_INVALID_MAP
+	str[1] = "invalid map"; //ERR_INVALID_MAP
 	str[2] = "Missing required map's identifier.\n"; //ERR_MISSING_MAP_ELEMENT
 	str[3] = "Invalid color identfier.\n"; //ERR_INVALID_COLORS
 	str[4] = "Invalid RGB values. Each component must be between 0 and 255.\n"; //ERR_INVALID_RBG_VALUES

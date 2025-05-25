@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_texture_from_map.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:24:25 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/25 19:27:19 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/25 20:26:19 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,6 @@ t_errno grep_texture(t_cub_data *data)
 		return (errno);
 	if (data->texture->EA == NULL || data->texture->NO == NULL
 		|| data->texture->WE == NULL || data->texture->SO == NULL)
-			return (ERR_INVALID_MAP);
+			return (ERR_MISSING_MAP_ELEMENT);
 	return (SUCCESS);
 }

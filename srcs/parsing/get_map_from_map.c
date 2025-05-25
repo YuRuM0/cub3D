@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:02:48 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/25 20:23:57 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/25 20:28:15 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,8 @@ t_errno grep_map(t_cub_data *data)
 	i = -1;
 	get_map_row(data);
 	map_start = find_map_start(data);
+	if (data->map_info->map_row == 0)
+		return(ERR_MISSING_MAP_ELEMENT);
 	if (data->map_info->map_row < 3)
 		return (ERR_INVALID_MAP);
 	data->map_info->map_grid = malloc(sizeof(char *) * data->map_info->map_row + 1);
