@@ -6,11 +6,11 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:30:45 by flima             #+#    #+#             */
-/*   Updated: 2025/05/25 19:40:12 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/25 20:08:02 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3D.h"
+#include "cub3D.h"
 
 static t_errno	grep_colors(t_cub_data *data)
 {
@@ -33,7 +33,7 @@ static t_errno	grep_colors(t_cub_data *data)
 			if (data->colours->c_colour_str == NULL)
 				data->colours->c_colour_str = ft_strdup(data->wholemap[i]);
 			else
-				return (ERR_DUPLICATE);		
+				return (ERR_DUPLICATE);
 		}
 	}
 	if (data->colours->c_colour_str == NULL || data->colours->f_colour_str == NULL)

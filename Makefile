@@ -6,7 +6,7 @@
 #    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/05/25 20:03:27 by flima            ###   ########.fr        #
+#    Updated: 2025/05/25 20:06:51 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,8 @@ MLX_FLAGS = -I$(INCLUDE) #-L./mlx -lmlx -lX11 -lXext -lm
 
 SRCS_DIR = srcs
 PARSE_DIR = $(SRCS_DIR)/parsing
-PARSE_FILES = $(PARSE_DIR)/grep_map.c\
-				$(PARSE_DIR)/grep_texture.c\
+PARSE_FILES = $(PARSE_DIR)/get_map_from_map.c\
+				$(PARSE_DIR)/get_texture_from_map.c\
 				$(PARSE_DIR)/utils.c\
 				$(PARSE_DIR)/parse.c\
 				$(PARSE_DIR)/get_colors_from_map.c
@@ -52,6 +52,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS) Makefile
 	@$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) $(LIBFT) -I$(INCLUDE) -lreadline -o $(NAME)
+	@echo "\n$(GREEN)cub3D  ✅$(RESET)\n"
 	@echo "\n$(GREEN)cub3D  ✅$(RESET)\n"
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)

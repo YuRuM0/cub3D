@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/25 20:00:48 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/25 20:07:21 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct s_map
 	int			player_row;
 	int			player_col;
 	char		player_dir;
+	int			map_row;
+	int			map_col;
 }	t_map;
 
 typedef struct s_texture
@@ -64,18 +66,18 @@ typedef struct s_cub_data
 void free_double(char **s);
 void struct_init(t_cub_data *data);
 t_errno	validate_RGB_values(char **color);
-
-//init_map_rep_texture
-void read_mapfile(char **argv, t_cub_data *data);
-t_errno grep_texture(t_cub_data *data);
+int	find_map_start(t_cub_data *data);
 
 //parse
+void read_mapfile(char **argv, t_cub_data *data);
 void parse(char **argv, t_cub_data *data);
 t_errno get_colors(t_cub_data *data);
 
 //free and error_handlers
 void	status_error_handler(t_cub_data *data, t_errno status);
 void	free_all_data(t_cub_data *data);
+t_errno grep_map(t_cub_data *data);
+t_errno grep_texture(t_cub_data *data);;
 
 //main
 int main(int argc, char **argv);
