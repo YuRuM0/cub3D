@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/25 15:54:35 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/25 17:27:27 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ typedef enum e_errno
 	ERR_INVALID_MAP
 } 	t_errno;
 
-
-
 typedef struct s_colours
 {
 	char *f_colour_str;
@@ -37,6 +35,9 @@ typedef struct s_colours
 typedef struct s_map
 {
 	char		**map_grid;
+	int			player_row;
+	int			player_col;
+	int			player_dir;
 }	t_map;
 
 typedef struct s_texture

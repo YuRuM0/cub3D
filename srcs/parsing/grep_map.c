@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:02:48 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/24 21:59:43 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/25 17:41:53 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,48 @@ int	find_map_row(t_cub_data *data)
 	return (i);
 }
 
+//wall surrounding
+	//if space, mustbe surrounded by 1s
+	//if 0, not first line nor last lines
+//one player make a struct?
+int check_player_location(t_cub_data *data, char **map_grid)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map_grid[i])
+	{
+		j = 0;
+		while (map_grid[i][j])
+		{
+			if (map_grid[i][j] == 'W' || map_grid[i][j] == 'S' ||
+			map_grid[i][j] == 'E' || map_grid[i][j] == 'N')
+			{
+				if ()
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int	check_surrounding_wall(char **map_grid)
+{
+
+}
+
 t_errno grep_map(t_cub_data *data, int map_row)
 {
-	first_check(data, map_row);
-	while (data->wholemap[map_row])
+	int	i;
+
+	i = 0;
+	while (data->wholemap[map_row + i] != NULL)
 	{
-		
+		if (data->wholemap[map_row + i][0] == '\n')
+			return (ERR_INVALID_MAP);
+		data->map_info->map_grid[i] = ft_strdup(data->wholemap[map_row + i]);
+		i++;
 	}
-	end_check(data, map_row);
+
 }
