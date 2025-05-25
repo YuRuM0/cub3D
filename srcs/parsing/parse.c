@@ -6,11 +6,11 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:58:51 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/24 21:24:31 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/25 19:56:10 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3D.h"
+#include "cub3D.h"
 
 static int get_file_rows(char **argv)
 {
@@ -67,5 +67,7 @@ void parse(char **argv, t_cub_data *data)
 		//error
 		;
 	//grep_col;
-	//grep_map;
+	if (grep_texture(data) != SUCCESS)
+		printf("wrong!");
+
 }

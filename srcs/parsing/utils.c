@@ -6,17 +6,18 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/25 17:45:56 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/25 19:49:47 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3D.h"
+#include "cub3D.h"
 
 void struct_init(t_cub_data *data)
 {
 	data->colours = malloc(sizeof(t_colours));
 	data->texture = malloc(sizeof(t_texture));
-	if (data->colours == NULL || data->texture == NULL)
+	data->map_info = malloc(sizeof(t_map));
+	if (data->colours == NULL || data->texture == NULL || data->map_info == NULL)
 		;
 		//errhandle (ERR_MEM_ALLOC)
 	data->colours->c_colour_str = NULL;
@@ -25,8 +26,10 @@ void struct_init(t_cub_data *data)
 	data->texture->NO = NULL;
 	data->texture->SO = NULL;
 	data->texture->WE = NULL;
-	data->map_info = NULL;
 	data->wholemap = NULL;
+	data->map_info->map_grid = NULL;
+	data->map_info->map_col = 0;
+	data->map_info->map_row = 0;
 	data->map_info->player_dir = '0';
 }
 
@@ -58,4 +61,32 @@ void free_double(char **s)
 	while (s[i])
 		free(s[i++]);
 	free(s);
+}
+
+int	find_map_start(t_cub_data *data)
+{
+	int	i;
+	int	checker;
+
+	checker = 0;
+	i = 0;
+	while (checker != 6 && data->wholemap[i])
+	{
+		if (ft_strncmp(data->wholemap[i], "NO", 2) == 0)
+			checker++;
+		else if (ft_strncmp(data->wholemap[i], "WE", 2) == 0)
+			checker++;
+		else if (ft_strncmp(data->wholemap[i], "EA", 2) == 0)
+			checker++;
+		else if (ft_strncmp(data->wholemap[i], "SO", 2) == 0)
+			checker++;
+		else if (ft_strncmp(data->wholemap[i], "F", 1) == 0)
+			checker++;
+		else if (ft_strncmp(data->wholemap[i], "C", 1) == 0)
+			checker++;
+		i++;
+	}
+	while (data->wholemap[i][0] == '\n')
+		i++;
+	return (i);
 }

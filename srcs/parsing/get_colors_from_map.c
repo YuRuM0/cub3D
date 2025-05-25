@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_colors_from_map.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:30:45 by flima             #+#    #+#             */
-/*   Updated: 2025/05/25 17:41:36 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/25 19:27:42 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3D.h"
+#include "cub3D.h"
 
 static t_errno	grep_colors(t_cub_data *data)
 {
@@ -33,7 +33,7 @@ static t_errno	grep_colors(t_cub_data *data)
 			if (data->colours->c_colour_str == NULL)
 				data->colours->c_colour_str = ft_strdup(data->wholemap[i]);
 			else
-				return (ERR_DUPLICATE);		
+				return (ERR_DUPLICATE);
 		}
 	}
 	if (data->colours->c_colour_str == NULL || data->colours->f_colour_str == NULL)
@@ -81,7 +81,7 @@ t_errno	convert_color_type(int *array, char **color)
 			return (free_double(color), ERR_INVALID_RBG_VALUES);
 	}
 	return (free_double(color), SUCCESS);
-	
+
 }
 t_errno get_RGB_values(t_cub_data *data)
 {

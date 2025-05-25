@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:00:28 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/24 21:21:04 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/25 19:07:21 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int main(int argc, char **argv)
 	//check if argv[1] ends with .cub?
 	struct_init(data);
 	parse(argv, data);
-	grep_texture(data);
-	printf("%s\n", data->texture->NO);
-	free(data);
+
 	return (0);
 }
