@@ -6,7 +6,7 @@
 #    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/05/25 20:06:51 by flima            ###   ########.fr        #
+#    Updated: 2025/05/25 20:14:59 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ YELLOW  = \033[33m
 BLUE    = \033[34m
 
 CFLAGS = -Wall -Werror -Wextra -g
-CFLAGS += -fsanitize=address
+# CFLAGS += -fsanitize=address
 
 LIBFT_DIR = Libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -52,7 +52,6 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS) Makefile
 	@$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) $(LIBFT) -I$(INCLUDE) -lreadline -o $(NAME)
-	@echo "\n$(GREEN)cub3D  ✅$(RESET)\n"
 	@echo "\n$(GREEN)cub3D  ✅$(RESET)\n"
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)

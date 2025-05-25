@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:58:51 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/25 20:09:16 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/25 20:22:45 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,13 @@ void parse(char **argv, t_cub_data *data)
 	t_errno	status;
 	
 	read_mapfile(argv, data);
+	status = grep_texture(data);
+	if (status != SUCCESS)
+		status_error_handler(data, status);
 	status = get_colors(data);
+	if (status != SUCCESS)
+		status_error_handler(data, status);
+	status = grep_map(data);
 	if (status != SUCCESS)
 		status_error_handler(data, status);
 }
