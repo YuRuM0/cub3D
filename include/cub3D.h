@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/25 17:27:27 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/25 17:44:41 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ typedef enum e_errno
 {
 	SUCCESS,
 	ERR_MEM_ALLOC,
-	ERR_DUPLICATE,
-	ERR_INVALID_MAP
+	ERR_DUPLICATE, // there more than two required element in map
+	ERR_INVALID_MAP,
+	ERR_MISSING_COLOR, //did not find the one or more color in the map
+	ERR_INVALID_COLORS, // colors are not in the format F 000,000,000 (there is sometging else )
+	ERR_INVALID_RBG_VALUES
 } 	t_errno;
 
 typedef struct s_colours
@@ -68,6 +71,7 @@ t_errno grep_texture(t_cub_data *data);
 
 //parse
 void parse(char **argv, t_cub_data *data);
+t_errno get_colors(t_cub_data *data);
 
 //main
 int main(int argc, char **argv);
