@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/25 20:23:31 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/26 15:57:17 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_errno	validate_RGB_values(char **color)
 		{
 			if (j == 3 && color[2][j] == '\n' && color[2][j + 1] == '\0')
 				return (SUCCESS);
-			if (!ft_isdigit(color[i][j]))
+			if (!ft_isdigit(color[i][j]) && color[i][j] != '\n')
 				return (ERR_INVALID_RBG_VALUES);
 			j++;
 		}

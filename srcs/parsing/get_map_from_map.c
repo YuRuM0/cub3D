@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_from_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:02:48 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/25 20:28:15 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/26 15:56:25 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ static int check_player_location(t_cub_data *data)
 				else
 					return (ERR_DUPLICATE);
 			}
+			if (data->map_info->map_grid[i][j] != '1' && data->map_info->map_grid[i][j] != '0' &&
+			data->map_info->map_grid[i][j] != ' ')
+				return (ERR_INVALID_MAP);
 		}
 	}
 	return (SUCCESS);
@@ -135,11 +138,11 @@ t_errno grep_map(t_cub_data *data)
 
 	i = -1;
 	get_map_row(data);
-	map_start = find_map_start(data);
 	if (data->map_info->map_row == 0)
 		return(ERR_MISSING_MAP_ELEMENT);
 	if (data->map_info->map_row < 3)
 		return (ERR_INVALID_MAP);
+	map_start = find_map_start(data);
 	data->map_info->map_grid = malloc(sizeof(char *) * data->map_info->map_row + 1);
 	if (!data->map_info->map_grid)
 		return (ERR_MEM_ALLOC);
