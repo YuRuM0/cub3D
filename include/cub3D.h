@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/25 20:07:21 by flima            ###   ########.fr       */
+/*   Updated: 2025/05/26 16:11:54 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef enum e_errno
 	ERR_INVALID_MAP,
 	ERR_MISSING_MAP_ELEMENT, //did not find the one or more color in the map
 	ERR_INVALID_COLORS, // colors are not in the format F 000,000,000 (there is sometging else )
-	ERR_INVALID_RBG_VALUES
+	ERR_INVALID_RBG_VALUES,
+	ERR_INVALID_INPUT // too many arguments, wrong arguments
 } 	t_errno;
 
 typedef struct s_colours
