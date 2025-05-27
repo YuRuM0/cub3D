@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_from_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:02:48 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/26 15:56:25 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/27 17:24:49 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static int check_player_location(t_cub_data *data)
 				else
 					return (ERR_DUPLICATE);
 			}
-			if (data->map_info->map_grid[i][j] != '1' && data->map_info->map_grid[i][j] != '0' &&
-			data->map_info->map_grid[i][j] != ' ')
+			else if (data->map_info->map_grid[i][j] != '1' && data->map_info->map_grid[i][j] != '0' &&
+			data->map_info->map_grid[i][j] != ' ' && data->map_info->map_grid[i][j] != '\n')
 				return (ERR_INVALID_MAP);
 		}
 	}
