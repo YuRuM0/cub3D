@@ -9,3 +9,5 @@ zsh: segmentation fault (core dumped)  ./cub3D maps/best_map.cub
 1111
 1EA1   => still valid map, it should detect A.....
 11110ewns
+
+remove \n in the map and textures;

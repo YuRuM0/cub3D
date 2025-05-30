@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/26 16:11:54 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/05/30 19:31:44 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,37 @@
 
 #include "libft.h"
 #include <errno.h>
+
+
+# define	gameWidth 320
+# define	gameHeight 200
+
+/* Info variables DDA algorithm
+distToSideX - distance from player position to the nearest X side (ray)
+distToSideY - distance from player position to the nearest Y side (ray)
+deltaDistX - constant? distance from one X side to the next X side (ray)
+deltaDistY - constant? distance from one Y side to the next Y side (ray)
+    * We use the shorter distance (all the sum of (distToSide and deltaDist++)) to determine in which direction we are going to move (in X or Y).
+    * Special case: when the ray is vertical or horizontal — in these cases, one of the variables (...X or ...Y) is zero because the ray never crosses one of them.
+*/
+
+typedef struct	s_vetor2D
+{
+	double	x;
+	double	y;	
+}				t_vetor2D;
+
+typedef struct	s_rayEngine //should be one variable or a lot of them based on the number of rays?
+{
+	t_vetor2D	posPlayer;
+	t_vetor2D	dir;
+	t_vetor2D	planeCamera; //[0,0.66]
+	t_vetor2D	cameraPixel; //plane * multiplier (mult = 2 * (x/320) - 1) > x = pixel number and 320 width
+	t_vetor2D	planeR;
+	t_vetor2D	planeL;
+	t_vetor2D	rayDir;
+	
+}				t_rayEngine;
 
 typedef enum e_errno
 {
@@ -44,6 +75,8 @@ typedef struct s_map
 	char		player_dir;
 	int			map_row;
 	int			map_col;
+	int			map_width; //col * width
+	int			map_height; // row * height
 }	t_map;
 
 typedef struct s_texture
@@ -57,9 +90,10 @@ typedef struct s_texture
 typedef struct s_cub_data
 {
 	char **wholemap;
-	t_texture *texture;
-	t_colours *colours;
-	t_map	*map_info;
+	t_texture 	*texture;
+	t_colours 	*colours;
+	t_map		*map_info;
+	t_rayEngine	*engine;
 }	t_cub_data;
 
 //parsing
@@ -80,6 +114,10 @@ void	free_all_data(t_cub_data *data);
 t_errno grep_map(t_cub_data *data);
 t_errno grep_texture(t_cub_data *data);;
 
+//utils
+t_vetor2D	multiVetor(t_vetor2D v1, t_vetor2D v2);
+t_vetor2D	subVetor(t_vetor2D v1, t_vetor2D v2);
+t_vetor2D	sumVetor(t_vetor2D v1, t_vetor2D v2);
 //main
 int main(int argc, char **argv);
 #endif
