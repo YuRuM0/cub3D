@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   DDA.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/05/30 19:44:39 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/03 12:51:58 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void	casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine)
 {
 	unsigned int	pixel;
 	double			multiplier;
+	double 			deltaDistX;
+	double 			deltaDistY;
+	t_vetor2D		mapPos; //postion of the player in the right location on map ex (1.25, 2.45) - (1, 2)
 	t_vetor2D		raydir;
 	
 	//draw ground and celling
@@ -36,6 +39,13 @@ void	casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine)
 		engine->cameraPixel.x = engine->planeCamera.x * multiplier;
 		engine->cameraPixel.y = engine->planeCamera.y * multiplier;
 		raydir = sumVetor(engine->cameraPixel, engine->dir);
+		//split here (fincd (destaDistX and destaDistY))
+		deltaDistX = (magVetor(raydir.x, raydir.y) / raydir.x);
+		deltaDistY = (magVetor(raydir.x, raydir.y) / raydir.y);
+		/// split
+		mapPos.x = trunc(engine->posPlayer.x); //to find distToSideX and Y
+		mapPos.y = trunc(engine->posPlayer.y);
+		
 		//DDA and draw walls;
 	}
 

@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/30 19:31:44 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/03 12:30:57 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "libft.h"
 #include <errno.h>
+#include <math.h>
 
 
 # define	gameWidth 320
@@ -26,7 +27,7 @@ distToSideY - distance from player position to the nearest Y side (ray)
 deltaDistX - constant? distance from one X side to the next X side (ray)
 deltaDistY - constant? distance from one Y side to the next Y side (ray)
     * We use the shorter distance (all the sum of (distToSide and deltaDist++)) to determine in which direction we are going to move (in X or Y).
-    * Special case: when the ray is vertical or horizontal — in these cases, one of the variables (...X or ...Y) is zero because the ray never crosses one of them.
+    * Special case: when the ray   is vertical or horizontal — in these cases, one of the variables (...X or ...Y) is zero because the ray never crosses one of them.
 */
 
 typedef struct	s_vetor2D
@@ -43,7 +44,7 @@ typedef struct	s_rayEngine //should be one variable or a lot of them based on th
 	t_vetor2D	cameraPixel; //plane * multiplier (mult = 2 * (x/320) - 1) > x = pixel number and 320 width
 	t_vetor2D	planeR;
 	t_vetor2D	planeL;
-	t_vetor2D	rayDir;
+	t_vetor2D	rayDir; //local var??
 	
 }				t_rayEngine;
 
@@ -118,6 +119,7 @@ t_errno grep_texture(t_cub_data *data);;
 t_vetor2D	multiVetor(t_vetor2D v1, t_vetor2D v2);
 t_vetor2D	subVetor(t_vetor2D v1, t_vetor2D v2);
 t_vetor2D	sumVetor(t_vetor2D v1, t_vetor2D v2);
+double		magVetor(double x, double y);
 //main
 int main(int argc, char **argv);
 #endif
