@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/04 20:10:02 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/04 20:14:10 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,9 +171,10 @@ void		init_vetors(t_rayEngine *engine, t_map *map);
 // rendering
 // floor ceiling
 //int draw_floor_ceiling(t_image *image, t_colours *colours);
-unsigned int rgb_to_binary(long *colours);
+long rgb_to_binary(long *colours);
 void draw_background(t_image *image);
 void draw_floor_ceiling(t_image image, t_colours *colours);
+void mlx_put_pixel_on_img(t_image image, int x, int y, long colour);
 
 //window
 void start_window(t_colours *colours, t_cub_data *data);

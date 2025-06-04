@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 12:23:08 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/04 19:56:24 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/04 20:13:46 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 # define background_col 0x4D4D4DD4D4D
 
-unsigned int rgb_to_binary(long *colours)
+long rgb_to_binary(long *colours)
 {
-	unsigned int binary;
+	long binary;
 
 	binary = (colours[0] << 16) + (colours[1] << 8) + colours[2];
 	//printf("%d\n", binary);
 	return (binary);
 }
 
-static void mlx_put_pixel_on_img(t_image image, int x, int y, unsigned int colour)
+void mlx_put_pixel_on_img(t_image image, int x, int y, long colour)
 {
 	char *pixel;
 
 	pixel =  image.addr +(y * image.len_line + x * (image.bits_per_pixel / 8));
-	*(unsigned int *)pixel = colour;
+	*(long *)pixel = colour;
 }
 
 void draw_background(t_image *image)
