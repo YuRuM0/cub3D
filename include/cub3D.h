@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/03 13:16:47 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/04 18:04:34 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "libft.h"
 #include <errno.h>
+#include <math.h>
 
 
 # define	gameWidth 320
@@ -37,15 +38,40 @@ typedef struct	s_vetor2D
 	double	y;
 }				t_vetor2D;
 
+typedef enum s_sideWall
+{
+	NO,
+	SO,
+	WE,
+	EA
+}	t_sideWall;
+
+typedef struct s_ddaVars
+{
+	double 			distToSideY;
+	double 			distToSideX;
+	double 			deltaDistX;
+	double 			deltaDistY;
+	double			rayLengthX; //distance to wall from pos using x
+	double			rayLengthY; //distance to wall from pos using y
+	int				stepDirX; //direction of ray
+	int				stepDirY; //direction of ray
+	bool			hitWall;
+	t_sideWall		hitside;
+	t_vetor2D		rayWall;
+}					t_ddaVars;
+
 typedef struct	s_rayEngine //should be one variable or a lot of them based on the number of rays?
 {
 	t_vetor2D	posPlayer;
 	t_vetor2D	dir;
 	t_vetor2D	planeCamera; //[0,0.66]
-	t_vetor2D	cameraPixel; //plane * multiplier (mult = 2 * (x/320) - 1) > x = pixel number and 320 width
 	t_vetor2D	planeR;
 	t_vetor2D	planeL;
 	t_vetor2D	rayDir;
+	t_ddaVars	*dda;
+	t_map		*map;
+	t_cub_data	*data;
 
 }				t_rayEngine;
 
@@ -96,7 +122,7 @@ typedef struct s_cub_data
 	t_colours 	*colours;
 	t_map		*map_info;
 	t_rayEngine	*engine;
-}	t_cub_data;
+}				t_cub_data;
 
 typedef struct s_image
 {
@@ -127,10 +153,17 @@ void	free_all_data(t_cub_data *data);
 t_errno grep_map(t_cub_data *data);
 t_errno grep_texture(t_cub_data *data);;
 
-//utils
+//DDA
 t_vetor2D	multiVetor(t_vetor2D v1, t_vetor2D v2);
 t_vetor2D	subVetor(t_vetor2D v1, t_vetor2D v2);
 t_vetor2D	sumVetor(t_vetor2D v1, t_vetor2D v2);
+t_vetor2D	calc_cameraPixel(t_rayEngine *engine, unsigned int pixel);
+void		calc_distToSides(t_rayEngine *engine, t_vetor2D rayDir, t_ddaVars *dda);
+void		init_dda_struct(t_ddaVars *dda);
+void		hitWallDir(t_ddaVars *dda, int	fromSide);
+void		casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine);
+void		init_dda_struct(t_ddaVars *dda);
+void		init_vetors(t_rayEngine *engine, t_map *map);
 //main
 //int main(int argc, char **argv);
 #endif
