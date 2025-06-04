@@ -6,3 +6,4 @@
 cub3D
 # ignore any files or testing folders
 /maps/*
+mlx
