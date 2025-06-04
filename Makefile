@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
+#    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/05/25 20:14:59 by flima            ###   ########.fr        #
+#    Updated: 2025/06/04 18:00:43 by yulpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ HEADERS = $(INCLUDE)/libft.h \
 			$(INCLUDE)/cub3D.h
 
 MLX = mlx/libmlx.a
-MLX_FLAGS = -I$(INCLUDE) #-L./mlx -lmlx -lX11 -lXext -lm
+MLX_INC = -I$(INCLUDE) -Imlx
+MLX_FLAGS = -L./mlx -lmlx -lX11 -lXext -lm
 
 SRCS_DIR = srcs
 PARSE_DIR = $(SRCS_DIR)/parsing
@@ -42,7 +43,11 @@ ERR_FREE_DIR = $(SRCS_DIR)/errors_n_free
 ERR_FREE_FILES = $(ERR_FREE_DIR)/error_handler_msg.c\
 					$(ERR_FREE_DIR)/free_all_data.c
 
-SRCS_FILES = $(PARSE_FILES) $(ERR_FREE_FILES) \
+RENDERING_DIR = $(SRCS_DIR)/rendering
+RENDERING_FILES = $(RENDERING_DIR)/floor_ceiling.c\
+					$(RENDERING_DIR)/window.c
+
+SRCS_FILES = $(PARSE_FILES) $(ERR_FREE_FILES) $(RENDERING_FILES)\
 				$(SRCS_DIR)/main.c
 
 OBJS_DIR = objs
@@ -50,13 +55,10 @@ OBJS = $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS_FILES))
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS) Makefile
-	@$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) $(LIBFT) -I$(INCLUDE) -lreadline -o $(NAME)
-	@echo "\n$(GREEN)cub3D  ✅$(RESET)\n"
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS) | $(MLX)
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) $(MLX_FLAGS) -I$(INCLUDE) -c $< -o $@
+	@$(CC) $(CFLAGS) $(MLX_INC) -c $< -o $@
 	@echo "$(GREEN)Compiling: $< into $@$(RESET)"
 
 $(LIBFT):
@@ -67,6 +69,10 @@ $(MLX):
     git clone https://github.com/42Paris/minilibx-linux.git mlx; \
 	fi
 	@$(MAKE) -C mlx
+
+$(NAME): $(LIBFT) $(OBJS) Makefile $(MLX)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lreadline $(MLX_FLAGS) -o $(NAME)
+	@echo "\n$(GREEN)cub3D  ✅$(RESET)\n"
 
 clean:
 	@$(MAKE) --no-print-directory clean -C Libft

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/03 13:16:47 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/04 18:19:33 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "libft.h"
 #include <errno.h>
-
+#include "../mlx/mlx.h"
 
 # define	gameWidth 320
 # define	gameHeight 200
@@ -131,6 +131,17 @@ t_errno grep_texture(t_cub_data *data);;
 t_vetor2D	multiVetor(t_vetor2D v1, t_vetor2D v2);
 t_vetor2D	subVetor(t_vetor2D v1, t_vetor2D v2);
 t_vetor2D	sumVetor(t_vetor2D v1, t_vetor2D v2);
+
+// rendering
+// floor ceiling
+//int draw_floor_ceiling(t_image *image, t_colours *colours);
+unsigned int rgb_to_binary(long *colours);
+void draw_background(t_image *image);
+void draw_floor_ceiling(t_image image, t_colours *colours);
+
+//window
+void start_window();
+
 //main
-//int main(int argc, char **argv);
+int main(int argc, char **argv);
 #endif

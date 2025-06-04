@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:00:28 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/27 17:17:01 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/04 18:02:30 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_errno input_checker(int argc, char **argv)
 {
 	char *end;
-	
+
 	if (argc != 2)
 		return (ERR_INVALID_INPUT);
 	end = ft_strchr(argv[1], '.');
@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 	//check if argv[1] ends with .cub?
 	struct_init(data);
 	parse(argv, data);
+	start_window();
 	free_all_data(data);
-	ft_printf("SAFADINHA\n");
 	return (0);
 }
