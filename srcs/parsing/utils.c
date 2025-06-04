@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/26 15:57:17 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/04 20:14:20 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ void struct_init(t_cub_data *data)
 	data->colours = malloc(sizeof(t_colours));
 	data->texture = malloc(sizeof(t_texture));
 	data->map_info = malloc(sizeof(t_map));
-	if (data->colours == NULL || data->texture == NULL || data->map_info == NULL)
+	data->engine = malloc(sizeof(t_rayEngine));
+	data->engine->dda = malloc(sizeof(t_ddaVars));
+	if (data->colours == NULL || data->texture == NULL || data->map_info == NULL\
+		 || data->engine == NULL || data->engine->dda == NULL)
 		;
 		//errhandle (ERR_MEM_ALLOC)
 	data->colours->c_colour_str = NULL;

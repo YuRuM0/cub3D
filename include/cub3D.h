@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/04 20:14:10 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/04 20:16:04 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ t_errno grep_texture(t_cub_data *data);;
 t_vetor2D	multiVetor(t_vetor2D v1, t_vetor2D v2);
 t_vetor2D	subVetor(t_vetor2D v1, t_vetor2D v2);
 t_vetor2D	sumVetor(t_vetor2D v1, t_vetor2D v2);
+double		magVetor(double x, double y);
 t_vetor2D	calc_cameraPixel(t_rayEngine *engine, unsigned int pixel);
 void		calc_distToSides(t_rayEngine *engine, t_vetor2D rayDir, t_ddaVars *dda);
 void		init_dda_struct(t_ddaVars *dda);

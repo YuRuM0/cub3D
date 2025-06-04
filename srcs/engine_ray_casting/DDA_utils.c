@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:58 by flima             #+#    #+#             */
-/*   Updated: 2025/06/04 19:59:53 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/04 20:07:51 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	init_dda_struct(t_ddaVars *dda)
 	dda->distToSideY = 0;
 	dda->distToSideX = 0;
 }
+
 t_vetor2D	calc_cameraPixel(t_rayEngine *engine, unsigned int pixel)
 {
 	double		multiplier;
