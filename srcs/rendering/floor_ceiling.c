@@ -6,13 +6,13 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 12:23:08 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/04 18:20:30 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/04 19:56:24 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-# define background_col 0x4D4D4D
+# define background_col 0x4D4D4DD4D4D
 
 unsigned int rgb_to_binary(long *colours)
 {

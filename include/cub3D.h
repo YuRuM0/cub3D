@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/04 19:49:04 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/04 20:01:17 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,10 @@ void draw_background(t_image *image);
 void draw_floor_ceiling(t_image image, t_colours *colours);
 
 //window
-void start_window();
+void start_window(t_colours *colours, t_cub_data *data);
+
+//player
+void draw_player(t_image image, t_cub_data *data);
 
 //main
 int main(int argc, char **argv);
