@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/04 18:04:34 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/04 19:49:04 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "libft.h"
 #include <errno.h>
 #include <math.h>
-
+#include "../mlx/mlx.h"
 
 # define	gameWidth 320
 # define	gameHeight 200
@@ -164,6 +164,17 @@ void		hitWallDir(t_ddaVars *dda, int	fromSide);
 void		casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine);
 void		init_dda_struct(t_ddaVars *dda);
 void		init_vetors(t_rayEngine *engine, t_map *map);
+
+// rendering
+// floor ceiling
+//int draw_floor_ceiling(t_image *image, t_colours *colours);
+unsigned int rgb_to_binary(long *colours);
+void draw_background(t_image *image);
+void draw_floor_ceiling(t_image image, t_colours *colours);
+
+//window
+void start_window();
+
 //main
-//int main(int argc, char **argv);
+int main(int argc, char **argv);
 #endif
