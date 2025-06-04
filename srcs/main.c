@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:00:28 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/04 18:02:30 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/04 20:02:15 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int main(int argc, char **argv)
 	//check if argv[1] ends with .cub?
 	struct_init(data);
 	parse(argv, data);
+	// casting_rays(data, data->map_info, data->engine);
 	start_window();
 	free_all_data(data);
 	return (0);

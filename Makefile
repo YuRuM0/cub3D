@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
+#    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/06/04 18:00:43 by yulpark          ###   ########.fr        #
+#    Updated: 2025/06/04 20:00:16 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,10 @@ PARSE_FILES = $(PARSE_DIR)/get_map_from_map.c\
 				$(PARSE_DIR)/parse.c\
 				$(PARSE_DIR)/get_colors_from_map.c
 
+RAY_ENGINE_DIR = $(SRCS_DIR)/engine_ray_casting
+RAY_ENGINE_FILES = $(RAY_ENGINE_DIR)/DDA_utils.c \
+					$(RAY_ENGINE_DIR)/DDA.c
+
 ERR_FREE_DIR = $(SRCS_DIR)/errors_n_free
 ERR_FREE_FILES = $(ERR_FREE_DIR)/error_handler_msg.c\
 					$(ERR_FREE_DIR)/free_all_data.c
@@ -48,7 +52,7 @@ RENDERING_FILES = $(RENDERING_DIR)/floor_ceiling.c\
 					$(RENDERING_DIR)/window.c
 
 SRCS_FILES = $(PARSE_FILES) $(ERR_FREE_FILES) $(RENDERING_FILES)\
-				$(SRCS_DIR)/main.c
+				$(RAY_ENGINE_FILES) $(SRCS_DIR)/main.c
 
 OBJS_DIR = objs
 OBJS = $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS_FILES))

@@ -6,12 +6,11 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/04 18:11:50 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/04 20:01:06 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-
 
 static void getWall_coord(t_rayEngine *engine, t_ddaVars *dda)
 {
@@ -37,7 +36,7 @@ static void getWall_coord(t_rayEngine *engine, t_ddaVars *dda)
 			hitWallDir(dda, 1);
 		}
 		if (map[(int)dda->rayWall.x][(int)dda->rayWall.y] == '1')
-			dda->hitWall == true;
+			dda->hitWall = true;
 	}
 }
 //return the distance from player to walll

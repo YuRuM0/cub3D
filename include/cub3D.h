@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/04 19:49:04 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/04 19:58:48 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ deltaDistY - constant? distance from one Y side to the next Y side (ray)
     * We use the shorter distance (all the sum of (distToSide and deltaDist++)) to determine in which direction we are going to move (in X or Y).
     * Special case: when the ray is vertical or horizontal — in these cases, one of the variables (...X or ...Y) is zero because the ray never crosses one of them.
 */
+
+typedef struct s_cub_data t_cub_data;
+typedef struct s_map t_map;
 
 typedef struct	s_vetor2D
 {
@@ -63,15 +66,15 @@ typedef struct s_ddaVars
 
 typedef struct	s_rayEngine //should be one variable or a lot of them based on the number of rays?
 {
-	t_vetor2D	posPlayer;
-	t_vetor2D	dir;
-	t_vetor2D	planeCamera; //[0,0.66]
-	t_vetor2D	planeR;
-	t_vetor2D	planeL;
-	t_vetor2D	rayDir;
-	t_ddaVars	*dda;
-	t_map		*map;
-	t_cub_data	*data;
+	t_vetor2D			posPlayer;
+	t_vetor2D			dir;
+	t_vetor2D			planeCamera; //[0,0.66]
+	t_vetor2D			planeR;
+	t_vetor2D			planeL;
+	t_vetor2D			rayDir;
+	t_ddaVars			*dda;
+	struct s_map		*map;
+	struct s_cub_data	*data;
 
 }				t_rayEngine;
 
@@ -95,7 +98,7 @@ typedef struct s_colours
 	long c_colour[3];
 }	t_colours;
 
-typedef struct s_map
+struct s_map
 {
 	char		**map_grid;
 	int			player_row;
@@ -105,7 +108,7 @@ typedef struct s_map
 	int			map_col;
 	int			map_width; //col * width
 	int			map_height; // row * height
-}	t_map;
+};
 
 typedef struct s_texture
 {
@@ -115,14 +118,14 @@ typedef struct s_texture
 	char *EA;
 }	t_texture;
 
-typedef struct s_cub_data
+struct s_cub_data
 {
 	char **wholemap;
 	t_texture 	*texture;
 	t_colours 	*colours;
 	t_map		*map_info;
 	t_rayEngine	*engine;
-}				t_cub_data;
+};
 
 typedef struct s_image
 {

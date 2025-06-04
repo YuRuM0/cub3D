@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:58 by flima             #+#    #+#             */
-/*   Updated: 2025/06/04 18:06:02 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/04 19:59:53 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	calc_distToSides(t_rayEngine *engine, t_vetor2D rayDir, t_ddaVars *dda)
 
 void	hitWallDir(t_ddaVars *dda, int	fromSide)
 {
-	if (fromSide = 0)
+	if (fromSide == 0)
 	{
 		if (dda->stepDirX < 0)
 			dda->hitside = EA;
