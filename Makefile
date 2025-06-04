@@ -6,7 +6,7 @@
 #    By: flima <flima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/06/04 20:00:16 by flima            ###   ########.fr        #
+#    Updated: 2025/06/04 20:07:17 by flima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ PARSE_FILES = $(PARSE_DIR)/get_map_from_map.c\
 
 RAY_ENGINE_DIR = $(SRCS_DIR)/engine_ray_casting
 RAY_ENGINE_FILES = $(RAY_ENGINE_DIR)/DDA_utils.c \
-					$(RAY_ENGINE_DIR)/DDA.c
+					$(RAY_ENGINE_DIR)/DDA.c \
+					$(RAY_ENGINE_DIR)/vetor.c
 
 ERR_FREE_DIR = $(SRCS_DIR)/errors_n_free
 ERR_FREE_FILES = $(ERR_FREE_DIR)/error_handler_msg.c\

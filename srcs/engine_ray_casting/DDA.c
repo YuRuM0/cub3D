@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/04 20:01:06 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/04 20:10:15 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel)
 	rayDir = calc_cameraPixel(engine, pixel);
 	dda->deltaDistX = (magVetor(rayDir.x, rayDir.y) / fabs(rayDir.x));
 	dda->deltaDistY = (magVetor(rayDir.x, rayDir.y) / fabs(rayDir.y));
-	calc_distToSides(engine, rayDir, &dda);
+	calc_distToSides(engine, rayDir, dda);
 	DDA_algorithm(engine, dda);
 }
 
@@ -63,6 +63,7 @@ void	casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine)
 {
 	unsigned int	pixel;
 	
+	(void)data;
 	//draw ground and celling
 	init_vetors(engine, map);
 	// pixel = -1;
