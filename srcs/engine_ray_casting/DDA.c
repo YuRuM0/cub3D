@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/04 20:10:15 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/06 19:59:56 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void getWall_coord(t_rayEngine *engine, t_ddaVars *dda)
 
 	map = engine->map->map_grid;
 	dda->rayLengthX = dda->distToSideX;
-	dda->deltaDistY = dda->distToSideY;
+	dda->rayLengthY = dda->distToSideY;
 	dda->rayWall.x = floor(engine->posPlayer.x);
 	dda->rayWall.y = floor(engine->posPlayer.y);
 	while (dda->hitWall == false)
@@ -35,7 +35,8 @@ static void getWall_coord(t_rayEngine *engine, t_ddaVars *dda)
 			dda->rayLengthY += dda->deltaDistY;
 			hitWallDir(dda, 1);
 		}
-		if (map[(int)dda->rayWall.x][(int)dda->rayWall.y] == '1')
+		// printf("%c\n", map[(int)dda->rayWall.x][(int)dda->rayWall.y]);
+		if (map[(int)dda->rayWall.y][(int)dda->rayWall.x] == '1')
 			dda->hitWall = true;
 	}
 }
@@ -65,12 +66,15 @@ void	casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine)
 	
 	(void)data;
 	//draw ground and celling
-	init_vetors(engine, map);
+	init_vetors(engine, map);//call it here?
 	// pixel = -1;
 	pixel = gameWidth / 2;
+	//main loop to draw
 	while (++pixel < gameWidth)
 	{
+		init_dda_struct(engine->dda);
 		get_distance(engine->dda, engine, pixel);
+		// pause();
 	}
 	printf("done\n");
 }

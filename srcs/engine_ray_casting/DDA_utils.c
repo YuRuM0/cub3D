@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:58 by flima             #+#    #+#             */
-/*   Updated: 2025/06/04 20:07:51 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/06 17:58:00 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	init_vetors(t_rayEngine *engine, t_map *map)
 {
-	engine->posPlayer.x = map->player_row;
-	engine->posPlayer.y = map->player_col;
+	engine->posPlayer.x = map->player_col;
+	engine->posPlayer.y = map->player_row;
 	engine->planeCamera.x = 0.66;
 	engine->planeCamera.y = 0;
 	engine->dir.x = 0;
@@ -44,7 +44,7 @@ t_vetor2D	calc_cameraPixel(t_rayEngine *engine, unsigned int pixel)
 	t_vetor2D	cameraPixel;
 	t_vetor2D	rayDir;
 
-	multiplier = 2 * (pixel/gameWidth) - 1;
+	multiplier = 2 * ((double)pixel/(double)gameWidth) - 1;
 	cameraPixel.x = engine->planeCamera.x * multiplier;
 	cameraPixel.y = engine->planeCamera.y * multiplier;
 	rayDir = sumVetor(cameraPixel, engine->dir);
@@ -67,7 +67,7 @@ void	calc_distToSides(t_rayEngine *engine, t_vetor2D rayDir, t_ddaVars *dda)
 	if (rayDir.y < 0)
 	{
 		dda->distToSideY = (engine->posPlayer.y - mapPos.y) * dda->deltaDistY;
-		dda->stepDirX = -1;
+		dda->stepDirY = -1;
 	}
 	else if (rayDir.y > 0)
 		dda->distToSideY = ((mapPos.y + 1) * engine->posPlayer.y) * dda->deltaDistY;

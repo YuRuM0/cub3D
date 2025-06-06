@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/04 20:14:20 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:55:09 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void struct_init(t_cub_data *data)
 		 || data->engine == NULL || data->engine->dda == NULL)
 		;
 		//errhandle (ERR_MEM_ALLOC)
+	data->engine->map = data->map_info;
+	data->engine->data = data;
 	data->colours->c_colour_str = NULL;
 	data->colours->f_colour_str = NULL;
 	data->texture->EA = NULL;
