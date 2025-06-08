@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/08 18:54:47 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/08 19:29:41 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,15 @@ static double	get_distToWall(t_ddaVars *dda, t_rayEngine *engine)
 }
 
 //return the distance from player to walll
-static void	DDA_algorithm(t_rayEngine *engine, t_ddaVars *dda)
+static double	DDA_algorithm(t_rayEngine *engine, t_ddaVars *dda)
 {
 	double	euclideanDist;
 	double	perpendicularDist;
 	
 	getWall_coord(engine, dda);
 	euclideanDist = get_distToWall(dda, engine);
-	perpendicularDist = euclideanDist / magVetor(engine->rayDir.x, engine->rayDir.y); //real dist from player to wall 
-	printf("perpe: %f\n", perpendicularDist);
-	//printf("Wall coordinate: (%d, %d)\nSideWall: %d\n", (int)dda->rayWall.x, (int)dda->rayWall.y, dda->hitside);
+	perpendicularDist = euclideanDist / magVetor(engine->rayDir.x, engine->rayDir.y); //real dist from player to wall
+	return (perpendicularDist);
 }
 
 static void	calc_deltaDist(t_ddaVars *dda, t_vetor2D rayDir)
@@ -100,12 +99,17 @@ static void	calc_deltaDist(t_ddaVars *dda, t_vetor2D rayDir)
 void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel)
 {
 	t_vetor2D		rayDir;
+	double			wallLineHight;
+	double			perpendicularDist;
 
 	rayDir = calc_cameraPixel(engine, pixel);
 	engine->rayDir = rayDir;
 	calc_deltaDist(dda, rayDir);
 	calc_distToSides(engine, rayDir, dda);
-	DDA_algorithm(engine, dda);
+	perpendicularDist = DDA_algorithm(engine, dda);
+	wallLineHight = (double)gameHeight / perpendicularDist;
+	//where statrt draw = gameHeight/2 - wallLineHight/2;
+	
 }
 
 // function to cast the rays based on the - width of the window? 360 or 640 or a variable that calculate the width based on the size os the map
@@ -119,7 +123,7 @@ void	casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine)
 	// pixel = -1;
 	pixel = (gameWidth /2) - 1;
 	//main loop to draw
-	while (++pixel < gameWidth)
+	while (++pixel < map->map_width)
 	{
 		init_dda_struct(engine->dda);
 		get_distance(engine->dda, engine, pixel);

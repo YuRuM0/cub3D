@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/06 16:55:09 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/08 19:24:35 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void struct_init(t_cub_data *data)
 	data->map_info->map_grid = NULL;
 	data->map_info->map_col = 0;
 	data->map_info->map_row = 0;
-	data->map_info->player_dir = '0';
+	data->map_info->player_dir = '0'; //what is this?
 }
 
 t_errno	validate_RGB_values(char **color)

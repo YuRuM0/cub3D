@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/04 20:16:04 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:21:21 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 #include <math.h>
 #include "../mlx/mlx.h"
 
+
 # define	gameWidth 320
 # define	gameHeight 200
-# define	Width 1280
-# define	Height 960
+# define	Width 64
+# define	Height 64
 
 /* Info variables DDA algorithm
 distToSideX - distance from player position to the nearest X side (ray)

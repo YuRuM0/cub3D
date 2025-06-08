@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/04 20:01:02 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:32:22 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void start_window(t_colours *colours, t_cub_data *data)
+void start_window(t_colours *colours, t_cub_data *data, t_map *map)
 {
 	t_image image;
 
+	map->map_width = Width * map->map_col;
+	map->map_height = Height * map->map_row; //window size based on map size
 	image.mlx = mlx_init();
 	image.window = mlx_new_window(image.mlx, Width, Height, "mlx");
 	image.img = mlx_new_image(image.mlx, Width, Height);
