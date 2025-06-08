@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/06 19:59:56 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/08 15:53:56 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,40 @@ static void getWall_coord(t_rayEngine *engine, t_ddaVars *dda)
 			dda->rayLengthY += dda->deltaDistY;
 			hitWallDir(dda, 1);
 		}
-		// printf("%c\n", map[(int)dda->rayWall.x][(int)dda->rayWall.y]);
 		if (map[(int)dda->rayWall.y][(int)dda->rayWall.x] == '1')
 			dda->hitWall = true;
 	}
 }
+
+static double	get_distToWall(t_ddaVars *dda, t_rayEngine *engine)
+{
+	double	euclideanDist;
+
+	printf("rayDir.x: %f e rayDir.y: %f\n", engine->rayDir.x, engine->rayDir.y);
+	if (dda->hitside == NO)
+		euclideanDist = (fabs(dda->rayWall.y + 1 - engine->posPlayer.y)\
+		 * magVetor(engine->rayDir.x, engine->rayDir.y)) / fabs(engine->rayDir.y);
+	else if (dda->hitside == SO)
+		euclideanDist = (fabs(dda->rayWall.y - engine->posPlayer.y)\
+		 * magVetor(engine->rayDir.x, engine->rayDir.y)) / fabs(engine->rayDir.y);
+	else if (dda->hitside == WE)
+		euclideanDist = (fabs(dda->rayWall.x + 1 - engine->posPlayer.x)\
+		 * magVetor(engine->rayDir.x, engine->rayDir.y)) / fabs(engine->rayDir.x);
+	else
+		euclideanDist = (fabs(dda->rayWall.x - engine->posPlayer.x)\
+		 * magVetor(engine->rayDir.x, engine->rayDir.y)) / fabs(engine->rayDir.x);
+	return (euclideanDist);
+}
+
 //return the distance from player to walll
 static void	DDA_algorithm(t_rayEngine *engine, t_ddaVars *dda)
 {
+	double	euclideanDist;
+	
 	getWall_coord(engine, dda);
-	printf("Wall coordinate: (%d, %d)\nSideWall: %d\n", (int)dda->rayWall.x, (int)dda->rayWall.y, dda->hitside);
+	euclideanDist = get_distToWall(dda, engine);
+	printf("euclid: %f\n", euclideanDist);
+	//printf("Wall coordinate: (%d, %d)\nSideWall: %d\n", (int)dda->rayWall.x, (int)dda->rayWall.y, dda->hitside);
 }
 
 //get distance of each ray from the player to the wall (DDA as well)
@@ -53,6 +77,7 @@ void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel)
 	t_vetor2D		rayDir;
 
 	rayDir = calc_cameraPixel(engine, pixel);
+	engine->rayDir = rayDir;
 	dda->deltaDistX = (magVetor(rayDir.x, rayDir.y) / fabs(rayDir.x));
 	dda->deltaDistY = (magVetor(rayDir.x, rayDir.y) / fabs(rayDir.y));
 	calc_distToSides(engine, rayDir, dda);
@@ -74,7 +99,7 @@ void	casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine)
 	{
 		init_dda_struct(engine->dda);
 		get_distance(engine->dda, engine, pixel);
-		// pause();
+		pause();
 	}
 	printf("done\n");
 }
