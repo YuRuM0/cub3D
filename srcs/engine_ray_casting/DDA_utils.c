@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:58 by flima             #+#    #+#             */
-/*   Updated: 2025/06/08 18:59:35 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/09 18:31:19 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	init_vetors(t_rayEngine *engine, t_map *map)
 void	init_dda_struct(t_ddaVars *dda)
 {
 	dda->hitWall = false;
+	dda->drawStart = 0;
+	dda->drawEnd = 0;
 	dda->hitside = 0;
 	dda->stepDirY = 1;
 	dda->stepDirX = 1;
@@ -48,7 +50,7 @@ t_vetor2D	calc_cameraPixel(t_rayEngine *engine, unsigned int pixel)
 	multiplier = 2 * ((double)pixel/(double)gameWidth) - 1;
 	cameraPixel.x = engine->planeCamera.x * multiplier;
 	cameraPixel.y = engine->planeCamera.y * multiplier;
-	printf("camera pixel: (%f, %f)\nmukt %f\n", cameraPixel.y, cameraPixel.y, multiplier);
+	// printf("camera pixel: (%f, %f)\nmukt %f\n", cameraPixel.y, cameraPixel.y, multiplier);
 	rayDir = sumVetor(cameraPixel, engine->dir);
 	return (rayDir);
 }

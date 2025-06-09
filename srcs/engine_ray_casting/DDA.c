@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/08 19:29:41 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/09 18:31:39 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,22 +108,55 @@ void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel)
 	calc_distToSides(engine, rayDir, dda);
 	perpendicularDist = DDA_algorithm(engine, dda);
 	wallLineHight = (double)gameHeight / perpendicularDist;
-	//where statrt draw = gameHeight/2 - wallLineHight/2;
+	dda->drawStart = (double)gameHeight / 2 - wallLineHight / 2;
+	dda->drawEnd = (double)gameHeight / 2 + wallLineHight / 2;
+	printf("line start: %f - line end: %f\n", dda->drawStart, dda->drawEnd);
 	
 }
+
+// void	test_draw()
+// {
+// 	// void *mlx = mlx_init();
+// 	// void *window = mlx_new_window(mlx, gameWidth, gameHeight, "test");
+// 	void *mlx = mlx_init();
+//     void *win = mlx_new_window(mlx, gameWidth, gameHeight, "Ceu e Chao");
+
+//     void *img = mlx_new_image(mlx, gameWidth, gameHeight);
+//     char *data;
+//     int bpp, size_line, endian;
+//     data = mlx_get_data_addr(img, &bpp, &size_line, &endian);
+
+//     for (int y = 0; y < gameHeight; y++)
+//     {
+//         for (int x = 0; x < gameWidth; x++)
+//         {
+//             int color;
+//             if (y < gameHeight / 2)
+//                 color = 0x87CEEB; // Céu azul (SkyBlue)
+//             else
+//                 color = 0x003300; // Verde escuro (Floor)
+
+//             int i = (y * size_line) + (x * (bpp / 8));
+//             *(int *)(data + i) = color;
+//         }
+//     }
+
+//     mlx_put_image_to_window(mlx, win, img, 0, 0);
+//     mlx_loop(mlx);
+// }
 
 // function to cast the rays based on the - width of the window? 360 or 640 or a variable that calculate the width based on the size os the map
 void	casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine)
 {
-	unsigned int	pixel;
-	
+	int	pixel;
+	// test_draw();
 	(void)data;
 	//draw ground and celling
 	init_vetors(engine, map);//call it here?
 	// pixel = -1;
-	pixel = (gameWidth /2) - 1;
+	pixel = (gameWidth / 2) - 1;
 	//main loop to draw
-	while (++pixel < map->map_width)
+	while (++pixel < gameWidth)
 	{
 		init_dda_struct(engine->dda);
 		get_distance(engine->dda, engine, pixel);

@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:00:28 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/08 19:31:08 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/09 17:57:49 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int main(int argc, char **argv)
 	//check if argv[1] ends with .cub?
 	struct_init(data);
 	parse(argv, data);
+	// start_window(data->colours, data, data->map_info);
 	casting_rays(data, data->map_info, data->engine);
-	// start_window();
 	free_all_data(data);
 	return (0);
 }

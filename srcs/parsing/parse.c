@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:58:51 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/25 20:22:45 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/09 17:13:34 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,15 @@ void read_mapfile(char **argv, t_cub_data *data)
 
 }
 
+// static void	get_map_col(t_map *map)
+// {
+// 	int col;
+// 	j
+
+// 	col = 0;
+	
+// }
+
 void parse(char **argv, t_cub_data *data)
 {
 	t_errno	status;
@@ -74,4 +83,6 @@ void parse(char **argv, t_cub_data *data)
 	status = grep_map(data);
 	if (status != SUCCESS)
 		status_error_handler(data, status);
+	// get_map_col(data->map_info);
+	
 }

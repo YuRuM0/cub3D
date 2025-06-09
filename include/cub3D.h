@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/08 19:21:21 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/09 18:04:08 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 #include "../mlx/mlx.h"
 
 
-# define	gameWidth 320
-# define	gameHeight 200
-# define	Width 64
-# define	Height 64
+# define	gameWidth 1920
+# define	gameHeight 1080
+# define	Width 320
+# define	Height 200 //test only
 
 /* Info variables DDA algorithm
 distToSideX - distance from player position to the nearest X side (ray)
@@ -61,6 +61,8 @@ typedef struct s_ddaVars
 	int				stepDirX; //direction of ray
 	int				stepDirY; //direction of ray
 	bool			hitWall;
+	double			drawStart;
+	double			drawEnd;
 	t_sideWall		hitside;
 	t_vetor2D		rayWall;
 }					t_ddaVars;
@@ -179,7 +181,7 @@ void draw_floor_ceiling(t_image image, t_colours *colours);
 void mlx_put_pixel_on_img(t_image image, int x, int y, long colour);
 
 //window
-void start_window(t_colours *colours, t_cub_data *data);
+void start_window(t_colours *colours, t_cub_data *data, t_map *map);
 
 //player
 void draw_player(t_image image, t_cub_data *data);
