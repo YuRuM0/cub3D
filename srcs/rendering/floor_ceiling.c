@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floor_ceiling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 12:23:08 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/04 20:13:46 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/10 15:38:26 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ long rgb_to_binary(long *colours)
 	return (binary);
 }
 
-void mlx_put_pixel_on_img(t_image image, int x, int y, long colour)
+void mlx_put_pixel_on_img(t_image *image, int x, int y, long colour)
 {
 	char *pixel;
 
-	pixel =  image.addr +(y * image.len_line + x * (image.bits_per_pixel / 8));
+	pixel =  image->addr +(y * image->len_line + x * (image->bits_per_pixel / 8));
 	*(long *)pixel = colour;
 }
 
@@ -42,19 +42,19 @@ void draw_background(t_image *image)
 		y = 0;
 		while (y < Height)
 		{
-			mlx_put_pixel_on_img(*image, x, y, background_col);
+			mlx_put_pixel_on_img(image, x, y, background_col);
 			y++;
 		}
 		x++;
 	}
 }
 
-void draw_floor_ceiling(t_image image, t_colours *colours)
+void draw_floor_ceiling(t_image *image, t_colours *colours)
 {
 	int		x;
 	int		y;
 
-	x = Width / 2;
+	x = 0;
 	while (x < Width)
 	{
 		y = 0;
@@ -68,8 +68,8 @@ void draw_floor_ceiling(t_image image, t_colours *colours)
 		}
 		x++;
 	}
-	mlx_put_image_to_window(image.mlx, image.window, image.img, 0, 0);
-	mlx_loop(image.mlx);
+	// mlx_put_image_to_window(image.mlx, image.window, image.img, 0, 0);
+	// mlx_loop(image.mlx);
 }
 
 
