@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/17 09:43:59 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/17 12:21:02 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 
 
 # define	gameWidth 1920
-# define	gameHeight 1080
+# define	gameHeight 1080 
 # define	Width 1920
-# define	Height 1080 //test only
+# define	Height 1080
 
 /* Info variables DDA algorithm
 distToSideX - distance from player position to the nearest X side (ray)
@@ -165,6 +165,7 @@ t_vetor2D	multiVetor(t_vetor2D v1, t_vetor2D v2);
 t_vetor2D	subVetor(t_vetor2D v1, t_vetor2D v2);
 t_vetor2D	sumVetor(t_vetor2D v1, t_vetor2D v2);
 double		magVetor(double x, double y);
+void		rotateVetor(t_vetor2D *vetor, double angle_rad);
 t_vetor2D	calc_cameraPixel(t_rayEngine *engine, unsigned int pixel);
 void		calc_distToSides(t_rayEngine *engine, t_vetor2D rayDir, t_ddaVars *dda);
 void		init_dda_struct(t_ddaVars *dda);

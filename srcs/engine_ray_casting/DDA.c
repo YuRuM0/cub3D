@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/17 10:50:48 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/17 13:35:16 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void getWall_coord(t_rayEngine *engine, t_ddaVars *dda)
 	dda->rayLengthX = dda->distToSideX;
 	dda->rayLengthY = dda->distToSideY;
 	dda->rayWall.x = floor(engine->posPlayer.x);
-	dda->rayWall.y = floor(engine->posPlayer.y);
+	dda->rayWall.y = floor(engine->posPlayer.y); //why floor
 	while (dda->hitWall == false)
 	{
 		if (dda->rayLengthX < dda->rayLengthY)
@@ -65,13 +65,13 @@ static double	DDA_algorithm(t_rayEngine *engine, t_ddaVars *dda)
 {
 	double	euclideanDist;
 	double	perpendicularDist;
-	double 	dot;
+	// double 	dot;
 	
 	getWall_coord(engine, dda);
 	euclideanDist = get_distToWall(dda, engine);
-	dot = engine->rayDir.x * engine->dir.x + engine->rayDir.y * engine->dir.y;
-	// perpendicularDist = euclideanDist / magVetor(engine->rayDir.x, engine->rayDir.y); //real dist from player to wall
-	perpendicularDist = euclideanDist * dot;
+	// dot = engine->rayDir.x * engine->dir.x + engine->rayDir.y * engine->dir.y;
+	perpendicularDist = euclideanDist / magVetor(engine->rayDir.x, engine->rayDir.y); //real dist from player to wall
+	// perpendicularDist = euclideanDist * dot;
 	return (perpendicularDist);
 }
 
@@ -146,16 +146,14 @@ void	draw_line(t_ddaVars *dda, t_image *img, int pixel)
 void	casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine)
 {
 	int	pixel;
-	// test_draw();
 	(void)data;
-	// mlx_put_image_to_window(data->img->mlx, data->img->window, data->img->img, 0, 0);
-	// mlx_loop(data->img->mlx);
 	init_vetors(engine, map);//call it here?
 	pixel = -1;
-	// pixel = (gameWidth / 2) - 1;
+	rotateVetor(&engine->dir, 2);
+	rotateVetor(&engine->planeCamera, 2);
 	//main loop to draw
 	while (++pixel < gameWidth)
-	{
+	{ 
 		init_dda_struct(engine->dda);
 		get_distance(engine->dda, engine, pixel);
 		// pause();

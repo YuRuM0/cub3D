@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 19:29:04 by flima             #+#    #+#             */
-/*   Updated: 2025/06/03 12:27:09 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/17 12:20:51 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,10 @@ double	magVetor(double x, double y)
 
 	mag = sqrt((x * x + y * y));
 	return (mag);
+}
+
+void	rotateVetor(t_vetor2D *vetor, double angle_rad)
+{
+	vetor->x = vetor->x * cos(angle_rad) - vetor->y * sin(angle_rad);
+	vetor->y = vetor->x * sin(angle_rad) - vetor->y * cos(angle_rad);
 }
