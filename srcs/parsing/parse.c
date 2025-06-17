@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:58:51 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/09 17:13:34 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/17 14:32:03 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,28 @@ void read_mapfile(char **argv, t_cub_data *data)
 	wholemap[i] = NULL;
 	close(fd);
 	data->wholemap = wholemap;
-
 }
 
-// static void	get_map_col(t_map *map)
-// {
-// 	int col;
-// 	j
+ static void	get_map_col(t_map *map)
+ {
+	int i;
+	int longest;
 
-// 	col = 0;
-	
-// }
+	i = 0;
+	longest = 0;
+	while (map->map_grid[i])
+	{
+		if (ft_strlen(map->map_grid[i]) >= (size_t)longest)
+			longest = ft_strlen(map->map_grid[i]);
+		i++;
+	}
+	map->map_col = longest;
+ }
 
 void parse(char **argv, t_cub_data *data)
 {
 	t_errno	status;
-	
+
 	read_mapfile(argv, data);
 	status = grep_texture(data);
 	if (status != SUCCESS)
@@ -83,6 +89,5 @@ void parse(char **argv, t_cub_data *data)
 	status = grep_map(data);
 	if (status != SUCCESS)
 		status_error_handler(data, status);
-	// get_map_col(data->map_info);
-	
+	get_map_col(data->map_info);
 }
