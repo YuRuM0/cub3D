@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/17 10:11:55 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/17 10:50:48 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,13 @@ static double	DDA_algorithm(t_rayEngine *engine, t_ddaVars *dda)
 {
 	double	euclideanDist;
 	double	perpendicularDist;
+	double 	dot;
 	
 	getWall_coord(engine, dda);
 	euclideanDist = get_distToWall(dda, engine);
-	perpendicularDist = euclideanDist / magVetor(engine->rayDir.x, engine->rayDir.y); //real dist from player to wall
+	dot = engine->rayDir.x * engine->dir.x + engine->rayDir.y * engine->dir.y;
+	// perpendicularDist = euclideanDist / magVetor(engine->rayDir.x, engine->rayDir.y); //real dist from player to wall
+	perpendicularDist = euclideanDist * dot;
 	return (perpendicularDist);
 }
 
@@ -108,6 +111,7 @@ void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel)
 	calc_distToSides(engine, rayDir, dda);
 	perpendicularDist = DDA_algorithm(engine, dda);
 	wallLineHight = (double)gameHeight / perpendicularDist;
+	// printf("perpendicularDist: %f	wallLineHight: %f\n", perpendicularDist, wallLineHight);
 	dda->drawStart = (double)gameHeight / 2 - wallLineHight / 2;
 	dda->drawEnd = (double)gameHeight / 2 + wallLineHight / 2;
 	
@@ -136,7 +140,6 @@ void	draw_line(t_ddaVars *dda, t_image *img, int pixel)
 		mlx_put_pixel_on_img(img, pixel, y, rgb_to_binary(color));
 		y++;
 	}
-	mlx_put_image_to_window(img->mlx, img->window, img->img, 0, 0);
 }
 
 // function to cast the rays based on the - width of the window? 360 or 640 or a variable that calculate the width based on the size os the map
@@ -159,6 +162,7 @@ void	casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine)
 		// mlx_put_image_to_window(data->img->mlx, data->img->window, data->img->img, 0, 0);
 		draw_line(engine->dda, data->img, pixel);
 	}
+	mlx_put_image_to_window(data->img->mlx, data->img->window, data->img->img, 0, 0);
 }
 
 int	ray_loop(t_cub_data *data)
