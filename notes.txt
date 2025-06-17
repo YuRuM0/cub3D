@@ -11,5 +11,8 @@ zsh: segmentation fault (core dumped)  ./cub3D maps/best_map.cub
 11110ewns
 
 remove \n in the map and textures;
-calculate map_col and map_row
-not working 
+calculate map_col and map_row => fixed
+not working
+
+
+For hook should I check if the position that I am trying to move only (if it is a wall) or should I also check if the hitWall == false

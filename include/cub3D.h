@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/17 12:21:02 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/17 16:08:23 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,15 @@
 
 
 # define	gameWidth 1920
-# define	gameHeight 1080 
+# define	gameHeight 1080
 # define	Width 1920
 # define	Height 1080
+# define	ESC 65307
+# define	LEFT 65361
+# define	UP 65362
+# define	RIGHT 65363
+# define	DOWN 65364
+# define	PI 3.1415926535
 
 /* Info variables DDA algorithm
 distToSideX - distance from player position to the nearest X side (ray)
@@ -101,16 +107,24 @@ typedef struct s_colours
 	long c_colour[3];
 }	t_colours;
 
+typedef struct s_player_info
+{
+	float player_dx;
+	float player_dy;
+	float player_angle;
+}	t_player_info;
+
 struct s_map
 {
-	char		**map_grid;
-	int			player_row;
-	int			player_col;
-	char		player_dir;
-	int			map_row;
-	int			map_col;
-	int			map_width; //col * width
-	int			map_height; // row * height
+	char			**map_grid;
+	int				player_row;
+	int				player_col;
+	char			player_dir;
+	t_player_info	*player_info;
+	int				map_row;
+	int				map_col;
+	int				map_width; //col * width
+	int				map_height; // row * height
 };
 
 typedef struct s_texture
@@ -180,14 +194,11 @@ int			ray_loop(t_cub_data *data);
 //int draw_floor_ceiling(t_image *image, t_colours *colours);
 long rgb_to_binary(long *colours);
 void draw_background(t_image *image);
-void draw_floor_ceiling(t_image *image, t_colours *colours);
+void draw_floor_ceiling(t_image *image, t_colours *colours, t_cub_data *data);
 void mlx_put_pixel_on_img(t_image *image, int x, int y, long colour);
 
 //window
 void start_window(t_colours *colours, t_cub_data *data, t_map *map);
-
-//player
-void draw_player(t_image image, t_cub_data *data);
 
 //main
 int main(int argc, char **argv);
