@@ -12,3 +12,4 @@ zsh: segmentation fault (core dumped)  ./cub3D maps/best_map.cub
 
 remove \n in the map and textures;
 calculate map_col and map_row
+not working 
