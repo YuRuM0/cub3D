@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:55:52 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/18 14:32:05 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/18 17:19:48 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ static long colour_pixels(t_cub_data *data, t_calc *value)
 	map_loc = data->map_info->map_grid[value->map_y][value->map_x];
 	if (map_loc == '1')
 		return WALL_COLOUR;
-	else if (ft_isalpha(map_loc) == 1)
-		return player_colour;
 	else
 		return FLOOR_COLOUR;
 }

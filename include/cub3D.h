@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/18 14:33:50 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/18 18:14:07 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,9 @@ typedef struct s_player_info
 	float player_dx;
 	float player_dy;
 	float player_angle;
+	int dx;
+	int dy; // for line drawing
+	int steps; // num steps in line stretching out from the player
 }	t_player_info;
 
 struct s_map
@@ -211,9 +214,13 @@ void mlx_put_pixel_on_img(t_image *image, int x, int y, long colour);
 void minimap_struct_init(t_calc *value, t_cub_data *data);
 void draw_map_border(t_image *img);
 void draw_map(t_image *img, t_cub_data *data, t_calc *value);
+void drawPlayer(t_cub_data *data, t_image *img, t_calc *value);
 
 //window
 void start_window(t_colours *colours, t_cub_data *data, t_map *map);
+
+// utils
+float degToRad(int a);
 
 //main
 int main(int argc, char **argv);

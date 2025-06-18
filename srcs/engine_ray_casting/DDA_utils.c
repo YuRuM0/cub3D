@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DDA_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:58 by flima             #+#    #+#             */
-/*   Updated: 2025/06/18 13:04:30 by filipe           ###   ########.fr       */
+/*   Updated: 2025/06/18 18:52:00 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	init_dda_struct(t_ddaVars *dda)
 	dda->distToSideX = 0;
 }
 
+//calculates
 t_vetor2D	calc_cameraPixel(t_rayEngine *engine, unsigned int pixel)
 {
 	double		multiplier;
@@ -62,7 +63,7 @@ t_vetor2D	calc_cameraPixel(t_rayEngine *engine, unsigned int pixel)
 void	calc_distToSides(t_rayEngine *engine, t_vetor2D rayDir, t_ddaVars *dda)
 {
 	t_vetor2D		mapPos;
-	
+
 	mapPos.x = floor(engine->posPlayer.x); //to find distToSideX and Y pos(1.5, 2.5) - mappos(1,2)
 	mapPos.y = floor(engine->posPlayer.y);
 	if (rayDir.x < 0)

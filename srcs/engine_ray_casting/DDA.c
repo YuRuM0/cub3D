@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/18 14:35:43 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/18 14:39:08 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine)
 	int	pixel;
 	(void)data;
 	init_vetors(engine, map);//call it here?
-	pixel = -1;
+	pixel = Width / 2 - 1;
 	rotateVetor(&engine->dir, 2);
 	rotateVetor(&engine->planeCamera, 2);
 	//main loop to draw
