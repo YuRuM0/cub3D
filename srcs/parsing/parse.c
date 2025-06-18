@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:58:51 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/18 13:50:48 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/18 14:35:01 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void read_mapfile(char **argv, t_cub_data *data)
 	wholemap = malloc(sizeof(char*) * (rows + 1));
 	if (!wholemap)
 		//memalloc issue
-		;
+		return;
 	i = 0;
 	while (i < rows)
 	{

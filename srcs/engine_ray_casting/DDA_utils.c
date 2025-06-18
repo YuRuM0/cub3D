@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DDA_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:58 by flima             #+#    #+#             */
-/*   Updated: 2025/06/17 12:52:02 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/18 13:04:30 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ void	calc_distToSides(t_rayEngine *engine, t_vetor2D rayDir, t_ddaVars *dda)
 		dda->stepDirX = -1;
 	}
 	else
-		dda->distToSideX = ((mapPos.x + 1) * engine->posPlayer.x) * dda->deltaDistX;
+		dda->distToSideX = ((mapPos.x + 1) - engine->posPlayer.x) * dda->deltaDistX;
 	if (rayDir.y < 0)
 	{
 		dda->distToSideY = (engine->posPlayer.y - mapPos.y) * dda->deltaDistY;
 		dda->stepDirY = -1;
 	}
 	else
-		dda->distToSideY = ((mapPos.y + 1) * engine->posPlayer.y) * dda->deltaDistY;
+		dda->distToSideY = ((mapPos.y + 1) - engine->posPlayer.y) * dda->deltaDistY;
 }
 
 void	hitWallDir(t_ddaVars *dda, int	fromSide)
