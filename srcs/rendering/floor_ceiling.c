@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   floor_ceiling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 12:23:08 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/10 15:38:26 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/18 13:46:23 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-# define background_col 0x4D4D4DD4D4D
+# define background_col 0xFF808080
 
 long rgb_to_binary(long *colours)
 {
 	long binary;
 
 	binary = (colours[0] << 16) + (colours[1] << 8) + colours[2];
-	//printf("%d\n", binary);
 	return (binary);
 }
 
@@ -54,13 +53,13 @@ void draw_floor_ceiling(t_image *image, t_colours *colours)
 	int		x;
 	int		y;
 
-	x = 0;
+	x = Width / 2;
 	while (x < Width)
 	{
 		y = 0;
 		while (y < Height)
 		{
-			if (y < Height /2)
+			if (y < Height / 2)
 				mlx_put_pixel_on_img(image, x, y, rgb_to_binary(colours->c_colour));
 			if (y >= Height / 2)
 				mlx_put_pixel_on_img(image, x, y, rgb_to_binary(colours->f_colour));
@@ -68,8 +67,7 @@ void draw_floor_ceiling(t_image *image, t_colours *colours)
 		}
 		x++;
 	}
-	// mlx_put_image_to_window(image.mlx, image.window, image.img, 0, 0);
-	// mlx_loop(image.mlx);
+	//mlx_put_pixel_on_img(image, player_x_loc / 2, player_y_loc / 2, player_colour);
+	//mlx_put_image_to_window(image.mlx, image.window, image.img, 0, 0);
+	//mlx_loop(image.mlx);
 }
-
-

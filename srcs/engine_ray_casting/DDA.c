@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DDA.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/17 13:35:16 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/17 13:57:51 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static double	DDA_algorithm(t_rayEngine *engine, t_ddaVars *dda)
 	double	euclideanDist;
 	double	perpendicularDist;
 	// double 	dot;
-	
+
 	getWall_coord(engine, dda);
 	euclideanDist = get_distToWall(dda, engine);
 	// dot = engine->rayDir.x * engine->dir.x + engine->rayDir.y * engine->dir.y;
@@ -114,7 +114,7 @@ void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel)
 	// printf("perpendicularDist: %f	wallLineHight: %f\n", perpendicularDist, wallLineHight);
 	dda->drawStart = (double)gameHeight / 2 - wallLineHight / 2;
 	dda->drawEnd = (double)gameHeight / 2 + wallLineHight / 2;
-	
+
 }
 
 void	draw_line(t_ddaVars *dda, t_image *img, int pixel)
@@ -128,7 +128,7 @@ void	draw_line(t_ddaVars *dda, t_image *img, int pixel)
 		color[1] = 0;
 		color[2] = 0;
 	}
-	else 
+	else
 	{
 		color[0] = 255;
 		color[1] = 100;
@@ -148,12 +148,12 @@ void	casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine)
 	int	pixel;
 	(void)data;
 	init_vetors(engine, map);//call it here?
-	pixel = -1;
+	pixel = Width / 2 - 1;
 	rotateVetor(&engine->dir, 2);
 	rotateVetor(&engine->planeCamera, 2);
 	//main loop to draw
 	while (++pixel < gameWidth)
-	{ 
+	{
 		init_dda_struct(engine->dda);
 		get_distance(engine->dda, engine, pixel);
 		// pause();

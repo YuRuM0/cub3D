@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/17 16:08:23 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/18 13:42:13 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,16 @@ struct s_cub_data
 	t_image		*img;
 };
 
+typedef struct map_drawing_calc
+{
+	int offset_x;
+	int offset_y;
+	float scale_x;
+	float scale_y;
+	int map_x;
+	int map_y;
+}	t_calc;
+
 //parsing
 //utils
 void free_double(char **s);
@@ -194,8 +204,13 @@ int			ray_loop(t_cub_data *data);
 //int draw_floor_ceiling(t_image *image, t_colours *colours);
 long rgb_to_binary(long *colours);
 void draw_background(t_image *image);
-void draw_floor_ceiling(t_image *image, t_colours *colours, t_cub_data *data);
+void draw_floor_ceiling(t_image *image, t_colours *colours);
 void mlx_put_pixel_on_img(t_image *image, int x, int y, long colour);
+
+//minimap
+void minimap_struct_init(t_calc *value, t_cub_data *data);
+void draw_map_border(t_image *img);
+void draw_map(t_image *img, t_cub_data *data, t_calc *value);
 
 //window
 void start_window(t_colours *colours, t_cub_data *data, t_map *map);

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:02:48 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/17 14:25:18 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/18 14:06:41 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,19 @@ static t_errno	check_surrounding_wall(char **map_grid)
 	return (SUCCESS);
 }
 
+static char	*ft_strdup_no_newline(const char *s)
+{
+	char	*newstr;
+	size_t	len;
+
+	len = ft_strlen(s);
+	newstr = (char *)malloc(len);
+	if (newstr == NULL)
+		return (NULL);
+	ft_strlcpy(newstr, s, len);
+	return (newstr);
+}
+
 t_errno grep_map(t_cub_data *data)
 {
 	int	i;
@@ -150,7 +163,7 @@ t_errno grep_map(t_cub_data *data)
 	{
 		if (data->wholemap[map_start + i][0] == '\n')
 			return (ERR_INVALID_MAP);
-		data->map_info->map_grid[i] = ft_strdup(data->wholemap[map_start + i]);
+		data->map_info->map_grid[i] = ft_strdup_no_newline(data->wholemap[map_start + i]);
 		if (!data->map_info->map_grid[i])
 			return (ERR_MEM_ALLOC);
 	}

@@ -6,7 +6,7 @@
 #    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/06/17 14:40:35 by yulpark          ###   ########.fr        #
+#    Updated: 2025/06/18 13:23:45 by yulpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,8 @@ ERR_FREE_FILES = $(ERR_FREE_DIR)/error_handler_msg.c\
 
 RENDERING_DIR = $(SRCS_DIR)/rendering
 RENDERING_FILES = $(RENDERING_DIR)/floor_ceiling.c\
-					$(RENDERING_DIR)/window.c
+					$(RENDERING_DIR)/window.c\
+					$(RENDERING_DIR)/minimap.c
 
 SRCS_FILES = $(PARSE_FILES) $(ERR_FREE_FILES) $(RENDERING_FILES)\
 				$(RAY_ENGINE_FILES) $(SRCS_DIR)/main.c
