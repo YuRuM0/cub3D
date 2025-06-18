@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/08 19:24:35 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/18 09:52:56 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void struct_init(t_cub_data *data)
 	data->engine->dda = malloc(sizeof(t_ddaVars));
 	if (data->colours == NULL || data->texture == NULL || data->map_info == NULL\
 		 || data->engine == NULL || data->engine->dda == NULL)
-		;
-		//errhandle (ERR_MEM_ALLOC)
+		return ;//errhandle (ERR_MEM_ALLOC)
 	data->engine->map = data->map_info;
 	data->engine->data = data;
 	data->colours->c_colour_str = NULL;

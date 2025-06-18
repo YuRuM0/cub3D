@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/17 16:08:23 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/18 10:29:15 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ int			ray_loop(t_cub_data *data);
 //int draw_floor_ceiling(t_image *image, t_colours *colours);
 long rgb_to_binary(long *colours);
 void draw_background(t_image *image);
-void draw_floor_ceiling(t_image *image, t_colours *colours, t_cub_data *data);
+void draw_floor_ceiling(t_image *image, t_colours *colours);
 void mlx_put_pixel_on_img(t_image *image, int x, int y, long colour);
 
 //window

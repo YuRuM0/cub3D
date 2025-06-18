@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DDA.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/17 13:35:16 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/18 13:10:53 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void getWall_coord(t_rayEngine *engine, t_ddaVars *dda)
 	dda->rayLengthX = dda->distToSideX;
 	dda->rayLengthY = dda->distToSideY;
 	dda->rayWall.x = floor(engine->posPlayer.x);
-	dda->rayWall.y = floor(engine->posPlayer.y); //why floor
+	dda->rayWall.y = floor(engine->posPlayer.y);
 	while (dda->hitWall == false)
 	{
 		if (dda->rayLengthX < dda->rayLengthY)
@@ -46,32 +46,27 @@ static double	get_distToWall(t_ddaVars *dda, t_rayEngine *engine)
 	double	euclideanDist;
 
 	if (dda->hitside == NO)
-		euclideanDist = (fabs(dda->rayWall.y + 1 - engine->posPlayer.y)\
-		 * magVetor(engine->rayDir.x, engine->rayDir.y)) / fabs(engine->rayDir.y);
+		euclideanDist = fabs(dda->rayWall.y + 1 - engine->posPlayer.y)\
+		 / fabs(engine->rayDir.y);
 	else if (dda->hitside == SO)
-		euclideanDist = (fabs(dda->rayWall.y - engine->posPlayer.y)\
-		 * magVetor(engine->rayDir.x, engine->rayDir.y)) / fabs(engine->rayDir.y);
+		euclideanDist = fabs(dda->rayWall.y - engine->posPlayer.y)\
+		 / fabs(engine->rayDir.y);
 	else if (dda->hitside == WE)
-		euclideanDist = (fabs(dda->rayWall.x + 1 - engine->posPlayer.x)\
-		 * magVetor(engine->rayDir.x, engine->rayDir.y)) / fabs(engine->rayDir.x);
+		euclideanDist = fabs(dda->rayWall.x + 1 - engine->posPlayer.x)\
+		 / fabs(engine->rayDir.x);
 	else
-		euclideanDist = (fabs(dda->rayWall.x - engine->posPlayer.x)\
-		 * magVetor(engine->rayDir.x, engine->rayDir.y)) / fabs(engine->rayDir.x);
+		euclideanDist = fabs(dda->rayWall.x - engine->posPlayer.x)\
+		 / fabs(engine->rayDir.x);
 	return (euclideanDist);
 }
 
 //return the distance from player to walll
 static double	DDA_algorithm(t_rayEngine *engine, t_ddaVars *dda)
 {
-	double	euclideanDist;
 	double	perpendicularDist;
-	// double 	dot;
 	
 	getWall_coord(engine, dda);
-	euclideanDist = get_distToWall(dda, engine);
-	// dot = engine->rayDir.x * engine->dir.x + engine->rayDir.y * engine->dir.y;
-	perpendicularDist = euclideanDist / magVetor(engine->rayDir.x, engine->rayDir.y); //real dist from player to wall
-	// perpendicularDist = euclideanDist * dot;
+	perpendicularDist = get_distToWall(dda, engine);
 	return (perpendicularDist);
 }
 
@@ -111,9 +106,8 @@ void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel)
 	calc_distToSides(engine, rayDir, dda);
 	perpendicularDist = DDA_algorithm(engine, dda);
 	wallLineHight = (double)gameHeight / perpendicularDist;
-	// printf("perpendicularDist: %f	wallLineHight: %f\n", perpendicularDist, wallLineHight);
-	dda->drawStart = (double)gameHeight / 2 - wallLineHight / 2;
-	dda->drawEnd = (double)gameHeight / 2 + wallLineHight / 2;
+	dda->drawStart = ((double)gameHeight / 2) - (wallLineHight / 2);
+	dda->drawEnd = ((double)gameHeight / 2) + (wallLineHight / 2);
 	
 }
 
@@ -149,8 +143,8 @@ void	casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine)
 	(void)data;
 	init_vetors(engine, map);//call it here?
 	pixel = -1;
-	rotateVetor(&engine->dir, 2);
-	rotateVetor(&engine->planeCamera, 2);
+	rotateVetor(&engine->dir, 0.0);
+	rotateVetor(&engine->planeCamera, 0.0);
 	//main loop to draw
 	while (++pixel < gameWidth)
 	{ 
