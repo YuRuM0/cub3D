@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:55:52 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/18 14:11:52 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/18 14:32:05 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void draw_map_border(t_image *img)
 	}
 }
 
-
 static long colour_pixels(t_cub_data *data, t_calc *value)
 {
 	char map_loc;
@@ -63,70 +62,38 @@ static long colour_pixels(t_cub_data *data, t_calc *value)
 		return FLOOR_COLOUR;
 }
 
-void draw_map(t_image *img, t_cub_data *data, t_calc *value)
+static void draw_map_loop(t_image *img, int *pixel_x_start_end, int *pixel_y_start_end, t_cub_data *data, t_calc *value)
 {
-	int pixel_start_x;
-	int pixel_end_x;
-	int pixel_start_y;
-	int pixel_end_y;
 	int pixel_y;
 	int pixel_x;
+
+	pixel_y = pixel_y_start_end[0] - 1;
+	while (++pixel_y < pixel_y_start_end[1])
+	{
+		pixel_x = pixel_x_start_end[0] - 1;
+		while (++pixel_x < pixel_x_start_end[1])
+		{
+			if (pixel_x >= X_OFFSET && pixel_x < X_OFFSET + MINIMAP_WIDTH &&
+				pixel_y >= Y_OFFSET && pixel_y < Y_OFFSET + MINIMAP_HEIGHT)
+				mlx_put_pixel_on_img(img, pixel_x, pixel_y, colour_pixels(data, value));
+		}
+	}
+}
+void draw_map(t_image *img, t_cub_data *data, t_calc *value)
+{
+	int pixel_x_start_end[2];
+	int pixel_y_start_end[2];
 
 	while (++value->map_y < data->map_info->map_row)
 	{
 		value->map_x = -1;
 		while (++value->map_x < data->map_info->map_col)
 		{
-			pixel_start_x = X_OFFSET + (int)(value->map_x * value->scale_x) + 1;
-			pixel_end_x   = X_OFFSET + (int)((value->map_x + 1) * value->scale_x) - 1;
-			pixel_start_y = Y_OFFSET + (int)(value->map_y * value->scale_y) + 1;
-			pixel_end_y   = Y_OFFSET + (int)((value->map_y + 1) * value->scale_y) - 1;
-			pixel_y = pixel_start_y - 1;
-			while (++pixel_y < pixel_end_y)
-			{
-				pixel_x = pixel_start_x - 1;
-				while (++pixel_x < pixel_end_x)
-				{
-					if (pixel_x >= X_OFFSET && pixel_x < X_OFFSET + MINIMAP_WIDTH &&
-						pixel_y >= Y_OFFSET && pixel_y < Y_OFFSET + MINIMAP_HEIGHT)
-						mlx_put_pixel_on_img(img, pixel_x, pixel_y, colour_pixels(data, value));
-				}
-			}
+			pixel_x_start_end[0] = X_OFFSET + (int)(value->map_x * value->scale_x) + 1;
+			pixel_x_start_end[1]   = X_OFFSET + (int)((value->map_x + 1) * value->scale_x) - 1;
+			pixel_y_start_end[0] = Y_OFFSET + (int)(value->map_y * value->scale_y) + 1;
+			pixel_y_start_end[1]   = Y_OFFSET + (int)((value->map_y + 1) * value->scale_y) - 1;
+			draw_map_loop(img, pixel_x_start_end, pixel_y_start_end, data, value);
 		}
 	}
 }
-
-/*
-
-void draw_player_on_minimap(t_image *image, t_cub_data *data)
-{
-    // Calculate scale factors (same as in draw_minimap)
-    float scale_x = (float)MINIMAP_WIDTH / data->map_info->map_col;
-    float scale_y = (float)MINIMAP_HEIGHT / data->map_info->map_row;
-
-    // Calculate player position in minimap pixels
-    int player_pixel_x = MINIMAP_X_OFFSET + (int)(data->map_info->player_col * scale_x);
-    int player_pixel_y = MINIMAP_Y_OFFSET + (int)(data->map_info->player_row * scale_y);
-
-    // Calculate appropriate player dot size based on scale
-    int dot_size = (int)fmax(2, fmin(scale_x, scale_y) / 3); // At least 2 pixels, max 1/3 of cell size
-
-    // Draw player dot
-    for (int dx = -dot_size/2; dx <= dot_size/2; dx++)
-    {
-        for (int dy = -dot_size/2; dy <= dot_size/2; dy++)
-        {
-            int px = player_pixel_x + dx;
-            int py = player_pixel_y + dy;
-
-            // Check bounds
-            if (px >= MINIMAP_X_OFFSET && px < MINIMAP_X_OFFSET + MINIMAP_WIDTH &&
-                py >= MINIMAP_Y_OFFSET && py < MINIMAP_Y_OFFSET + MINIMAP_HEIGHT)
-            {
-                mlx_put_pixel_on_img(image, px, py, PLAYER_COLOR);
-            }
-        }
-    }
-}
-	*/
-
