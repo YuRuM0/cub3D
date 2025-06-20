@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/20 10:58:46 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/20 14:30:14 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,33 +137,25 @@ void	draw_line(t_ddaVars *dda, t_image *img, int pixel)
 }
 
 // function to cast the rays based on the - width of the window? 360 or 640 or a variable that calculate the width based on the size os the map
-void	casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine)
+void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 {
 	int	pixel;
-	(void)data;
-	init_vetors(engine, map);//call it here?
 	pixel = -1;
-	// rotateVetor(&engine->dir, M_PI/2);
-	// rotateVetor(&engine->planeCamera, M_PI/2);
-	//main loop to draw
+	draw_floor_ceiling(data->img, data->colours);
 	while (++pixel < gameWidth)
-	{ 
+	{
 		init_dda_struct(engine->dda);
 		get_distance(engine->dda, engine, pixel);
-		// pause();
-		// mlx_put_image_to_window(data->img->mlx, data->img->window, data->img->img, 0, 0);
 		draw_line(engine->dda, data->img, pixel);
 	}
 	mlx_put_image_to_window(data->img->mlx, data->img->window, data->img->img, 0, 0);
 }
 
-int	ray_loop(t_cub_data *data)
+int	ray_loop(void *param)
 {
-	// t_cub_data *data;
+	t_cub_data *data;
 
-	// data = (t_cub_data *)param;
-	casting_rays(data, data->map_info, data->engine);
-	printf("done\n");
-	pause();
+	data = (t_cub_data *)param;
+	casting_rays(data, data->engine);
 	return (0);
 }

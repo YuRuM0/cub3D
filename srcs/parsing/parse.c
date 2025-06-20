@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:58:51 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/18 09:53:42 by filipe           ###   ########.fr       */
+/*   Updated: 2025/06/20 14:03:08 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,5 @@ void parse(char **argv, t_cub_data *data)
 	if (status != SUCCESS)
 		status_error_handler(data, status);
 	get_map_col(data->map_info);
+	game_settings(data);
 }

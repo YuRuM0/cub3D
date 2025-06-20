@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/18 09:52:56 by filipe           ###   ########.fr       */
+/*   Updated: 2025/06/20 14:37:05 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void struct_init(t_cub_data *data)
 	data->map_info = malloc(sizeof(t_map));
 	data->engine = malloc(sizeof(t_rayEngine));
 	data->engine->dda = malloc(sizeof(t_ddaVars));
+	data->img = malloc(sizeof(t_image));
 	if (data->colours == NULL || data->texture == NULL || data->map_info == NULL\
 		 || data->engine == NULL || data->engine->dda == NULL)
 		return ;//errhandle (ERR_MEM_ALLOC)
@@ -35,6 +36,35 @@ void struct_init(t_cub_data *data)
 	data->map_info->map_col = 0;
 	data->map_info->map_row = 0;
 	data->map_info->player_dir = '0'; //what is this?
+}
+
+static void	set_direction(t_rayEngine *engine, t_map *mmap)
+{
+	char		dir;
+	
+	dir = mmap->map_grid[mmap->player_row][mmap->player_col];
+	write(1, &dir, 1);
+	if (dir == 'S')
+	{
+		rotateVetor(&engine->dir, M_PI);
+		rotateVetor(&engine->planeCamera, M_PI);
+	}
+	else if (dir == 'E')
+	{
+		rotateVetor(&engine->dir, M_PI/2);
+		rotateVetor(&engine->planeCamera, M_PI/2);
+	}
+	else if (dir == 'W')
+	{
+		rotateVetor(&engine->dir, -M_PI/2);
+		rotateVetor(&engine->planeCamera, -M_PI/2);
+	}
+}
+
+void	game_settings(t_cub_data *data)
+{
+	init_vetors(data->engine, data->map_info);
+	set_direction(data->engine, data->map_info);
 }
 
 t_errno	validate_RGB_values(char **color)
