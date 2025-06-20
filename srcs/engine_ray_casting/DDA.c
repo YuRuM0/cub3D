@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DDA.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/18 14:39:08 by yulpark          ###   ########.fr       */
+/*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
+/*   Updated: 2025/06/20 11:02:15 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,9 @@ void	casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine)
 	int	pixel;
 	(void)data;
 	init_vetors(engine, map);//call it here?
-	pixel = Width / 2 - 1;
-	rotateVetor(&engine->dir, 2);
-	rotateVetor(&engine->planeCamera, 2);
+	pixel = -1;
+	// rotateVetor(&engine->dir, M_PI/2);
+	// rotateVetor(&engine->planeCamera, M_PI/2);
 	//main loop to draw
 	while (++pixel < gameWidth)
 	{
