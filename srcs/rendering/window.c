@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/18 18:14:28 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/20 14:48:30 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,4 @@ void start_window(t_colours *colours, t_cub_data *data, t_map *map)
 	mlx_put_image_to_window(image->mlx, image->window, image->img, 0, 0);
 	//mlx_loop(data->img->mlx);
 }
+

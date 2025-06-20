@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/20 11:01:49 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/20 14:47:43 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,7 @@ typedef struct	s_rayEngine //should be one variable or a lot of them based on th
 {
 	t_vetor2D			posPlayer;
 	t_vetor2D			dir;
-	t_vetor2D			planeCamera; //[0,0.66]
-	t_vetor2D			planeR;
-	t_vetor2D			planeL;
+	t_vetor2D			planeCamera;
 	t_vetor2D			rayDir;
 	t_ddaVars			*dda;
 	struct s_map		*map;
@@ -171,14 +169,15 @@ typedef struct map_drawing_calc
 
 //parsing
 //utils
-void free_double(char **s);
-void struct_init(t_cub_data *data);
+void 	free_double(char **s);
+void 	struct_init(t_cub_data *data);
 t_errno	validate_RGB_values(char **color);
-int	find_map_start(t_cub_data *data);
+int		find_map_start(t_cub_data *data);
+void	game_settings(t_cub_data *data);
 
 //parse
-void read_mapfile(char **argv, t_cub_data *data);
-void parse(char **argv, t_cub_data *data);
+void 	read_mapfile(char **argv, t_cub_data *data);
+void 	parse(char **argv, t_cub_data *data);
 t_errno get_colors(t_cub_data *data);
 
 //free and error_handlers
@@ -197,10 +196,10 @@ t_vetor2D	calc_cameraPixel(t_rayEngine *engine, unsigned int pixel);
 void		calc_distToSides(t_rayEngine *engine, t_vetor2D rayDir, t_ddaVars *dda);
 void		init_dda_struct(t_ddaVars *dda);
 void		hitWallDir(t_ddaVars *dda, int	fromSide);
-void		casting_rays(t_cub_data *data, t_map *map, t_rayEngine *engine);
+void		casting_rays(t_cub_data *data, t_rayEngine *engine);
 void		init_dda_struct(t_ddaVars *dda);
 void		init_vetors(t_rayEngine *engine, t_map *map);
-int			ray_loop(t_cub_data *data);
+int			ray_loop(void *param);
 
 // rendering
 // floor ceiling
