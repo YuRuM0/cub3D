@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DDA_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:58 by flima             #+#    #+#             */
-/*   Updated: 2025/06/18 13:04:30 by filipe           ###   ########.fr       */
+/*   Updated: 2025/06/20 10:45:34 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,11 @@ t_vetor2D	calc_cameraPixel(t_rayEngine *engine, unsigned int pixel)
 	double		multiplier;
 	t_vetor2D	cameraPixel;
 	t_vetor2D	rayDir;
-	// double		rayMag;
 
 	multiplier = 2 * ((double)pixel/(double)gameWidth) - 1;
 	cameraPixel.x = engine->planeCamera.x * multiplier;
 	cameraPixel.y = engine->planeCamera.y * multiplier;
-	// printf("camera pixel: (%f, %f)\nmukt %f\n", cameraPixel.y, cameraPixel.y, multiplier);
 	rayDir = sumVetor(cameraPixel, engine->dir);
-	// rayMag = magVetor(rayDir.x, rayDir.y);
-	// rayDir.x /= rayMag;
-	// rayDir.y /= rayMag;
 	return (rayDir);
 }
 
