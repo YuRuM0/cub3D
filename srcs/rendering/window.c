@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 20:19:50 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/21 21:43:25 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 void start_window(t_cub_data *data)
 {
 	data->mlx = mlx_init(Width, Height, "cub3D", false);
+	if (!data->mlx)
+		
 	data->img->img = mlx_new_image(data->mlx, Width, Height);
 }
 

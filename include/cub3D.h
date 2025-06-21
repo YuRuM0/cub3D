@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 20:53:51 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 21:44:08 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <math.h>
 #include "MLX42/MLX42.h"
 
-// # define	M_PI 3.1415926535
+# define	PI 3.1415926535
 # define	Width 1920
 # define	Height 1080
 # define	ROTATION_SPEED 0.10
@@ -99,7 +99,8 @@ typedef enum e_errno
 	ERR_MISSING_MAP_ELEMENT, //did not find the one or more color in the map
 	ERR_INVALID_COLORS, // colors are not in the format F 000,000,000 (there is sometging else )
 	ERR_INVALID_RBG_VALUES,
-	ERR_INVALID_INPUT // too many arguments, wrong arguments
+	ERR_INVALID_INPUT, // too many arguments, wrong arguments
+	ERR_MLX_FAIL
 } 	t_errno;
 
 typedef struct s_colours
@@ -176,7 +177,7 @@ typedef struct map_drawing_calc
 //parsing
 //utils
 void 	free_double(char **s);
-void 	struct_init(t_cub_data *data);
+void 	struct_alloc(t_cub_data *data);
 t_errno	validate_RGB_values(char **color);
 int		find_map_start(t_cub_data *data);
 void	game_settings(t_cub_data *data);
