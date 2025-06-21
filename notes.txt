@@ -16,5 +16,4 @@ not working
 
 
 For hook should I check if the position that I am trying to move only (if it is a wall) or should I also check if the hitWall == false
-split this function by its features - void start_window(t_colours *colours, t_cub_data *data, t_map *map) - a function to init the mlx and another to minimap, also call 
-	mlx_put_image_to_window(image->mlx, image->window, image->img, 0, 0); e drawnfloor to ray_loop (main loop)
+* modify Makefile to clean libft and mlx .o and .a

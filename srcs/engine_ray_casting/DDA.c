@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/20 14:48:04 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 19:50:31 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,10 @@ void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel)
 	calc_deltaDist(dda, rayDir);
 	calc_distToSides(engine, rayDir, dda);
 	perpendicularDist = DDA_algorithm(engine, dda);
-	wallLineHight = (double)gameHeight / perpendicularDist;
-	// printf("perpendicularDist: %f	wallLineHight: %f\n", perpendicularDist, wallLineHight);
-	dda->drawStart = ((double)gameHeight / 2) - (wallLineHight / 2);
-	dda->drawEnd = ((double)gameHeight / 2) + (wallLineHight / 2);
-
+	wallLineHight = (double)Height / perpendicularDist;
+	dda->drawStart = ((double)Height / 2) - (wallLineHight / 2);
+	dda->drawEnd = ((double)Height / 2) + (wallLineHight / 2);
+	
 }
 
 void	draw_line(t_ddaVars *dda, t_image *img, int pixel)
@@ -131,10 +130,12 @@ void	draw_line(t_ddaVars *dda, t_image *img, int pixel)
 		color[1] = 100;
 		color[2] = 100;
 	}
+	if (dda->drawStart < 0 || dda->drawEnd >= Height)
+		return ;
 	y = dda->drawStart;
 	while (y < dda->drawEnd)
 	{
-		mlx_put_pixel_on_img(img, pixel, y, rgb_to_binary(color));
+		mlx_put_pixel(img->img, pixel, y, rgb_to_binary(color));
 		y++;
 	}
 }
@@ -145,20 +146,19 @@ void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 	int	pixel;
 	pixel = -1;
 	draw_floor_ceiling(data->img, data->colours);
-	while (++pixel < gameWidth)
+	while (++pixel < Width)
 	{
 		init_dda_struct(engine->dda);
 		get_distance(engine->dda, engine, pixel);
 		draw_line(engine->dda, data->img, pixel);
 	}
-	mlx_put_image_to_window(data->img->mlx, data->img->window, data->img->img, 0, 0);
+	mlx_image_to_window(data->mlx, data->img->img, 0, 0);
 }
 
-int	ray_loop(void *param)
+void	ray_loop(void *param)
 {
 	t_cub_data *data;
 
 	data = (t_cub_data *)param;
 	casting_rays(data, data->engine);
-	return (0);
 }

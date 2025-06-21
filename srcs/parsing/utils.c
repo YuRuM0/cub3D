@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/20 14:37:05 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 13:25:34 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	set_direction(t_rayEngine *engine, t_map *mmap)
 	char		dir;
 	
 	dir = mmap->map_grid[mmap->player_row][mmap->player_col];
-	write(1, &dir, 1);
 	if (dir == 'S')
 	{
 		rotateVetor(&engine->dir, M_PI);

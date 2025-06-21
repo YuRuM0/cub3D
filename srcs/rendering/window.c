@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/20 14:50:26 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 19:50:50 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,8 @@ void start_window(t_colours *colours, t_cub_data *data, t_map *map)
 		return; //handle it.
 	(void)map;
 	(void)colours;
-	// map->map_width = Width * map->map_col;
-	// map->map_height = Height * map->map_row; //map size based on size of map size
-	data->map_info->player_info = player_info;
-	//data->img = image;
-	player_info->player_angle = 0;
-	player_info->player_dx = cos(degToRad(player_info->player_angle));
-	player_info->player_dy = -sin(degToRad(player_info->player_angle));
-	image->mlx = mlx_init();
-	image->window = mlx_new_window(image->mlx, Width, Height, "mlx");
-	image->img = mlx_new_image(image->mlx, Width, Height);
-	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel, &image->len_line, &image->endian);
-	// draw_background(image);
-	draw_floor_ceiling(image, colours);
-	// minimap_main(calc, data, image);
-	data->img = image;
-	mlx_put_image_to_window(image->mlx, image->window, image->img, 0, 0);
-	//mlx_loop(data->img->mlx);
+
+	data->mlx = mlx_init(Width, Height, "cub3D", false);
+	data->img->img = mlx_new_image(data->mlx, Width, Height);
 }
 

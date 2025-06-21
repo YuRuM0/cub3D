@@ -1,0 +1,37 @@
+| Tecla            | Constante MLX42        | Valor (int) |
+| ---------------- | ---------------------- | ----------- |
+| `W`              | `MLX_KEY_W`            | 87          |
+| `A`              | `MLX_KEY_A`            | 65          |
+| `S`              | `MLX_KEY_S`            | 83          |
+| `D`              | `MLX_KEY_D`            | 68          |
+| `ESC`            | `MLX_KEY_ESCAPE`       | 256         |
+| `Seta Esquerda`  | `MLX_KEY_LEFT`         | 263         |
+| `Seta Direita`   | `MLX_KEY_RIGHT`        | 262         |
+| `Seta Cima`      | `MLX_KEY_UP`           | 265         |
+| `Seta Baixo`     | `MLX_KEY_DOWN`         | 264         |
+| `Espaço`         | `MLX_KEY_SPACE`        | 32          |
+| `Enter`          | `MLX_KEY_ENTER`        | 257         |
+| `Shift Esquerdo` | `MLX_KEY_LEFT_SHIFT`   | 340         |
+| `Ctrl Esquerdo`  | `MLX_KEY_LEFT_CONTROL` | 341         |
+
+| Modificador       | Constante     |
+| ----------------- | ------------- |
+| `Shift`           | `MLX_SHIFT`   |
+| `Ctrl`            | `MLX_CONTROL` |
+| `Alt`             | `MLX_ALT`     |
+| `Super (Cmd/Win)` | `MLX_SUPER`   |
+
+example
+void	key_hook(mlx_key_data_t keydata, void *param)
+{
+	t_cub_data *data = (t_cub_data *)param;
+
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(data->img->mlx);
+
+	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+		move_forward(data);
+
+	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
+		rotate_player_left(data);
+}
