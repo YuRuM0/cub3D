@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 20:16:25 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/21 20:53:51 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 // # define	M_PI 3.1415926535
 # define	Width 1920
 # define	Height 1080
-# define	ROTATION_SPEED 0.05
-#define		MOVE_SPEED 0.05
-#define 	HITBOX_RADIUS 0.2
+# define	ROTATION_SPEED 0.10
+#define		MOVE_SPEED 0.15
+#define 	HITBOX_RADIUS 0.45
 
 /* Info variables DDA algorithm
 distToSideX - distance from player position to the nearest X side (ray)
