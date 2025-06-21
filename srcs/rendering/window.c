@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 19:44:25 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 19:57:11 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void start_window(t_colours *colours, t_cub_data *data, t_map *map)
 
 	data->mlx = mlx_init(Width, Height, "cub3D", false);
 	data->img->img = mlx_new_image(data->mlx, Width, Height);
+	printf;
 }
 
