@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 19:50:50 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 20:19:50 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,53 @@
 // 	drawPlayer(data, img, value);
 // }
 
-void start_window(t_colours *colours, t_cub_data *data, t_map *map)
+void	draw_line(t_ddaVars *dda, t_image *img, int pixel)
 {
-	t_image *image;
-	t_calc *calc;
-	t_player_info *player_info;
+	double y;
+	long color[3];
 
-	image = malloc(sizeof(t_image));
-	calc = malloc(sizeof(t_calc));
-	player_info = malloc(sizeof(t_player_info));
-	if (image == NULL || calc == NULL || player_info == NULL)
-		return; //handle it.
-	(void)map;
-	(void)colours;
+	if (dda->hitside == NO || dda->hitside == SO)
+	{
+		color[0] = 255;
+		color[1] = 0;
+		color[2] = 0;
+	}
+	else
+	{
+		color[0] = 255;
+		color[1] = 100;
+		color[2] = 100;
+	}
+	if (dda->drawStart < 0)
+		dda->drawStart = 0;
+	if (dda->drawEnd >= Height)
+		dda->drawEnd = Height - 1;
+	y = dda->drawStart;
+	while (y < dda->drawEnd)
+	{
+		mlx_put_pixel(img->img, pixel, y, rgb_to_binary(color));
+		y++;
+	}
+}
 
+void	casting_rays(t_cub_data *data, t_rayEngine *engine)
+{
+	int	pixel;
+
+	pixel = -1;
+	draw_floor_ceiling(data->img, data->colours);
+	while (++pixel < Width)
+	{
+		init_dda_struct(engine->dda);
+		get_distance(engine->dda, engine, pixel);
+		draw_line(engine->dda, data->img, pixel);
+	}
+	// minimap
+	mlx_image_to_window(data->mlx, data->img->img, 0, 0);
+}
+
+void start_window(t_cub_data *data)
+{
 	data->mlx = mlx_init(Width, Height, "cub3D", false);
 	data->img->img = mlx_new_image(data->mlx, Width, Height);
 }

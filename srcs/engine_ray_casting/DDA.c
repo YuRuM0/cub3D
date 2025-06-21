@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DDA.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/21 19:50:31 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 20:12:27 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,50 +110,23 @@ void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel)
 	wallLineHight = (double)Height / perpendicularDist;
 	dda->drawStart = ((double)Height / 2) - (wallLineHight / 2);
 	dda->drawEnd = ((double)Height / 2) + (wallLineHight / 2);
-	
-}
 
-void	draw_line(t_ddaVars *dda, t_image *img, int pixel)
-{
-	double y;
-	long color[3];
-
-	if (dda->hitside == NO || dda->hitside == SO)
-	{
-		color[0] = 255;
-		color[1] = 0;
-		color[2] = 0;
-	}
-	else
-	{
-		color[0] = 255;
-		color[1] = 100;
-		color[2] = 100;
-	}
-	if (dda->drawStart < 0 || dda->drawEnd >= Height)
-		return ;
-	y = dda->drawStart;
-	while (y < dda->drawEnd)
-	{
-		mlx_put_pixel(img->img, pixel, y, rgb_to_binary(color));
-		y++;
-	}
 }
 
 // function to cast the rays based on the - width of the window? 360 or 640 or a variable that calculate the width based on the size os the map
-void	casting_rays(t_cub_data *data, t_rayEngine *engine)
-{
-	int	pixel;
-	pixel = -1;
-	draw_floor_ceiling(data->img, data->colours);
-	while (++pixel < Width)
-	{
-		init_dda_struct(engine->dda);
-		get_distance(engine->dda, engine, pixel);
-		draw_line(engine->dda, data->img, pixel);
-	}
-	mlx_image_to_window(data->mlx, data->img->img, 0, 0);
-}
+//void	casting_rays(t_cub_data *data, t_rayEngine *engine)
+//{
+//	int	pixel;
+//	pixel = -1;
+//	draw_floor_ceiling(data->img, data->colours);
+//	while (++pixel < Width)
+//	{
+//		init_dda_struct(engine->dda);
+//		get_distance(engine->dda, engine, pixel);
+//		draw_line(engine->dda, data->img, pixel);
+//	}
+//	mlx_image_to_window(data->mlx, data->img->img, 0, 0);
+//}
 
 void	ray_loop(void *param)
 {

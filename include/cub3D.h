@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 19:50:17 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 20:16:25 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,7 @@ void		casting_rays(t_cub_data *data, t_rayEngine *engine);
 void		init_dda_struct(t_ddaVars *dda);
 void		init_vetors(t_rayEngine *engine, t_map *map);
 void			ray_loop(void *param);
+void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel);
 
 //player commands
 void	key_hook(mlx_key_data_t keydata, void *param);
@@ -214,18 +215,17 @@ void	key_hook(mlx_key_data_t keydata, void *param);
 // floor ceiling
 //int draw_floor_ceiling(t_image *image, t_colours *colours);
 uint32_t rgb_to_binary(long *colours);
-void draw_background(t_image *image);
+//void draw_background(t_image *image);wwadads
 void draw_floor_ceiling(t_image *image, t_colours *colours);
-void mlx_put_pixel_on_img(t_image *image, int x, int y, long colour);
 
 //minimap
-void minimap_struct_init(t_calc *value, t_cub_data *data);
-void draw_map_border(t_image *img);
-void draw_map(t_image *img, t_cub_data *data, t_calc *value);
-void drawPlayer(t_cub_data *data, t_image *img, t_calc *value);
+//void minimap_struct_init(t_calc *value, t_cub_data *data);
+//void draw_map_border(t_image *img);
+//void draw_map(t_image *img, t_cub_data *data, t_calc *value);
+//void drawPlayer(t_cub_data *data, t_image *img, t_calc *value);
 
 //window
-void start_window(t_colours *colours, t_cub_data *data, t_map *map);
+void start_window(t_cub_data *data);
 
 // utils
 float degToRad(int a);
