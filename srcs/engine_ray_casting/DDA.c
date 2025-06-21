@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/21 16:52:27 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 17:09:10 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel)
 	calc_deltaDist(dda, rayDir);
 	calc_distToSides(engine, rayDir, dda);
 	perpendicularDist = DDA_algorithm(engine, dda);
-	wallLineHight = (double)gameHeight / perpendicularDist;
-	dda->drawStart = ((double)gameHeight / 2) - (wallLineHight / 2);
-	dda->drawEnd = ((double)gameHeight / 2) + (wallLineHight / 2);
+	wallLineHight = (double)Height / perpendicularDist;
+	dda->drawStart = ((double)Height / 2) - (wallLineHight / 2);
+	dda->drawEnd = ((double)Height / 2) + (wallLineHight / 2);
 	
 }
 
@@ -144,7 +144,7 @@ void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 	int	pixel;
 	pixel = -1;
 	draw_floor_ceiling(data->img, data->colours);
-	while (++pixel < gameWidth)
+	while (++pixel < Width)
 	{
 		init_dda_struct(engine->dda);
 		get_distance(engine->dda, engine, pixel);

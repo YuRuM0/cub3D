@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 12:23:08 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 16:44:21 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 19:44:09 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ uint32_t rgb_to_binary(long *colours)
 	color |= (0xFF);
 	color |= b << 8;
 
-    // printf("Color: 0x%08X\n", color);  // Debug print
     return color;
 }
 

@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 14:39:31 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 18:20:37 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,12 @@
 #include <math.h>
 #include "MLX42/MLX42.h"
 
-# define	M_PI 3.14159265358979323846
-# define	gameWidth 1920
-# define	gameHeight 1080
+// # define	M_PI 3.1415926535
 # define	Width 1920
 # define	Height 1080
-# define	ESC 65307
-# define	LEFT 65361
-# define	UP 65362
-# define	RIGHT 65363
-# define	DOWN 65364
-# define	PI 3.1415926535
+# define	ROTATION_SPEED 0.05
+#define		MOVE_SPEED 0.05
+#define 	HITBOX_RADIUS 0.2
 
 /* Info variables DDA algorithm
 distToSideX - distance from player position to the nearest X side (ray)
@@ -73,6 +68,15 @@ typedef struct s_ddaVars
 	t_vetor2D		rayWall;
 }					t_ddaVars;
 
+typedef	struct s_collision
+{
+	int			tileX;
+	int			tileY;
+	int			newX;
+	int			newY;
+	t_vetor2D	distVetor;
+}				t_collision;
+
 typedef struct	s_rayEngine //should be one variable or a lot of them based on the number of rays?
 {
 	t_vetor2D			posPlayer;
@@ -82,6 +86,7 @@ typedef struct	s_rayEngine //should be one variable or a lot of them based on th
 	t_ddaVars			*dda;
 	struct s_map		*map;
 	struct s_cub_data	*data;
+	t_collision			collision;
 
 }				t_rayEngine;
 
@@ -188,6 +193,9 @@ void		casting_rays(t_cub_data *data, t_rayEngine *engine);
 void		init_dda_struct(t_ddaVars *dda);
 void		init_vetors(t_rayEngine *engine, t_map *map);
 void			ray_loop(void *param);
+
+//player commands
+void	key_hook(mlx_key_data_t keydata, void *param);
 
 // rendering
 // floor ceiling

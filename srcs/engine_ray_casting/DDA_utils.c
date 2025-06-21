@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:58 by flima             #+#    #+#             */
-/*   Updated: 2025/06/20 14:40:18 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 17:08:54 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_vetor2D	calc_cameraPixel(t_rayEngine *engine, unsigned int pixel)
 	t_vetor2D	cameraPixel;
 	t_vetor2D	rayDir;
 
-	multiplier = 2 * ((double)pixel/(double)gameWidth) - 1;
+	multiplier = 2 * ((double)pixel/(double)Width) - 1;
 	cameraPixel.x = engine->planeCamera.x * multiplier;
 	cameraPixel.y = engine->planeCamera.y * multiplier;
 	rayDir = sumVetor(cameraPixel, engine->dir);
