@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/20 14:30:05 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 14:39:31 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "libft.h"
 #include <errno.h>
 #include <math.h>
-#include "../mlx/mlx.h"
+#include "MLX42/MLX42.h"
 
 # define	M_PI 3.14159265358979323846
 # define	gameWidth 1920
@@ -141,12 +141,13 @@ typedef struct s_image
 	int	bits_per_pixel;
 	int len_line;
 	int endian;
-	void *img;
+	mlx_image_t *img;
 }	t_image;
 
 struct s_cub_data
 {
-	char **wholemap;
+	char 		**wholemap;
+	mlx_t		*mlx;
 	t_texture 	*texture;
 	t_colours 	*colours;
 	t_map		*map_info;
@@ -186,12 +187,12 @@ void		hitWallDir(t_ddaVars *dda, int	fromSide);
 void		casting_rays(t_cub_data *data, t_rayEngine *engine);
 void		init_dda_struct(t_ddaVars *dda);
 void		init_vetors(t_rayEngine *engine, t_map *map);
-int			ray_loop(void *param);
+void			ray_loop(void *param);
 
 // rendering
 // floor ceiling
 //int draw_floor_ceiling(t_image *image, t_colours *colours);
-long rgb_to_binary(long *colours);
+uint32_t rgb_to_binary(long *colours);
 void draw_background(t_image *image);
 void draw_floor_ceiling(t_image *image, t_colours *colours);
 void mlx_put_pixel_on_img(t_image *image, int x, int y, long colour);

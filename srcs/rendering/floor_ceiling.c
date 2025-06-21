@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 12:23:08 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/10 15:38:26 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 16:44:21 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,50 @@
 
 # define background_col 0x4D4D4DD4D4D
 
-long rgb_to_binary(long *colours)
+uint32_t rgb_to_binary(long *colours)
 {
-	long binary;
+    uint8_t r = (uint8_t)colours[0];
+    uint8_t g = (uint8_t)colours[1];
+    uint8_t b = (uint8_t)colours[2];
+	uint32_t color;
+	
+	color = 0;
+	color |= (r << 24);
+	color |= (g << 16);
+	color |= (0xFF);
+	color |= b << 8;
 
-	binary = (colours[0] << 16) + (colours[1] << 8) + colours[2];
-	//printf("%d\n", binary);
-	return (binary);
+    // printf("Color: 0x%08X\n", color);  // Debug print
+    return color;
 }
 
-void mlx_put_pixel_on_img(t_image *image, int x, int y, long colour)
-{
-	char *pixel;
 
-	pixel =  image->addr +(y * image->len_line + x * (image->bits_per_pixel / 8));
-	*(long *)pixel = colour;
-}
 
-void draw_background(t_image *image)
-{
-	int		x;
-	int		y;
+// void mlx_put_pixel_on_img(t_image *image, int x, int y, long colour)
+// {
+// 	char *pixel;
 
-	x = 0;
-	while (x < Width)
-	{
-		y = 0;
-		while (y < Height)
-		{
-			mlx_put_pixel_on_img(image, x, y, background_col);
-			y++;
-		}
-		x++;
-	}
-}
+// 	pixel =  image->addr +(y * image->len_line + x * (image->bits_per_pixel / 8));
+// 	*(long *)pixel = colour;
+// }
+
+// void draw_background(t_image *image)
+// {
+// 	int		x;
+// 	int		y;
+
+// 	x = 0;
+// 	while (x < Width)
+// 	{
+// 		y = 0;
+// 		while (y < Height)
+// 		{
+// 			mlx_put_pixel_on_img(image, x, y, background_col);
+// 			y++;
+// 		}
+// 		x++;
+// 	}
+// }
 
 void draw_floor_ceiling(t_image *image, t_colours *colours)
 {
@@ -61,9 +71,9 @@ void draw_floor_ceiling(t_image *image, t_colours *colours)
 		while (y < Height)
 		{
 			if (y < Height /2)
-				mlx_put_pixel_on_img(image, x, y, rgb_to_binary(colours->c_colour));
+				mlx_put_pixel(image->img, x, y, rgb_to_binary(colours->c_colour));
 			if (y >= Height / 2)
-				mlx_put_pixel_on_img(image, x, y, rgb_to_binary(colours->f_colour));
+				mlx_put_pixel(image->img, x, y, rgb_to_binary(colours->f_colour));
 			y++;
 		}
 		x++;

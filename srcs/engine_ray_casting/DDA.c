@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/20 14:30:14 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 16:52:27 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,10 +128,12 @@ void	draw_line(t_ddaVars *dda, t_image *img, int pixel)
 		color[1] = 100;
 		color[2] = 100;
 	}
+	if (dda->drawStart < 0 || dda->drawEnd >= Height)
+		return ;
 	y = dda->drawStart;
 	while (y < dda->drawEnd)
 	{
-		mlx_put_pixel_on_img(img, pixel, y, rgb_to_binary(color));
+		mlx_put_pixel(img->img, pixel, y, rgb_to_binary(color));
 		y++;
 	}
 }
@@ -148,14 +150,13 @@ void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 		get_distance(engine->dda, engine, pixel);
 		draw_line(engine->dda, data->img, pixel);
 	}
-	mlx_put_image_to_window(data->img->mlx, data->img->window, data->img->img, 0, 0);
+	mlx_image_to_window(data->mlx, data->img->img, 0, 0);
 }
 
-int	ray_loop(void *param)
+void	ray_loop(void *param)
 {
 	t_cub_data *data;
 
 	data = (t_cub_data *)param;
 	casting_rays(data, data->engine);
-	return (0);
 }

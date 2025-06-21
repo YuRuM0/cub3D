@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:00:28 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/20 13:43:35 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 14:43:45 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int main(int argc, char **argv)
 	struct_init(&data);
 	parse(argv, &data);
 	start_window(data.colours, &data, data.map_info);
-	mlx_loop_hook(data.img->mlx, ray_loop, &data);
+	mlx_loop_hook(data.mlx, ray_loop, &data);
 	// ray_loop(&data);
-	mlx_loop(data.img->mlx);
+	mlx_loop(data.mlx);
 	// free_all_data(data);
 	return (0);
 }
