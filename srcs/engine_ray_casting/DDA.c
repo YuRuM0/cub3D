@@ -6,12 +6,11 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/21 20:12:27 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/21 21:47:06 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../../include/cub3D.h"
+#include "cub3D.h"
 
 static void getWall_coord(t_rayEngine *engine, t_ddaVars *dda)
 {
@@ -101,6 +100,7 @@ void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel)
 	t_vetor2D		rayDir;
 	double			wallLineHight;
 	double			perpendicularDist;
+	double			wall_hitX;
 
 	rayDir = calc_cameraPixel(engine, pixel);
 	engine->rayDir = rayDir;
@@ -110,7 +110,11 @@ void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel)
 	wallLineHight = (double)Height / perpendicularDist;
 	dda->drawStart = ((double)Height / 2) - (wallLineHight / 2);
 	dda->drawEnd = ((double)Height / 2) + (wallLineHight / 2);
-
+	if (dda->hitside == NO || dda->hitside == SO)
+		wall_hitX = engine->posPlayer.x + perpendicularDist * rayDir.x;
+	else
+		wall_hitX = engine->posPlayer.y + perpendicularDist * rayDir.y;
+	dda->wall_hitX = wall_hitX - floor(wall_hitX);
 }
 
 // function to cast the rays based on the - width of the window? 360 or 640 or a variable that calculate the width based on the size os the map

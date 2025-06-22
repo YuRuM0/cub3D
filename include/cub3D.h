@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/22 16:09:11 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/22 17:36:35 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_ddaVars
 	double			drawEnd;
 	t_sideWall		hitside;
 	t_vetor2D		rayWall;
+	int				wall_hitX;
 }					t_ddaVars;
 
 typedef	struct s_collision
@@ -144,12 +145,6 @@ typedef struct s_texture
 
 typedef struct s_image
 {
-	void *window;
-	void *mlx;
-	char *addr;
-	int	bits_per_pixel;
-	int len_line;
-	int endian;
 	mlx_image_t *img;
 }	t_image;
 
@@ -214,9 +209,7 @@ void	key_hook(mlx_key_data_t keydata, void *param);
 
 // rendering
 // floor ceiling
-//int draw_floor_ceiling(t_image *image, t_colours *colours);
 uint32_t rgb_to_binary(long *colours);
-//void draw_background(t_image *image);wwadads
 void draw_floor_ceiling(t_image *image, t_colours *colours);
 
 //minimap
@@ -227,6 +220,7 @@ void draw_floor_ceiling(t_image *image, t_colours *colours);
 
 //window
 t_errno start_window(t_cub_data *data);
+void	draw_line(t_cub_data *data, t_ddaVars *dda, t_image *img, int pixel);;
 
 // utils
 float degToRad(int a);

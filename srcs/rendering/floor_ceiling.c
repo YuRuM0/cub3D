@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 12:23:08 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 20:17:10 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/21 22:40:31 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ uint32_t rgb_to_binary(long *colours)
 	color = 0;
 	color |= (r << 24);
 	color |= (g << 16);
-	color |= (0xFF);
 	color |= b << 8;
+	color |= (0xFF);
 
     return color;
 }
