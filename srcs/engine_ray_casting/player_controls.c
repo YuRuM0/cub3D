@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 13:27:31 by flima             #+#    #+#             */
-/*   Updated: 2025/06/21 20:44:30 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/22 14:51:44 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	data = (t_cub_data *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
-		//handle it. 
-		printf("pressed ESC\n");
-		exit(0);
-	}
+		status_error_handler(data, SUCCESS);
 	if (keydata.key == MLX_KEY_A && (keydata.action = MLX_PRESS || keydata.action == MLX_REPEAT))
 		rotate_player(data->engine, -ROTATION_SPEED);
 	else if (keydata.key == MLX_KEY_D && (keydata.action = MLX_PRESS || keydata.action == MLX_REPEAT))

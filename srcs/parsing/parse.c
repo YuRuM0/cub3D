@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:58:51 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/20 14:48:42 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/22 14:45:54 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,7 @@ static int get_file_rows(char **argv)
 	int	i;
 	int fd;
 
-	//if (ft_strnstr(argv[1], ".ber", ft_strlen(argv[1])) == NULL)
-	//	print_errors_exit(-1);
 	fd = open(argv[1], O_RDONLY);
-	//if (fd < 0)
-	//	print_errors_exit(-2);
 	i = 0;
 	current_line = get_next_line(fd);
 	while (current_line != NULL)
@@ -35,7 +31,7 @@ static int get_file_rows(char **argv)
 	return (i);
 }
 
-void read_mapfile(char **argv, t_cub_data *data)
+t_errno read_mapfile(char **argv, t_cub_data *data)
 {
 	char **wholemap;
 	int rows;
@@ -46,17 +42,19 @@ void read_mapfile(char **argv, t_cub_data *data)
 	rows = get_file_rows(argv);
 	wholemap = malloc(sizeof(char*) * (rows + 1));
 	if (!wholemap)
-		//memalloc issue
-		return;
+		return (close (fd), ERR_MEM_ALLOC);
 	i = 0;
 	while (i < rows)
 	{
 		wholemap[i] = get_next_line(fd);
+		if (wholemap[i] == NULL)
+			return (close (fd), ERR_MEM_ALLOC);
 		i++;
 	}
 	wholemap[i] = NULL;
 	close(fd);
 	data->wholemap = wholemap;
+	return (SUCCESS);
 }
 
  static void	get_map_col(t_map *map)
@@ -79,7 +77,9 @@ void parse(char **argv, t_cub_data *data)
 {
 	t_errno	status;
 
-	read_mapfile(argv, data);
+	status = read_mapfile(argv, data);
+	if (status != SUCCESS)
+		status_error_handler(data, status);
 	status = grep_texture(data);
 	if (status != SUCCESS)
 		status_error_handler(data, status);

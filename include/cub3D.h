@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 21:44:08 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/22 14:54:11 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ int		find_map_start(t_cub_data *data);
 void	game_settings(t_cub_data *data);
 
 //parse
-void 	read_mapfile(char **argv, t_cub_data *data);
+t_errno	read_mapfile(char **argv, t_cub_data *data);
 void 	parse(char **argv, t_cub_data *data);
 t_errno get_colors(t_cub_data *data);
 
@@ -226,7 +226,7 @@ void draw_floor_ceiling(t_image *image, t_colours *colours);
 //void drawPlayer(t_cub_data *data, t_image *img, t_calc *value);
 
 //window
-void start_window(t_cub_data *data);
+t_errno start_window(t_cub_data *data);
 
 // utils
 float degToRad(int a);
