@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 19:49:58 by flima             #+#    #+#             */
-/*   Updated: 2025/06/21 21:33:42 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/22 15:13:06 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,4 @@ void	free_all_data(t_cub_data *data)
 	free_textures(data->texture);
 	free(data->engine->dda);
 	free(data->engine);
-	free(data);
 }
