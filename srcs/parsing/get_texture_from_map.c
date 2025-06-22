@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_texture_from_map.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:24:25 by yulpark           #+#    #+#             */
-/*   Updated: 2025/05/25 20:26:19 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 22:08:23 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 static t_errno grep_text_WE(t_cub_data *data)
 {
 	int	i;
+	char **texture_line;
 
 	i = -1;
 	while (data->wholemap[++i])
@@ -25,9 +26,11 @@ static t_errno grep_text_WE(t_cub_data *data)
 		{
 			if (data->texture->WE == NULL)
 			{
-				data->texture->WE = ft_strdup(data->wholemap[i]);
-				if (data->texture->WE == NULL)
+				texture_line = ft_split(data->wholemap[i], ' ');
+				if (!texture_line)
 					return (ERR_MEM_ALLOC);
+				data->texture->WE = texture_line[1];
+				data->texture->WE[ft_strlen(data->texture->WE) - 1] = '\0';
 			}
 			else
 				return (ERR_DUPLICATE);
@@ -39,6 +42,7 @@ static t_errno grep_text_WE(t_cub_data *data)
 static t_errno grep_text_SO(t_cub_data *data)
 {
 	int	i;
+	char **texture_line;
 
 	i = -1;
 	while (data->wholemap[++i])
@@ -47,9 +51,11 @@ static t_errno grep_text_SO(t_cub_data *data)
 		{
 			if (data->texture->SO == NULL)
 			{
-				data->texture->SO = ft_strdup(data->wholemap[i]);
-				if (data->texture->SO == NULL)
+				texture_line = ft_split(data->wholemap[i], ' ');
+				if (!texture_line)
 					return (ERR_MEM_ALLOC);
+				data->texture->SO = texture_line[1];
+				data->texture->SO[ft_strlen(data->texture->SO) - 1] = '\0';
 			}
 			else
 				return (ERR_DUPLICATE);
@@ -61,6 +67,7 @@ static t_errno grep_text_SO(t_cub_data *data)
 static t_errno grep_text_NO(t_cub_data *data)
 {
 	int	i;
+	char **texture_line;
 
 	i = -1;
 	while (data->wholemap[++i])
@@ -69,9 +76,11 @@ static t_errno grep_text_NO(t_cub_data *data)
 		{
 			if (data->texture->NO == NULL)
 			{
-				data->texture->NO = ft_strdup(data->wholemap[i]);
-				if (data->texture->NO == NULL)
+				texture_line = ft_split(data->wholemap[i], ' ');
+				if (!texture_line)
 					return (ERR_MEM_ALLOC);
+				data->texture->NO = texture_line[1];
+				data->texture->NO[ft_strlen(data->texture->NO) - 1] = '\0';
 			}
 			else
 				return (ERR_DUPLICATE);
@@ -83,6 +92,7 @@ static t_errno grep_text_NO(t_cub_data *data)
 static t_errno grep_text_EA(t_cub_data *data)
 {
 	int	i;
+	char **texture_line;
 
 	i = -1;
 	while (data->wholemap[++i])
@@ -91,9 +101,11 @@ static t_errno grep_text_EA(t_cub_data *data)
 		{
 			if (data->texture->EA == NULL)
 			{
-				data->texture->EA = ft_strdup(data->wholemap[i]);
-				if (data->texture->EA == NULL)
+				texture_line = ft_split(data->wholemap[i], ' ');
+				if (!texture_line)
 					return (ERR_MEM_ALLOC);
+				data->texture->EA = texture_line[1];
+				data->texture->EA[ft_strlen(data->texture->EA) - 1] = '\0';
 			}
 			else
 				return (ERR_DUPLICATE);
