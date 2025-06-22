@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/22 14:51:58 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/22 14:58:45 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel)
 	y = dda->drawStart;
 	while (y < dda->drawEnd)
 	{
-		
+
 	}
 }
 
@@ -114,9 +114,14 @@ void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 	mlx_image_to_window(data->mlx, data->img->img, 0, 0);
 }
 
-void start_window(t_cub_data *data)
+t_errno start_window(t_cub_data *data)
 {
 	data->mlx = mlx_init(Width, Height, "cub3D", false);
+	if (!data->mlx)
+		return (ERR_MLX_FAIL);
 	data->img->img = mlx_new_image(data->mlx, Width, Height);
+	if (!data->img->img)
+		return (ERR_MLX_FAIL);
+	return (SUCCESS);
 }
 

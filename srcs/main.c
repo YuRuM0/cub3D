@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:00:28 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 20:13:56 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/21 21:19:08 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,7 @@ int main(int argc, char **argv)
 
 	if (input_checker(argc, argv) != SUCCESS)
 		return (write(1, "Invalid input\n", 15), 1);
-	// data = malloc(sizeof(t_cub_data));
-	// if (!data)
-	// 	return (ERR_MEM_ALLOC);
-	//check if argv[1] ends with .cub?
-	struct_init(&data);
+	struct_alloc(&data);
 	parse(argv, &data);
 	start_window(&data);
 	mlx_loop_hook(data.mlx, ray_loop, &data);

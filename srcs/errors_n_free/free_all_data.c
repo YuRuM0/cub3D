@@ -6,11 +6,23 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 19:49:58 by flima             #+#    #+#             */
-/*   Updated: 2025/05/27 17:13:49 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 21:33:42 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void free_double(char **s)
+{
+	int	i;
+
+	i = 0;
+	if (s == NULL)
+		return ;
+	while (s[i])
+		free(s[i++]);
+	free(s);
+}
 
 static void	free_map(t_map *map)
 {
@@ -40,5 +52,7 @@ void	free_all_data(t_cub_data *data)
 	free_map(data->map_info);
 	free_colors(data->colours);
 	free_textures(data->texture);
+	free(data->engine->dda);
+	free(data->engine);
 	free(data);
 }

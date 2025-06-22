@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 21:43:13 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/22 14:58:34 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 #include <math.h>
 #include "MLX42/MLX42.h"
 
-// # define	M_PI 3.1415926535
+# define	PI 3.1415926535
 # define	Width 1920
 # define	Height 1080
-# define	ROTATION_SPEED 0.05
-#define		MOVE_SPEED 0.05
-#define 	HITBOX_RADIUS 0.2
+# define	ROTATION_SPEED 0.10
+#define		MOVE_SPEED 0.15
+#define 	HITBOX_RADIUS 0.45
 
 /* Info variables DDA algorithm
 distToSideX - distance from player position to the nearest X side (ray)
@@ -100,7 +100,8 @@ typedef enum e_errno
 	ERR_MISSING_MAP_ELEMENT, //did not find the one or more color in the map
 	ERR_INVALID_COLORS, // colors are not in the format F 000,000,000 (there is sometging else )
 	ERR_INVALID_RBG_VALUES,
-	ERR_INVALID_INPUT // too many arguments, wrong arguments
+	ERR_INVALID_INPUT, // too many arguments, wrong arguments
+	ERR_MLX_FAIL
 } 	t_errno;
 
 typedef struct s_colours
@@ -144,12 +145,6 @@ typedef struct s_texture
 
 typedef struct s_image
 {
-	void *window;
-	void *mlx;
-	char *addr;
-	int	bits_per_pixel;
-	int len_line;
-	int endian;
 	mlx_image_t *img;
 }	t_image;
 
@@ -177,13 +172,13 @@ typedef struct map_drawing_calc
 //parsing
 //utils
 void 	free_double(char **s);
-void 	struct_init(t_cub_data *data);
+void 	struct_alloc(t_cub_data *data);
 t_errno	validate_RGB_values(char **color);
 int		find_map_start(t_cub_data *data);
 void	game_settings(t_cub_data *data);
 
 //parse
-void 	read_mapfile(char **argv, t_cub_data *data);
+t_errno	read_mapfile(char **argv, t_cub_data *data);
 void 	parse(char **argv, t_cub_data *data);
 t_errno get_colors(t_cub_data *data);
 
@@ -224,7 +219,7 @@ void draw_floor_ceiling(t_image *image, t_colours *colours);
 //void drawPlayer(t_cub_data *data, t_image *img, t_calc *value);
 
 //window
-void start_window(t_cub_data *data);
+t_errno start_window(t_cub_data *data);
 void	draw_line(t_cub_data *data, t_ddaVars *dda, t_image *img, int pixel);;
 
 // utils

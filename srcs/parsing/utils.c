@@ -6,23 +6,14 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 13:25:34 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/21 21:37:21 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void struct_init(t_cub_data *data)
+static void	struct_init(t_cub_data *data)
 {
-	data->colours = malloc(sizeof(t_colours));
-	data->texture = malloc(sizeof(t_texture));
-	data->map_info = malloc(sizeof(t_map));
-	data->engine = malloc(sizeof(t_rayEngine));
-	data->engine->dda = malloc(sizeof(t_ddaVars));
-	data->img = malloc(sizeof(t_image));
-	if (data->colours == NULL || data->texture == NULL || data->map_info == NULL\
-		 || data->engine == NULL || data->engine->dda == NULL)
-		return ;//errhandle (ERR_MEM_ALLOC)
 	data->engine->map = data->map_info;
 	data->engine->data = data;
 	data->colours->c_colour_str = NULL;
@@ -35,35 +26,21 @@ void struct_init(t_cub_data *data)
 	data->map_info->map_grid = NULL;
 	data->map_info->map_col = 0;
 	data->map_info->map_row = 0;
-	data->map_info->player_dir = '0'; //what is this?
+	data->map_info->player_dir = '0';
 }
 
-static void	set_direction(t_rayEngine *engine, t_map *mmap)
+void	struct_alloc(t_cub_data *data)
 {
-	char		dir;
-	
-	dir = mmap->map_grid[mmap->player_row][mmap->player_col];
-	if (dir == 'S')
-	{
-		rotateVetor(&engine->dir, M_PI);
-		rotateVetor(&engine->planeCamera, M_PI);
-	}
-	else if (dir == 'E')
-	{
-		rotateVetor(&engine->dir, M_PI/2);
-		rotateVetor(&engine->planeCamera, M_PI/2);
-	}
-	else if (dir == 'W')
-	{
-		rotateVetor(&engine->dir, -M_PI/2);
-		rotateVetor(&engine->planeCamera, -M_PI/2);
-	}
-}
-
-void	game_settings(t_cub_data *data)
-{
-	init_vetors(data->engine, data->map_info);
-	set_direction(data->engine, data->map_info);
+	data->colours = malloc(sizeof(t_colours));
+	data->texture = malloc(sizeof(t_texture));
+	data->map_info = malloc(sizeof(t_map));
+	data->engine = malloc(sizeof(t_rayEngine));
+	data->engine->dda = malloc(sizeof(t_ddaVars));
+	data->img = malloc(sizeof(t_image));
+	if (data->colours == NULL || data->texture == NULL || data->map_info == NULL\
+		 || data->engine == NULL || data->engine->dda == NULL || data->img == NULL)
+		status_error_handler(data, ERR_MEM_ALLOC);
+	struct_init(data);
 }
 
 t_errno	validate_RGB_values(char **color)
@@ -86,18 +63,6 @@ t_errno	validate_RGB_values(char **color)
 		i++;
 	}
 	return (SUCCESS);
-}
-
-void free_double(char **s)
-{
-	int	i;
-
-	i = 0;
-	if (s == NULL)
-		return ;
-	while (s[i])
-		free(s[i++]);
-	free(s);
 }
 
 int	find_map_start(t_cub_data *data)
