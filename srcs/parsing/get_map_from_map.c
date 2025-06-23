@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:02:48 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 17:06:59 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 19:01:30 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,35 @@ static int check_player_location(t_cub_data *data)
 // first line = not 0
 // YOU NOT BUT ABOVE WAS A SPACE,THEN IT MUST BE 1
 
-static t_errno check_map_first_last(char **map_grid, int c)
+static t_errno check_map_sides_wall(char **map_grid, int i, int j)
+{
+	i = 1;
+	while (map_grid[i + 1] != NULL)
+	{
+		if (map_grid[i][0] != '1' && map_grid[i][0] != ' ')
+			return (ERR_INVALID_MAP);
+		j = ft_strlen(map_grid[i]) - 1;
+		if (map_grid[i][j] != '1' && map_grid[i][j] != ' ')
+			return (ERR_INVALID_MAP);
+		i++;
+	}
+	return (SUCCESS);
+}
+
+static t_errno check_map_first_last_wall(char **map_grid)
 {
 	int j;
+	int	i;
 
-	j = 0;
-	if (c == 0)
+	i = 0;
+	while (map_grid[i] != NULL)
 	{
-		while (map_grid[0][j])
+		j = 0;
+		while (map_grid[i][j])
 		{
+<<<<<<< HEAD
+			if (map_grid[i][j] != '1' && map_grid[i][j] != ' ')
+=======
 			if (map_grid[0][j] != '1' && map_grid[0][j] != ' ')
 				return (ERR_INVALID_MAP);
 			j++;
@@ -97,10 +117,17 @@ static t_errno check_map_first_last(char **map_grid, int c)
 		while (map_grid[c])
 		{
 			if (map_grid[c][j] != '1' && map_grid[c][j] != ' ')
+>>>>>>> refs/remotes/origin/main
 				return (ERR_INVALID_MAP);
 			j++;
 		}
+		if (map_grid[i + 1] == NULL)
+			break;
+		while (map_grid[i + 1] != NULL)
+			i++;
 	}
+	if (check_map_sides_wall(map_grid, i, j) != SUCCESS)
+		return (ERR_INVALID_MAP);
 	return (SUCCESS);
 }
 static t_errno	check_surrounding_wall(char **map_grid)
@@ -108,8 +135,15 @@ static t_errno	check_surrounding_wall(char **map_grid)
 	int j;
 	int	i;
 
-	j = 1;
 	i = 1;
+<<<<<<< HEAD
+	if (check_map_first_last_wall(map_grid) != SUCCESS)
+		return (ERR_INVALID_MAP);
+	while (map_grid[i + 1] != NULL)
+	{
+		j = 1;
+		while (map_grid[i][j])
+=======
 	if (check_map_first_last(map_grid, 0) != SUCCESS)
 		return (ERR_INVALID_MAP);
 	while (map_grid[i])
@@ -118,31 +152,41 @@ static t_errno	check_surrounding_wall(char **map_grid)
 			return (ERR_INVALID_MAP);
 		j = 1;
 		while (map_grid[i][j] && map_grid[i + 1] != NULL)
+>>>>>>> refs/remotes/origin/main
 		{
-			if (map_grid[i][j + 1] == '\0' && map_grid[i][j] == '0')
-				return (ERR_INVALID_MAP);
-			if (map_grid[i][j] == '0' && map_grid[i - 1][j] == ' ')
-				return (ERR_INVALID_MAP);
-			if (map_grid[i][j] == '0' && map_grid[i + 1][j] == ' ')
-				return (ERR_INVALID_MAP);
+			if (map_grid[i][j] != ' ' && map_grid[i][j] != '1')
+			{
+				if (map_grid[i + 1][j] == ' ' || map_grid[i - 1][j] == ' ' ||\
+				 map_grid[i][j + 1] == ' ' ||  map_grid[i][j - 1] == ' ')
+					return (ERR_INVALID_MAP);
+			}
 			j++;
 		}
 		i++;
 	}
-	check_map_first_last(map_grid, i);
 	return (SUCCESS);
 }
 
-static char	*ft_strdup_no_newline(const char *s)
+static char	*ft_strdup_no_newline(const char *s, t_map *map)
 {
 	char	*newstr;
-	size_t	len;
+	int		i;
 
-	len = ft_strlen(s);
-	newstr = (char *)malloc(len);
+	newstr = (char *)malloc(sizeof(char) * (map->biggest_col + 1));
 	if (newstr == NULL)
 		return (NULL);
-	ft_strlcpy(newstr, s, len);
+	i = 0;
+	while (s[i] != '\n' && s[i] != '\0')
+	{
+		newstr[i] = s[i];
+		i++;
+	}
+	while (i < map->biggest_col)
+	{
+		newstr[i] = ' ';
+		i++;
+	}
+	newstr[i] = '\0';
 	return (newstr);
 }
 
@@ -165,7 +209,7 @@ t_errno grep_map(t_cub_data *data)
 	{
 		if (data->wholemap[map_start + i][0] == '\n')
 			return (ERR_INVALID_MAP);
-		data->map_info->map_grid[i] = ft_strdup_no_newline(data->wholemap[map_start + i]);
+		data->map_info->map_grid[i] = ft_strdup_no_newline(data->wholemap[map_start + i], data->map_info);
 		if (!data->map_info->map_grid[i])
 			return (ERR_MEM_ALLOC);
 	}

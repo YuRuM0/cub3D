@@ -6,7 +6,11 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2025/06/23 18:50:09 by flima            ###   ########.fr       */
+=======
 /*   Updated: 2025/06/23 17:00:42 by yulpark          ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +132,7 @@ typedef struct s_player_info
 struct s_map
 {
 	char			**map_grid;
+	int				biggest_col;
 	int				player_row;
 	int				player_col;
 	char			player_dir;
