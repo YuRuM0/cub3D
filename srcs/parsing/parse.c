@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:58:51 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 16:56:46 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 19:22:43 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void parse(char **argv, t_cub_data *data)
 	if (status != SUCCESS)
 		status_error_handler(data, status);
 	status = grep_map(data);
-	printf("%d\n", status);
 	if (status != SUCCESS)
 		status_error_handler(data, status);
 	get_map_col(data->map_info);

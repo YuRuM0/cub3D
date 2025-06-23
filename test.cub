@@ -1,7 +1,7 @@
-NO textures/redbrick.png
-SO textures/redbrick.png
+NO textures/eagle.png
+SO textures/bluestone.png
 WE textures/redbrick.png
-EA textures/redbrick.png
+EA textures/greystone.png
 
 F 153,204,102
 C 0,204,255

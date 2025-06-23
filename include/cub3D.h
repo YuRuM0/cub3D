@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 19:02:42 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 19:46:52 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_ddaVars
 	float			texture_position;
 	float			increment;
 	int				tex_x;
-	int				wall_hitX;
+	double			wall_hitX;
 }					t_ddaVars;
 
 typedef	struct s_collision

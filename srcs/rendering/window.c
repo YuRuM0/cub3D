@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 18:50:32 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 20:05:00 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ static void map_buffer(t_ddaVars *dda, t_cub_data *data)
 
 	wall = dda->wall_hitX;
 	side = dda->hitside;
-	dda->tex_x = (int)(wall * data->texture[side].texture->width);
+	dda->tex_x = (int)(wall * data->texture[side].texture->width); // how much to sample from the texture
 	if (side == NO || side == WE)
 		dda->tex_x = data->texture[side].texture->width - dda->tex_x - 1; //for flipping
 	line_len = (dda->drawEnd - dda->drawStart);
 	dda->increment = (float)data->texture[side].texture->height / line_len;
-	dda->texture_position = (dda->drawStart - Height / 2 + line_len / 2) * dda->increment;
-	//dda->texture_position = 0.0;
+	dda->texture_position = 0.0;
+	//printf("wall_hitX = %d, tex_x = %d\n", dda->wall_hitX, dda->tex_x);
 }
 
 static void texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture *tex)
@@ -80,10 +80,10 @@ static void texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture
 	int y;
 	long colour[4];
 
-	if (dda->drawStart < 0)
-		dda->drawStart = 0;
-	if (dda->drawEnd > Height)
-		dda->drawEnd = Height;
+	//if (dda->drawStart < 0)
+	//	dda->drawStart = 0;
+	//if (dda->drawEnd > Height)
+	//	dda->drawEnd = Height;
 	y = dda->drawStart;
 	while (y < dda->drawEnd)
 	{
@@ -96,8 +96,10 @@ static void texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture
 		else
 			find_colour(dda, tex, EA, colour);
 		colour_converted = rgb_to_binary(colour);
-		mlx_put_pixel(img->img, pixel, y, colour_converted);
+		if (y > 0 && y < Height)
+			mlx_put_pixel(img->img, pixel, y, colour_converted);
 		dda->texture_position += dda->increment;
+		//printf("%f\n", dda->texture_position);
 		y++;
 	}
 }

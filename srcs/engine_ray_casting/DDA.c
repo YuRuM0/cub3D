@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/23 17:55:43 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 19:52:31 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,12 @@ void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel)
 	wallLineHight = (double)Height / perpendicularDist;
 	dda->drawStart = ((double)Height / 2) - (wallLineHight / 2);
 	dda->drawEnd = ((double)Height / 2) + (wallLineHight / 2);
-	if (dda->hitside == NO || dda->hitside == SO)
+	if (dda->hitside == WE || dda->hitside == EA)
 		wall_hitX = engine->posPlayer.y + perpendicularDist * rayDir.y;
 	else
 		wall_hitX = engine->posPlayer.x + perpendicularDist * rayDir.x;
 	dda->wall_hitX = wall_hitX - floor(wall_hitX);
+	//printf("hitside: %f, wall_hitX: %f\n", dda->wall_hitX, wall_hitX);
 }
 
 // function to cast the rays based on the - width of the window? 360 or 640 or a variable that calculate the width based on the size os the map
