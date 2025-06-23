@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 16:44:51 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/23 18:31:14 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,22 @@ t_errno	validate_RGB_values(char **color)
 	return (SUCCESS);
 }
 
+void	get_biggest_col(t_map *map, char **wholeMap, int i)
+{
+	int j;
+	int	biggest;
+
+	biggest = 0;
+	while (wholeMap[i])
+	{
+		j = ft_strlen(wholeMap[i]);
+		if (biggest < j)
+			biggest = j;
+		i++;
+	}
+	map->biggest_col = biggest;
+}
+
 int	find_map_start(t_cub_data *data)
 {
 	int	i;
@@ -92,5 +108,6 @@ int	find_map_start(t_cub_data *data)
 	}
 	while (data->wholemap[i][0] == '\n')
 		i++;
+	get_biggest_col(data->map_info, data->wholemap, i);
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:02:48 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 18:19:06 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/23 18:42:42 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,16 +143,26 @@ static t_errno	check_surrounding_wall(char **map_grid)
 	return (SUCCESS);
 }
 
-static char	*ft_strdup_no_newline(const char *s)
+static char	*ft_strdup_no_newline(const char *s, t_map *map)
 {
 	char	*newstr;
-	size_t	len;
+	int		i;
 
-	len = ft_strlen(s);
-	newstr = (char *)malloc(len);
+	newstr = (char *)malloc(sizeof(char) * (map->biggest_col + 1));
 	if (newstr == NULL)
 		return (NULL);
-	ft_strlcpy(newstr, s, len);
+	i = 0;
+	while (s[i] != '\n' && s[i] != '\0')
+	{
+		newstr[i] = s[i];
+		i++;
+	}
+	while (i < map->biggest_col)
+	{
+		newstr[i] = ' ';
+		i++;
+	}
+	newstr[i] = '\0';
 	return (newstr);
 }
 
@@ -175,7 +185,7 @@ t_errno grep_map(t_cub_data *data)
 	{
 		if (data->wholemap[map_start + i][0] == '\n')
 			return (ERR_INVALID_MAP);
-		data->map_info->map_grid[i] = ft_strdup_no_newline(data->wholemap[map_start + i]);
+		data->map_info->map_grid[i] = ft_strdup_no_newline(data->wholemap[map_start + i], data->map_info);
 		if (!data->map_info->map_grid[i])
 			return (ERR_MEM_ALLOC);
 	}
