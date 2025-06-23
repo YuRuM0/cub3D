@@ -1,25 +1,2 @@
 
-Check C/F colour if b/w range [0, 255]
-Replace space with 1 or let mlx handle (if possible)
-
-f0r6s2% ./cub3D maps/best_map.cub
-zsh: segmentation fault (core dumped)  ./cub3D maps/best_map.cub
-	(when no map)
-
-1111
-1EA1   => still valid map, it should detect A.....
-11110ewns
-
-remove \n in the map and textures;
-calculate map_col and map_row => fixed
-not working
-
-
-For hook should I check if the position that I am trying to move only (if it is a wall) or should I also check if the hitWall == false
 * modify Makefile to clean libft and mlx .o and .a
-
-
-testar map with 
-1011  working 
-1001
-1111
