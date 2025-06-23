@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:02:48 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 16:32:25 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/23 18:19:06 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,29 +78,43 @@ static int check_player_location(t_cub_data *data)
 // first line = not 0
 // YOU NOT BUT ABOVE WAS A SPACE,THEN IT MUST BE 1
 
-static t_errno check_map_first_last(char **map_grid, int c)
+static t_errno check_map_sides_wall(char **map_grid, int i, int j)
+{
+	i = 1;
+	while (map_grid[i + 1] != NULL)
+	{
+		if (map_grid[i][0] != '1' && map_grid[i][0] != ' ')
+			return (ERR_INVALID_MAP);
+		j = ft_strlen(map_grid[i]) - 1;
+		if (map_grid[i][j] != '1' && map_grid[i][j] != ' ')
+			return (ERR_INVALID_MAP);
+		i++;
+	}
+	return (SUCCESS);
+}
+
+static t_errno check_map_first_last_wall(char **map_grid)
 {
 	int j;
+	int	i;
 
-	j = 0;
-	if (c == 0)
+	i = 0;
+	while (map_grid[i] != NULL)
 	{
-		while (map_grid[0][j])
+		j = 0;
+		while (map_grid[i][j])
 		{
-			if (map_grid[0][j] == '0')
+			if (map_grid[i][j] != '1' && map_grid[i][j] != ' ')
 				return (ERR_INVALID_MAP);
 			j++;
 		}
+		if (map_grid[i + 1] == NULL)
+			break;
+		while (map_grid[i + 1] != NULL)
+			i++;
 	}
-	else
-	{
-		while (map_grid[c])
-		{
-			if (map_grid[c][j] == '0')
-				return (ERR_INVALID_MAP);
-			j++;
-		}
-	}
+	if (check_map_sides_wall(map_grid, i, j) != SUCCESS)
+		return (ERR_INVALID_MAP);
 	return (SUCCESS);
 }
 static t_errno	check_surrounding_wall(char **map_grid)
@@ -108,27 +122,24 @@ static t_errno	check_surrounding_wall(char **map_grid)
 	int j;
 	int	i;
 
-	j = 1;
 	i = 1;
-	check_map_first_last(map_grid, 0);
-	while (map_grid[i])
+	if (check_map_first_last_wall(map_grid) != SUCCESS)
+		return (ERR_INVALID_MAP);
+	while (map_grid[i + 1] != NULL)
 	{
-		if (map_grid[i][0] == '0')
-			return (ERR_INVALID_MAP);
-		j = 0;
-		while (map_grid[i][j] && map_grid[i + 1] != NULL)
+		j = 1;
+		while (map_grid[i][j])
 		{
-			if (map_grid[i][j + 1] == '\n' && map_grid[i][j] == '0')
-				return (ERR_INVALID_MAP);
-			if (map_grid[i][j] == '0' && map_grid[i - 1][j] == ' ')
-				return (ERR_INVALID_MAP);
-			if (map_grid[i][j] == '0' && map_grid[i + 1][j] == ' ')
-				return (ERR_INVALID_MAP);
+			if (map_grid[i][j] != ' ' && map_grid[i][j] != '1')
+			{
+				if (map_grid[i + 1][j] == ' ' || map_grid[i - 1][j] == ' ' ||\
+				 map_grid[i][j + 1] == ' ' ||  map_grid[i][j - 1] == ' ')
+					return (ERR_INVALID_MAP);
+			}
 			j++;
 		}
 		i++;
 	}
-	check_map_first_last(map_grid, i);
 	return (SUCCESS);
 }
 
