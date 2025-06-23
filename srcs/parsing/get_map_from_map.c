@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:02:48 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 17:01:28 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 17:02:26 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ static t_errno	check_surrounding_wall(char **map_grid)
 	{
 		if (map_grid[i][0] != '1' && map_grid[i][0] != ' ')
 			return (ERR_INVALID_MAP);
-		j = 0;
+		j = 1;
 		while (map_grid[i][j] && map_grid[i + 1] != NULL)
 		{
 			if (map_grid[i][j + 1] == '\n' && map_grid[i][j] == '0')
