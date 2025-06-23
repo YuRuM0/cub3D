@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 19:49:58 by flima             #+#    #+#             */
-/*   Updated: 2025/06/23 16:39:52 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/23 17:01:21 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ static void	free_colors(t_colours *color)
 
 static void	free_textures(t_texture *texture)
 {
-	free(texture->NO);
-	free(texture->SO);
-	free(texture->WE);
-	free(texture->EA);
+	//delete texture and image!
 	free(texture);
 }
 

@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_from_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:02:48 by yulpark           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/06/23 18:42:42 by flima            ###   ########.fr       */
+=======
+/*   Updated: 2025/06/23 17:02:26 by yulpark          ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +108,20 @@ static t_errno check_map_first_last_wall(char **map_grid)
 		j = 0;
 		while (map_grid[i][j])
 		{
+<<<<<<< HEAD
 			if (map_grid[i][j] != '1' && map_grid[i][j] != ' ')
+=======
+			if (map_grid[0][j] != '1' && map_grid[0][j] != ' ')
+				return (ERR_INVALID_MAP);
+			j++;
+		}
+	}
+	else
+	{
+		while (map_grid[c])
+		{
+			if (map_grid[c][j] != '1' && map_grid[c][j] != ' ')
+>>>>>>> refs/remotes/origin/main
 				return (ERR_INVALID_MAP);
 			j++;
 		}
@@ -123,12 +140,23 @@ static t_errno	check_surrounding_wall(char **map_grid)
 	int	i;
 
 	i = 1;
+<<<<<<< HEAD
 	if (check_map_first_last_wall(map_grid) != SUCCESS)
 		return (ERR_INVALID_MAP);
 	while (map_grid[i + 1] != NULL)
 	{
 		j = 1;
 		while (map_grid[i][j])
+=======
+	if (check_map_first_last(map_grid, 0) != SUCCESS)
+		return (ERR_INVALID_MAP);
+	while (map_grid[i])
+	{
+		if (map_grid[i][0] != '1' && map_grid[i][0] != ' ')
+			return (ERR_INVALID_MAP);
+		j = 1;
+		while (map_grid[i][j] && map_grid[i + 1] != NULL)
+>>>>>>> refs/remotes/origin/main
 		{
 			if (map_grid[i][j] != ' ' && map_grid[i][j] != '1')
 			{

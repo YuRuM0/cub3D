@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/06/23 18:50:09 by flima            ###   ########.fr       */
+=======
+/*   Updated: 2025/06/23 17:00:42 by yulpark          ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +70,9 @@ typedef struct s_ddaVars
 	double			drawEnd;
 	t_sideWall		hitside;
 	t_vetor2D		rayWall;
+	float			texture_position;
+	float			increment;
+	int				tex_x;
 	int				wall_hitX;
 }					t_ddaVars;
 
@@ -138,10 +145,9 @@ struct s_map
 
 typedef struct s_texture
 {
-	char *NO;
-	char *SO;
-	char *WE;
-	char *EA;
+	char *path;
+	mlx_texture_t *texture;
+	mlx_image_t *image;
 }	t_texture;
 
 typedef struct s_image
@@ -188,7 +194,7 @@ void	status_error_handler(t_cub_data *data, t_errno status);
 void	free_all_data(t_cub_data *data);
 void	clean_game_window(t_cub_data *data);
 t_errno grep_map(t_cub_data *data);
-t_errno grep_texture(t_cub_data *data);;
+t_errno grep_texture_all(t_cub_data *data);
 
 //DDA
 t_vetor2D	multiVetor(t_vetor2D v1, t_vetor2D v2);
@@ -200,7 +206,6 @@ t_vetor2D	calc_cameraPixel(t_rayEngine *engine, unsigned int pixel);
 void		calc_distToSides(t_rayEngine *engine, t_vetor2D rayDir, t_ddaVars *dda);
 void		init_dda_struct(t_ddaVars *dda);
 void		hitWallDir(t_ddaVars *dda, int	fromSide);
-void		casting_rays(t_cub_data *data, t_rayEngine *engine);
 void		init_dda_struct(t_ddaVars *dda);
 void		init_vetors(t_rayEngine *engine, t_map *map);
 void			ray_loop(void *param);
@@ -222,7 +227,7 @@ void draw_floor_ceiling(t_image *image, t_colours *colours);
 
 //window
 t_errno start_window(t_cub_data *data);
-void	draw_line(t_cub_data *data, t_ddaVars *dda, t_image *img, int pixel);;
+void	casting_rays(t_cub_data *data, t_rayEngine *engine);
 
 // utils
 float degToRad(int a);

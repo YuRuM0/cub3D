@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/22 14:58:45 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 16:43:31 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,70 +29,76 @@ so you convert to image -> display the image
 */
 
 
-//static uint32_t get_pixel_from_texture(mlx_image_t *tex_img, int x, int y)
-//{
-//	int converted_pixel_loc;
-//	char rgb[3];
-//	long rgb_long;
-//	uint32_t colour;
-
-//	if (x < 0)
-//		x = 0;
-//	if (y < 0)
-//		y = 0;
-//	if (x >= (int)tex_img->width)
-//		x = (int)tex_img->width - 1;
-//	if (y >= (int)tex_img->height)
-//		y = (int)tex_img->height - 1;
-//	//converting the pixel bytes(?)
-//	converted_pixel_loc = (y * tex_img->width + x) * 4; //4bytes per pixel
-//	rgb[0] = tex_img->pixels[converted_pixel_loc];
-//	rgb[1] = tex_img->pixels[converted_pixel_loc + 1];
-//	rgb[2] = tex_img->pixels[converted_pixel_loc + 2];
-//	rgb_long = ft_atol(rgb);
-//	colour = rgb_to_binary(&rgb_long);
-//	return (colour);
-//}
-
-void texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel)
+static void load_texture(t_cub_data *data)
 {
-	int colour;
-	int y;
+	int i;
 
-	y = dda->drawStart;
-	while (y < dda->drawEnd)
+	i = NO;
+	while (i < 4)
 	{
-
+		data->texture[i].texture = mlx_load_png(data->texture[i].path);
+		data->texture[i].image = mlx_texture_to_image(data->mlx, data->texture[i].texture);
+		i++;
 	}
 }
 
-void	draw_line(t_cub_data *data, t_ddaVars *dda, t_image *img, int pixel)
+static void find_colour(t_ddaVars *dda, t_texture *tex, int dir, long *colour)
 {
-	double y;
-	mlx_texture_t *tex;
-	mlx_image_t *tex_img;
-	int tex_x;
+	int tex_y;
+	uint8_t *pixels;
+	int width;
 
-	if (dda->hitside == NO)
-		tex = mlx_load_png(data->texture->NO);
-	else if (dda->hitside == SO)
-		tex = mlx_load_png(data->texture->SO);
-	else if (dda->hitside == WE)
-		tex = mlx_load_png(data->texture->WE);
-	else
-		tex = mlx_load_png(data->texture->EA);
-	tex_img = mlx_texture_to_image(data->mlx, tex);
-	tex_x = (int)(dda->wall_hitX * tex->width);
+	tex_y = (int)dda->texture_position;
+	pixels = tex[dir].image->pixels;
+	width = tex[dir].texture->width;
+	pixels = &pixels[((tex_y * tex[dir].texture->width) + dda->tex_x) * 4];
+	colour[0] = pixels[0];
+	colour[1] = pixels[1];
+	colour[2] = pixels[2];
+	colour[3] = pixels[3];
+}
+
+static void map_buffer(t_ddaVars *dda, t_cub_data *data)
+{
+	double wall;
+	int side;
+	int line_len;
+
+	wall = dda->wall_hitX;
+	side = dda->hitside;
+	dda->tex_x = (int)(wall * data->texture[side].texture->width);
+	if (side == NO || side == WE)
+		dda->tex_x = data->texture[side].texture->width - dda->tex_x - 1;
+	line_len = (dda->drawEnd - dda->drawStart);
+	dda->increment = (float)data->texture[side].texture->height / line_len;
+	//dda->texture_position = (dda->drawStart - Height / 2 + line_len / 2) * dda->increment;
+	dda->texture_position = 0.0;
+}
+
+static void texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture *tex)
+{
+	uint32_t colour_converted;
+	int y;
+	long colour[4];
+
 	if (dda->drawStart < 0)
 		dda->drawStart = 0;
-	if (dda->drawEnd >= Height)
-		dda->drawEnd = Height - 1; // maybe no longer needed?
+	if (dda->drawEnd > Height)
+		dda->drawEnd = Height;
 	y = dda->drawStart;
 	while (y < dda->drawEnd)
 	{
-		int d = y * 256 - Height * 128 + (dda->drawEnd - dda->drawStart) * 128;
-   		int tex_y = ((d * tex->height) / (dda->drawEnd - dda->drawStart)) / 256;
-		mlx_put_pixel(img->img, pixel, y, get_pixel_from_texture(tex_img, tex_x, tex_y));
+		if (dda->hitside == NO)
+			find_colour(dda, tex, NO, colour);
+		else if (dda->hitside == SO)
+			find_colour(dda, tex, SO, colour);
+		else if (dda->hitside == WE)
+			find_colour(dda, tex, WE, colour);
+		else
+			find_colour(dda, tex, EA, colour);
+		colour_converted = rgb_to_binary(colour);
+		mlx_put_pixel(img->img, pixel, y, colour_converted);
+		dda->texture_position += dda->increment;
 		y++;
 	}
 }
@@ -103,12 +109,13 @@ void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 
 	pixel = -1;
 	draw_floor_ceiling(data->img, data->colours);
+	load_texture(data);
 	while (++pixel < Width)
 	{
 		init_dda_struct(engine->dda);
 		get_distance(engine->dda, engine, pixel);
-		draw_line(data, engine->dda, data->img, pixel);
-		//instead frun mapping buff and set buff
+		map_buffer(engine->dda, data);
+		texture_to_buffer(engine->dda, data->img, pixel, data->texture);
 	}
 	// minimap
 	mlx_image_to_window(data->mlx, data->img->img, 0, 0);
@@ -124,4 +131,3 @@ t_errno start_window(t_cub_data *data)
 		return (ERR_MLX_FAIL);
 	return (SUCCESS);
 }
-

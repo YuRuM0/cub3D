@@ -1,16 +1,15 @@
 NO textures/redbrick.png
-SO textures/greystone.png
-WE textures/eagle.png
-EA textures/bluestone.png
+SO textures/redbrick.png
+WE textures/redbrick.png
+EA textures/redbrick.png
 
 F 153,204,102
 C 0,204,255
 
-     111   111           
-111111011111011  
-1000010000000001
-100000010000011
-1000000001111
+111111111
+1000010001
+1000000101
+1000000001
 1010000011111111
 10000N0000000001
 1100000011111111

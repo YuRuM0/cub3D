@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/06/23 18:31:14 by flima            ###   ########.fr       */
+=======
+/*   Updated: 2025/06/23 17:01:39 by yulpark          ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +18,12 @@
 
 static void	struct_init(t_cub_data *data)
 {
+	int i;
+
 	data->engine->map = data->map_info;
 	data->engine->data = data;
 	data->colours->c_colour_str = NULL;
 	data->colours->f_colour_str = NULL;
-	data->texture->EA = NULL;
-	data->texture->NO = NULL;
-	data->texture->SO = NULL;
-	data->texture->WE = NULL;
 	data->wholemap = NULL;
 	data->img->img = NULL;
 	data->mlx = NULL;
@@ -29,12 +31,18 @@ static void	struct_init(t_cub_data *data)
 	data->map_info->map_col = 0;
 	data->map_info->map_row = 0;
 	data->map_info->player_dir = '0';
+	i = 0;
+	while (i < 4)
+	{
+		data->texture[i].path = NULL;
+		i++;
+	}
 }
 
 void	struct_alloc(t_cub_data *data)
 {
 	data->colours = malloc(sizeof(t_colours));
-	data->texture = malloc(sizeof(t_texture));
+	data->texture = malloc(sizeof(t_texture) * 4);
 	data->map_info = malloc(sizeof(t_map));
 	data->engine = malloc(sizeof(t_rayEngine));
 	data->engine->dda = malloc(sizeof(t_ddaVars));
