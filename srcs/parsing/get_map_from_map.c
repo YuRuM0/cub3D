@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:02:48 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/18 14:06:41 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 16:59:34 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static t_errno check_map_first_last(char **map_grid, int c)
 	{
 		while (map_grid[0][j])
 		{
-			if (map_grid[0][j] == '0')
+			if (map_grid[0][j] != '1' && map_grid[0][j] != ' ')
 				return (ERR_INVALID_MAP);
 			j++;
 		}
@@ -96,7 +96,7 @@ static t_errno check_map_first_last(char **map_grid, int c)
 	{
 		while (map_grid[c])
 		{
-			if (map_grid[c][j] == '0')
+			if (map_grid[c][j] != '1' && map_grid[c][j] != ' ')
 				return (ERR_INVALID_MAP);
 			j++;
 		}
@@ -110,10 +110,11 @@ static t_errno	check_surrounding_wall(char **map_grid)
 
 	j = 1;
 	i = 1;
-	check_map_first_last(map_grid, 0);
+	if (check_map_first_last(map_grid, 0) != SUCCESS)
+		return (ERR_INVALID_MAP);
 	while (map_grid[i])
 	{
-		if (map_grid[i][0] == '0')
+		if (map_grid[i][0] != '1' && map_grid[i][0] != ' ')
 			return (ERR_INVALID_MAP);
 		while (map_grid[i][j] && map_grid[i + 1] != NULL)
 		{

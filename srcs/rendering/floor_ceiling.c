@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 12:23:08 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 22:40:31 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 15:59:47 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 uint32_t rgb_to_binary(long *colours)
 {
-    uint8_t r = (uint8_t)colours[0];
-    uint8_t g = (uint8_t)colours[1];
-    uint8_t b = (uint8_t)colours[2];
+	uint8_t r = (uint8_t)colours[0];
+	uint8_t g = (uint8_t)colours[1];
+	uint8_t b = (uint8_t)colours[2];
 	uint32_t color;
 
 	color = 0;
@@ -26,7 +26,6 @@ uint32_t rgb_to_binary(long *colours)
 	color |= (g << 16);
 	color |= b << 8;
 	color |= (0xFF);
-
     return color;
 }
 
