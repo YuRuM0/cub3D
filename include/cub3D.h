@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/22 16:09:11 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/23 15:54:20 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ t_errno get_colors(t_cub_data *data);
 //free and error_handlers
 void	status_error_handler(t_cub_data *data, t_errno status);
 void	free_all_data(t_cub_data *data);
+void	clean_game_window(t_cub_data *data);
 t_errno grep_map(t_cub_data *data);
 t_errno grep_texture(t_cub_data *data);;
 
