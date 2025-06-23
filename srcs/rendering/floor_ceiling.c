@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 12:23:08 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 15:59:47 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 17:32:58 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ uint32_t rgb_to_binary(long *colours)
 	color |= (0xFF);
     return color;
 }
-
-
 
 // void mlx_put_pixel_on_img(t_image *image, int x, int y, long colour)
 // {

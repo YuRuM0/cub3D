@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 16:43:31 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 18:50:32 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ mlx_delete_texture(texture);
 
 so you convert to image -> display the image
 */
-
 
 static void load_texture(t_cub_data *data)
 {
@@ -68,11 +67,11 @@ static void map_buffer(t_ddaVars *dda, t_cub_data *data)
 	side = dda->hitside;
 	dda->tex_x = (int)(wall * data->texture[side].texture->width);
 	if (side == NO || side == WE)
-		dda->tex_x = data->texture[side].texture->width - dda->tex_x - 1;
+		dda->tex_x = data->texture[side].texture->width - dda->tex_x - 1; //for flipping
 	line_len = (dda->drawEnd - dda->drawStart);
 	dda->increment = (float)data->texture[side].texture->height / line_len;
-	//dda->texture_position = (dda->drawStart - Height / 2 + line_len / 2) * dda->increment;
-	dda->texture_position = 0.0;
+	dda->texture_position = (dda->drawStart - Height / 2 + line_len / 2) * dda->increment;
+	//dda->texture_position = 0.0;
 }
 
 static void texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture *tex)
