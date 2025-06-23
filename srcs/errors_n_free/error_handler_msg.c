@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 19:00:20 by flima             #+#    #+#             */
-/*   Updated: 2025/06/23 16:41:05 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/23 19:35:56 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,26 @@ void	status_error_handler(t_cub_data *data, t_errno status)
 	
 }
 
+void	free_textures(t_cub_data *data)
+{
+	int i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (data->texture[i].image)
+			mlx_delete_image(data->mlx, data->texture[i].image);
+		if (data->texture[i].texture)
+			mlx_delete_texture(data->texture[i].texture);
+		if (data->texture[i].path)
+			free(data->texture[i].path);
+		i++;
+	}
+}
+
 void	clean_game_window(t_cub_data *data)
 {
+	free_textures(data);
 	if (data->img->img)
 		mlx_delete_image(data->mlx, data->img->img);
 	if (data->mlx)

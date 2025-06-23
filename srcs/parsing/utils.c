@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 19:05:57 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 19:28:30 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	struct_init(t_cub_data *data)
 	while (i < 4)
 	{
 		data->texture[i].path = NULL;
+		data->texture[i].image = NULL;
+		data->texture[i].texture = NULL;
 		i++;
 	}
 }
