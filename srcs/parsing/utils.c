@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 21:37:21 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/23 16:44:51 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	struct_init(t_cub_data *data)
 	data->texture->SO = NULL;
 	data->texture->WE = NULL;
 	data->wholemap = NULL;
+	data->img->img = NULL;
+	data->mlx = NULL;
 	data->map_info->map_grid = NULL;
 	data->map_info->map_col = 0;
 	data->map_info->map_row = 0;

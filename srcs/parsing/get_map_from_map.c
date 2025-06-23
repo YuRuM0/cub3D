@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_from_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:02:48 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/18 14:06:41 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 16:32:25 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ static t_errno	check_surrounding_wall(char **map_grid)
 	{
 		if (map_grid[i][0] == '0')
 			return (ERR_INVALID_MAP);
+		j = 0;
 		while (map_grid[i][j] && map_grid[i + 1] != NULL)
 		{
 			if (map_grid[i][j + 1] == '\n' && map_grid[i][j] == '0')
@@ -156,7 +157,7 @@ t_errno grep_map(t_cub_data *data)
 	if (data->map_info->map_row < 3)
 		return (ERR_INVALID_MAP);
 	map_start = find_map_start(data);
-	data->map_info->map_grid = malloc(sizeof(char *) * data->map_info->map_row + 1);
+	data->map_info->map_grid = malloc(sizeof(char *) * (data->map_info->map_row + 1));
 	if (!data->map_info->map_grid)
 		return (ERR_MEM_ALLOC);
 	while (data->wholemap[map_start + (++i)] && i < data->map_info->map_row)
