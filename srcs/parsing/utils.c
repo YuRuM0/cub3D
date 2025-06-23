@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/22 15:34:04 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 17:01:39 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void	struct_init(t_cub_data *data)
 	data->colours->c_colour_str = NULL;
 	data->colours->f_colour_str = NULL;
 	data->wholemap = NULL;
+	data->img->img = NULL;
+	data->mlx = NULL;
 	data->map_info->map_grid = NULL;
 	data->map_info->map_col = 0;
 	data->map_info->map_row = 0;

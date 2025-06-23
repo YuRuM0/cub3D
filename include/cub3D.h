@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 16:36:20 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/23 17:00:42 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # define	PI 3.1415926535
 # define	Width 1920
 # define	Height 1080
-# define	ROTATION_SPEED 0.10
-#define		MOVE_SPEED 0.15
-#define 	HITBOX_RADIUS 0.45
+# define	ROTATION_SPEED 0.07
+#define		MOVE_SPEED 0.05
+#define 	HITBOX_RADIUS 0.2
 
 /* Info variables DDA algorithm
 distToSideX - distance from player position to the nearest X side (ray)
@@ -187,6 +187,7 @@ t_errno get_colors(t_cub_data *data);
 //free and error_handlers
 void	status_error_handler(t_cub_data *data, t_errno status);
 void	free_all_data(t_cub_data *data);
+void	clean_game_window(t_cub_data *data);
 t_errno grep_map(t_cub_data *data);
 t_errno grep_texture_all(t_cub_data *data);
 

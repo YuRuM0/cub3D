@@ -17,3 +17,9 @@ not working
 
 For hook should I check if the position that I am trying to move only (if it is a wall) or should I also check if the hitWall == false
 * modify Makefile to clean libft and mlx .o and .a
+
+
+testar map with 
+1011  working 
+1001
+1111

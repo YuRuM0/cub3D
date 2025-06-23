@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 19:00:20 by flima             #+#    #+#             */
-/*   Updated: 2025/06/21 21:46:17 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/23 16:41:05 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void error_msg_strs(char **str)
 	str[0] = "Quitting...\n";
 	str[1] = "Memory allocation fails.\n";
 	str[2] = "Each identifier (NO, SO, WE, EA, F, C) must appear only once.\n"; //ERR_DUPLICATE
-	str[3] = "invalid map"; //ERR_INVALID_MAP
+	str[3] = "Invalid map.\n"; //ERR_INVALID_MAP
 	str[4] = "Missing required map's identifier.\n"; //ERR_MISSING_MAP_ELEMENT
 	str[5] = "Invalid color identfier.\n"; //ERR_INVALID_COLORS
 	str[6] = "Invalid RGB values. Each component must be between 0 and 255.\n"; //ERR_INVALID_RBG_VALUES
@@ -26,7 +26,7 @@ static void error_msg_strs(char **str)
 
 void	status_error_handler(t_cub_data *data, t_errno status)
 {
-	char 	*str[7];
+	char 	*str[8];
 	
 	(void)data;
 	error_msg_strs(str);
@@ -34,4 +34,12 @@ void	status_error_handler(t_cub_data *data, t_errno status)
 	free_all_data(data);
 	exit(status);
 	
+}
+
+void	clean_game_window(t_cub_data *data)
+{
+	if (data->img->img)
+		mlx_delete_image(data->mlx, data->img->img);
+	if (data->mlx)
+		mlx_terminate(data->mlx);
 }
