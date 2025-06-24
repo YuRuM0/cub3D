@@ -6,19 +6,11 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 20:05:00 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/24 21:06:11 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-// void minimap_main(t_calc *value, t_cub_data *data, t_image *img)
-// {
-// 	minimap_struct_init(value, data);
-// 	draw_map_border(img);
-// 	draw_map(img, data, value);
-// 	drawPlayer(data, img, value);
-// }
 
 /*
 mlx_texture_t* texture = mlx_load_png("./temp/sus.png");
@@ -28,34 +20,6 @@ mlx_delete_texture(texture);
 so you convert to image -> display the image
 */
 
-static void load_texture(t_cub_data *data)
-{
-	int i;
-
-	i = NO;
-	while (i < 4)
-	{
-		data->texture[i].texture = mlx_load_png(data->texture[i].path);
-		data->texture[i].image = mlx_texture_to_image(data->mlx, data->texture[i].texture);
-		i++;
-	}
-}
-
-static void find_colour(t_ddaVars *dda, t_texture *tex, int dir, long *colour)
-{
-	int tex_y;
-	uint8_t *pixels;
-	int width;
-
-	tex_y = (int)dda->texture_position;
-	pixels = tex[dir].image->pixels;
-	width = tex[dir].texture->width;
-	pixels = &pixels[((tex_y * tex[dir].texture->width) + dda->tex_x) * 4];
-	colour[0] = pixels[0];
-	colour[1] = pixels[1];
-	colour[2] = pixels[2];
-	colour[3] = pixels[3];
-}
 
 static void map_buffer(t_ddaVars *dda, t_cub_data *data)
 {
@@ -95,14 +59,24 @@ static void texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture
 			find_colour(dda, tex, WE, colour);
 		else
 			find_colour(dda, tex, EA, colour);
-		colour_converted = rgb_to_binary(colour);
-		if (y > 0 && y < Height)
+		colour_converted = rgb_to_binary(colour, 255);
+		if (y >= 0 && y < Height)
 			mlx_put_pixel(img->img, pixel, y, colour_converted);
 		dda->texture_position += dda->increment;
-		//printf("%f\n", dda->texture_position);
 		y++;
 	}
 }
+
+ static void minimap_main(t_calc *value, t_cub_data *data)
+ {
+	minimap_struct_init(value, data);
+ 	draw_map(data, value);
+	data->map_info->player_info->player_angle = 0;
+	data->map_info->player_info->player_dx = cos(degToRad(data->map_info->player_info->player_angle));
+	data->map_info->player_info->player_dy = -sin(degToRad(data->map_info->player_info->player_angle));
+ 	drawPlayer(data, value);
+ }
+
 
 void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 {
@@ -118,7 +92,7 @@ void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 		map_buffer(engine->dda, data);
 		texture_to_buffer(engine->dda, data->img, pixel, data->texture);
 	}
-	// minimap
+	minimap_main(data->map_info->calc, data);
 	mlx_image_to_window(data->mlx, data->img->img, 0, 0);
 }
 

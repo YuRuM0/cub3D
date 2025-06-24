@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 20:39:38 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/24 19:19:39 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,17 @@ typedef struct s_player_info
 	int steps; // num steps in line stretching out from the player
 }	t_player_info;
 
-struct s_map
+typedef struct map_drawing_calc
+{
+	int offset_x;
+	int offset_y;
+	float scale_x;
+	float scale_y;
+	int map_x;
+	int map_y;
+}	t_calc;
+
+typedef struct s_map
 {
 	char			**map_grid;
 	int				biggest_col;
@@ -137,7 +147,8 @@ struct s_map
 	int				map_col;
 	int				map_width; //col * width
 	int				map_height; // row * height
-};
+	t_calc			*calc; //for minimap calculation
+}	t_map;
 
 typedef struct s_texture
 {
@@ -162,15 +173,6 @@ struct s_cub_data
 	t_image		*img;
 };
 
-typedef struct map_drawing_calc
-{
-	int offset_x;
-	int offset_y;
-	float scale_x;
-	float scale_y;
-	int map_x;
-	int map_y;
-}	t_calc;
 
 //parsing
 //utils
@@ -212,14 +214,14 @@ void	key_hook(mlx_key_data_t keydata, void *param);
 
 // rendering
 // floor ceiling
-uint32_t rgb_to_binary(long *colours);
+uint32_t rgb_to_binary(long *colours, uint8_t alpha);
 void draw_floor_ceiling(t_image *image, t_colours *colours);
 
 //minimap
-//void minimap_struct_init(t_calc *value, t_cub_data *data);
-//void draw_map_border(t_image *img);
-//void draw_map(t_image *img, t_cub_data *data, t_calc *value);
-//void drawPlayer(t_cub_data *data, t_image *img, t_calc *value);
+void minimap_struct_init(t_calc *value, t_cub_data *data);
+void draw_map_border(t_cub_data *data);
+void draw_map(t_cub_data *data, t_calc *value);
+void drawPlayer(t_cub_data *data, t_calc *value);
 
 //window
 t_errno start_window(t_cub_data *data);
@@ -227,6 +229,8 @@ void	casting_rays(t_cub_data *data, t_rayEngine *engine);
 
 // utils
 float degToRad(int a);
+void find_colour(t_ddaVars *dda, t_texture *tex, int dir, long *colour);
+void load_texture(t_cub_data *data);
 
 //main
 int main(int argc, char **argv);
