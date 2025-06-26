@@ -6,16 +6,16 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:46:17 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/24 18:08:11 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/26 19:09:09 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cub3D.h"
 
-float degToRad(int a)
-{
-	return (a * PI / 180.0);
-}
+//float degToRad(int a)
+//{
+//	return (a * PI / 180.0);
+//}
 
 void load_texture(t_cub_data *data)
 {

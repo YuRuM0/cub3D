@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_controls.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 13:27:31 by flima             #+#    #+#             */
-/*   Updated: 2025/06/22 18:03:39 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/26 16:28:40 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	move_forward(t_rayEngine *engine)
 {
 	double	x;
 	double	y;
-	
+
 	x = engine->posPlayer.x + engine->dir.x * MOVE_SPEED;
 	y = engine->posPlayer.y + engine->dir.y * MOVE_SPEED;
 	if (is_move_free(engine->map->map_grid, &engine->collision, x, engine->posPlayer.y))
@@ -66,7 +66,7 @@ void	move_backward(t_rayEngine *engine)
 {
 	double	x;
 	double	y;
-	
+
 	x = engine->posPlayer.x - engine->dir.x * MOVE_SPEED;
 	y = engine->posPlayer.y - engine->dir.y * MOVE_SPEED;
 	if (is_move_free(engine->map->map_grid, &engine->collision, x, engine->posPlayer.y))
@@ -79,7 +79,7 @@ void	move_left(t_rayEngine *engine)
 {
 	double	x;
 	double	y;
-	
+
 	x = engine->posPlayer.x - engine->planeCamera.x * MOVE_SPEED;
 	y = engine->posPlayer.y - engine->planeCamera.y * MOVE_SPEED;
 	if (is_move_free(engine->map->map_grid, &engine->collision, x, engine->posPlayer.y))
@@ -92,7 +92,7 @@ void	move_right(t_rayEngine *engine)
 {
 	double	x;
 	double	y;
-	
+
 	x = engine->posPlayer.x + engine->planeCamera.x * MOVE_SPEED;
 	y = engine->posPlayer.y + engine->planeCamera.y * MOVE_SPEED;
 	if (is_move_free(engine->map->map_grid, &engine->collision, x, engine->posPlayer.y))

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/24 21:06:11 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/26 17:55:31 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,8 @@ static void texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture
  {
 	minimap_struct_init(value, data);
  	draw_map(data, value);
-	data->map_info->player_info->player_angle = 0;
-	data->map_info->player_info->player_dx = cos(degToRad(data->map_info->player_info->player_angle));
-	data->map_info->player_info->player_dy = -sin(degToRad(data->map_info->player_info->player_angle));
+	data->map_info->player_info->player_dx = data->engine->dir.x;
+	data->map_info->player_info->player_dy = data->engine->dir.y;
  	drawPlayer(data, value);
  }
 

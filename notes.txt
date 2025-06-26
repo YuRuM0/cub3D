@@ -1,2 +1,3 @@
 
 * modify Makefile to clean libft and mlx .o and .a
+still gets stuck when the player gets too close to the wall

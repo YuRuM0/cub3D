@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:55:52 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/24 21:21:48 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/26 19:07:42 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define player_colour 0xFFFF0000
 # define MINIMAP_HEIGHT (Height / 3) // little margin
-# define MINIMAP_WIDTH (Width /3)
+# define MINIMAP_WIDTH (Width / 3)
 # define X_OFFSET 10              // Start position X
 # define Y_OFFSET 20              // Start position Y  // should these be changed?
 # define BORDER_COLOUR 0x00808080
@@ -73,7 +73,7 @@ void draw_map(t_cub_data *data, t_calc *value)
 	while (++value->map_y < data->map_info->map_row)
 	{
 		value->map_x = -1;
-		while (++value->map_x < data->map_info->map_col)
+		while (++value->map_x < data->map_info->map_col - 1)
 		{
 			pixel_x_start_end[0] = (int)(value->map_x * value->scale_x);
 			pixel_x_start_end[1] = (int)((value->map_x + 1) * value->scale_x);

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/24 19:19:39 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/26 19:11:25 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,12 @@ typedef struct s_colours
 
 typedef struct s_player_info
 {
-	float player_dx;
-	float player_dy;
+	double player_dx;
+	double player_dy;
 	float player_angle;
-	int dx;
-	int dy; // for line drawing
-	int steps; // num steps in line stretching out from the player
+	float dx;
+	float dy; // for line drawing
+	float steps; // num steps in line stretching out from the player
 }	t_player_info;
 
 typedef struct map_drawing_calc
