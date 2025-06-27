@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:20:09 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/26 19:11:46 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/27 20:16:59 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define player_colour 0xFFFF0000
 
-static void drawLine(t_cub_data *data, int x, int y, t_vetor2D arrow, t_image *img)
+static void drawLine(t_cub_data *data, float x, float y, t_vetor2D arrow, t_image *img)
 {
 	float xinc;
 	float yinc;
@@ -34,11 +34,45 @@ static void drawLine(t_cub_data *data, int x, int y, t_vetor2D arrow, t_image *i
 		i++;
 	}
 }
+//static void drawLine(int x0, int y0, t_vetor2D arrow, t_image *img)
+//{
+//    int x1 = arrow.x;
+//    int y1 = arrow.y;
 
-static void player_square(t_image *img, int x, int y, long colour)
+//    int dx = abs(x1 - x0);
+//    int dy = abs(y1 - y0);
+//    int sx = x0 < x1 ? 1 : -1;
+//    int sy = y0 < y1 ? 1 : -1;
+//    int err = dx - dy;
+//    int e2;
+
+//    int x = x0;
+//    int y = y0;
+
+//    while (1) {
+//        // Bounds checking
+//        if (x >= 0 && (const uint32_t)x < img->img->width && y >= 0 && (const uint32_t)y < img->img->height) {
+//            mlx_put_pixel(img->img, x, y, player_colour);
+//        }
+
+//        if (x == x1 && y == y1) break;
+
+//        e2 = 2 * err;
+//        if (e2 > -dy) {
+//            err -= dy;
+//            x += sx;
+//        }
+//        if (e2 < dx) {
+//            err += dx;
+//            y += sy;
+//        }
+//    }
+//}
+
+static void player_square(t_image *img, float x, float y, long colour)
 {
-	int a;
-	int b;
+	float a;
+	float b;
 
 	a = x - 4;
 	b = y - 4;
@@ -57,8 +91,8 @@ void drawPlayer(t_cub_data *data, t_calc *value)
 	double pdx;
 	double pdy;
 	t_vetor2D arrow;
-	int x;
-	int y;
+	float x;
+	float y;
 
 	x = (data->engine->posPlayer.x * value->scale_x);
 	y = (data->engine->posPlayer.y * value->scale_y);

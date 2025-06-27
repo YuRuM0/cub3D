@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/26 17:55:31 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/27 22:22:59 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,14 @@ static void texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture
 	int y;
 	long colour[4];
 
-	//if (dda->drawStart < 0)
-	//	dda->drawStart = 0;
-	//if (dda->drawEnd > Height)
-	//	dda->drawEnd = Height;
 	y = dda->drawStart;
 	while (y < dda->drawEnd)
 	{
-		if (dda->hitside == NO)
-			find_colour(dda, tex, NO, colour);
-		else if (dda->hitside == SO)
-			find_colour(dda, tex, SO, colour);
-		else if (dda->hitside == WE)
-			find_colour(dda, tex, WE, colour);
-		else
-			find_colour(dda, tex, EA, colour);
+		if (dda->texture_position < 0)
+			dda->texture_position = 0;
+		if (dda->texture_position >= tex[dda->hitside].texture->height)
+			dda->texture_position = tex[dda->hitside].texture->height - 1;
+		find_colour(dda, tex, dda->hitside, colour);
 		colour_converted = rgb_to_binary(colour, 255);
 		if (y >= 0 && y < Height)
 			mlx_put_pixel(img->img, pixel, y, colour_converted);
@@ -76,14 +69,17 @@ static void texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture
  	drawPlayer(data, value);
  }
 
-
 void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 {
 	int	pixel;
+	int errno;
 
 	pixel = -1;
 	draw_floor_ceiling(data->img, data->colours);
-	load_texture(data);
+	errno = load_texture(data);
+	if (errno != SUCCESS)
+		status_error_handler(data, errno);
+	//load_texture(data);
 	while (++pixel < Width)
 	{
 		init_dda_struct(engine->dda);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:00:28 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/21 21:19:08 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/27 22:14:52 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int main(int argc, char **argv)
 	mlx_key_hook(data.mlx, key_hook, &data);
 	// ray_loop(&data);
 	mlx_loop(data.mlx);
-	// free_all_data(data);
+	//free_all_data(data);
 	return (0);
 }

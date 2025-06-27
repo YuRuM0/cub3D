@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handler_msg.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 19:00:20 by flima             #+#    #+#             */
-/*   Updated: 2025/06/23 19:35:56 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/27 22:37:11 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,20 @@ static void error_msg_strs(char **str)
 	str[4] = "Missing required map's identifier.\n"; //ERR_MISSING_MAP_ELEMENT
 	str[5] = "Invalid color identfier.\n"; //ERR_INVALID_COLORS
 	str[6] = "Invalid RGB values. Each component must be between 0 and 255.\n"; //ERR_INVALID_RBG_VALUES
-	str[7] = "Error creating game environment.\n";
+	str[7] = "Invalid input.\n";
+	str[8] = "Error creating game environment.\n";
 }
 
 void	status_error_handler(t_cub_data *data, t_errno status)
 {
-	char 	*str[8];
-	
+	char 	*str[9];
+
 	(void)data;
 	error_msg_strs(str);
 	write(STDERR_FILENO, str[status], ft_strlen(str[status]));
 	free_all_data(data);
 	exit(status);
-	
+
 }
 
 void	free_textures(t_cub_data *data)

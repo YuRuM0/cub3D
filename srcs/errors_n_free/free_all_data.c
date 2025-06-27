@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 19:49:58 by flima             #+#    #+#             */
-/*   Updated: 2025/06/23 17:01:21 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/27 20:45:05 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void free_double(char **s)
 static void	free_map(t_map *map)
 {
 	free_double(map->map_grid);
+	free(map->calc);
+	free(map->player_info);
 	free(map);
 }
 

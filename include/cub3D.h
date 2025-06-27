@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/26 19:11:25 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/27 21:44:57 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,9 +228,8 @@ t_errno start_window(t_cub_data *data);
 void	casting_rays(t_cub_data *data, t_rayEngine *engine);
 
 // utils
-float degToRad(int a);
 void find_colour(t_ddaVars *dda, t_texture *tex, int dir, long *colour);
-void load_texture(t_cub_data *data);
+t_errno load_texture(t_cub_data *data);
 
 //main
 int main(int argc, char **argv);
