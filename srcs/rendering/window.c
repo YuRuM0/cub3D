@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/27 22:22:59 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 17:32:30 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ static void texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture
 void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 {
 	int	pixel;
-	int errno;
+	int errnum;
 
 	pixel = -1;
 	draw_floor_ceiling(data->img, data->colours);
-	errno = load_texture(data);
-	if (errno != SUCCESS)
-		status_error_handler(data, errno);
+	errnum = load_texture(data);
+	if (errnum != SUCCESS)
+		status_error_handler(data, errnum);
 	//load_texture(data);
 	while (++pixel < Width)
 	{
@@ -87,7 +87,8 @@ void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 		map_buffer(engine->dda, data);
 		texture_to_buffer(engine->dda, data->img, pixel, data->texture);
 	}
-	minimap_main(data->map_info->calc, data);
+	if (data->show_map == true)
+		minimap_main(data->map_info->calc, data);
 	mlx_image_to_window(data->mlx, data->img->img, 0, 0);
 }
 

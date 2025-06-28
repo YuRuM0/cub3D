@@ -1,10 +1,10 @@
 NO textures/eagle.png
 SO textures/bluestone.png
 WE textures/redbrick.png
-EA .png
+EA textures/greystone.png
 
 F 153,204,102
-C 0,204,245
+C 150,200,200
 
 1111111111
 1100000001

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/26 19:06:19 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 17:52:21 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	struct_init(t_cub_data *data)
 	data->map_info->map_col = 0;
 	data->map_info->map_row = 0;
 	data->map_info->player_dir = '0';
+	data->show_map = false;
 	i = 0;
 	while (i < 4)
 	{
@@ -76,7 +77,7 @@ t_errno	validate_RGB_values(char **color)
 	return (SUCCESS);
 }
 
-void	get_biggest_col(t_map *map, char **wholeMap, int i)
+static void	get_biggest_col(t_map *map, char **wholeMap, int i)
 {
 	int j;
 	int	biggest;

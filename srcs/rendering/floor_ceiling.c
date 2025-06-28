@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 12:23:08 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/24 19:28:33 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 17:46:38 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,4 @@ void draw_floor_ceiling(t_image *image, t_colours *colours)
 		}
 		x++;
 	}
-	//mlx_put_pixel_on_img(image, player_x_loc / 2, player_y_loc / 2, player_colour);
-	//mlx_put_image_to_window(image.mlx, image.window, image.img, 0, 0);
-	//mlx_loop(image.mlx);
 }

@@ -6,7 +6,7 @@
 #    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/06/27 22:23:39 by yulpark          ###   ########.fr        #
+#    Updated: 2025/06/28 18:32:28 by yulpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ YELLOW  = \033[33m
 BLUE    = \033[34m
 
 CFLAGS = -Wall -Werror -Wextra -g
-CFLAGS += -fsanitize=address
+#CFLAGS += -fsanitize=address
 
 LIBFT_DIR = Libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -47,6 +47,7 @@ RAY_ENGINE_FILES = $(RAY_ENGINE_DIR)/DDA_utils.c \
 					$(RAY_ENGINE_DIR)/DDA.c \
 					$(RAY_ENGINE_DIR)/vetor.c \
 					$(RAY_ENGINE_DIR)/player_controls.c \
+					$(RAY_ENGINE_DIR)/player_control_utils.c \
 					$(RAY_ENGINE_DIR)/utils.c
 
 ERR_FREE_DIR = $(SRCS_DIR)/errors_n_free

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:30:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/27 20:50:56 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 17:54:18 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,16 @@ static t_errno	split_color_values(char *color, char ***_color)
 	*_color = ft_split(color_values[1], ',');
 	if (*_color == NULL)
 		return (ERR_MEM_ALLOC);
+	free_double(color_values);
 	i = 0;
 	while ((*_color)[i])
 		i++;
 	if (i != 3)
-		return (ERR_INVALID_COLORS);
+		return (free_double(*_color), ERR_INVALID_COLORS);
 	return (SUCCESS);
 }
 
-t_errno	convert_color_type(long *array, char ***color)
+static t_errno	convert_color_type(long *array, char ***color)
 {
 	int i;
 
@@ -82,7 +83,7 @@ t_errno	convert_color_type(long *array, char ***color)
 
 }
 
-t_errno get_RGB_values(t_cub_data *data)
+static t_errno get_RGB_values(t_cub_data *data)
 {
 	t_errno	status;
 	char	**floor_color;
