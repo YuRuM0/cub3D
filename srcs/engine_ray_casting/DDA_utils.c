@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:58 by flima             #+#    #+#             */
-/*   Updated: 2025/06/21 19:50:24 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/28 17:51:23 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	init_vetors(t_rayEngine *engine, t_map *map)
 	engine->posPlayer.y = map->player_row + 0.5;
 	engine->planeCamera.x = 0.66;
 	engine->planeCamera.y = 0;
-	engine->dir.x = 0;
-	engine->dir.y = -1;
+	engine->dir.x = 0.000000000003;
+	engine->dir.y = -1.000000000003;
 }
 
 void	init_dda_struct(t_ddaVars *dda)

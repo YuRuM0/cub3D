@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 13:27:31 by flima             #+#    #+#             */
-/*   Updated: 2025/06/27 20:41:59 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/28 17:58:58 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ bool	is_move_free(char **map, t_collision *collision, double x, double y)
 	int	map_x;
 	int	map_y;
 
-	map_x = (int)x;
-	map_y = (int)y;
+	map_x = (int)(x + 0.15);
+	map_y = (int)(y + 0.15);
 	if (map[map_y][map_x] == '1')
 		return (false);
 	collision->tileX = -1;
@@ -37,9 +37,9 @@ bool	is_move_free(char **map, t_collision *collision, double x, double y)
 			collision->newY = map_y + collision->tileY;
 			if (map[collision->newY][collision->newX] == '1')
 			{
-				collision->distVetor.x = fabs(x - (collision->newX + 0.5) + EPSILON);
-				collision->distVetor.y = fabs(y - (collision->newY + 0.5) + EPSILON);
-				if (magVetor(collision->distVetor.x, collision->distVetor.y) < HITBOX_RADIUS - EPSILON)
+				collision->distVetor.x = fabs(x - (collision->newX + 0.5));
+				collision->distVetor.y = fabs(y - (collision->newY + 0.5));
+				if (magVetor(collision->distVetor.x, collision->distVetor.y) < HITBOX_RADIUS)
 					return (false);
 			}
 			collision->tileY++;
@@ -56,6 +56,7 @@ void	move_forward(t_rayEngine *engine)
 
 	x = engine->posPlayer.x + engine->dir.x * MOVE_SPEED;
 	y = engine->posPlayer.y + engine->dir.y * MOVE_SPEED;
+	printf("x = %.10f, y = %.10f, dir = (%.10f, %.10f)\n", x, y, engine->dir.x, engine->dir.y);
 	if (is_move_free(engine->map->map_grid, &engine->collision, x, engine->posPlayer.y))
 		engine->posPlayer.x = x;
 	if (is_move_free(engine->map->map_grid, &engine->collision, engine->posPlayer.x, y))

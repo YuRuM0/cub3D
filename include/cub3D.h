@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/28 17:09:21 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/28 17:29:36 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define	ROTATION_SPEED 0.07
 #define		MOVE_SPEED 0.05
 #define 	HITBOX_RADIUS 0.5
-#define 	EPSILON 0.0001
+#define 	EPSILON 2
 
 /* Info variables DDA algorithm
 distToSideX - distance from player position to the nearest X side (ray)
