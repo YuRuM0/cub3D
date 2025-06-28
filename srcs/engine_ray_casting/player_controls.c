@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 13:27:31 by flima             #+#    #+#             */
-/*   Updated: 2025/06/28 21:36:07 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 21:36:44 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ bool	is_move_free(char **map, t_collision *collision, double x, double y)
 			collision->newy = map_y + collision->tiley;
 			if (map[collision->newy][collision->newx] == '1')
 			{
-				collision->distvetor.x = fabs(x - (collision->newx + 0.5) + EPSILON);
-				collision->distvetor.y = fabs(y - (collision->newy + 0.5) + EPSILON);
-				if (magVetor(collision->distvetor.x, collision->distvetor.y) < HITBOX_RADIUS - EPSILON)
+				collision->distvector.x = fabs(x - (collision->newx + 0.5) + EPSILON);
+				collision->distvector.y = fabs(y - (collision->newy + 0.5) + EPSILON);
+				if (magVetor(collision->distvector.x, collision->distvector.y) < HITBOX_RADIUS - EPSILON)
 					return (false);
 			}
 			collision->tiley++;

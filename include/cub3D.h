@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/28 21:35:14 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 21:36:38 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct s_collision
 	int			tiley;
 	int			newx;
 	int			newy;
-	t_vetor2D	distvetor;
+	t_vetor2D	distvector;
 }				t_collision;
 
 typedef struct s_rayEngine
