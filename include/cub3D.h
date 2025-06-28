@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/28 18:37:03 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/28 18:57:01 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@
 # define Height 1080
 # define ROTATION_SPEED 0.07
 # define MOVE_SPEED 0.05
-# define HITBOX_RADIUS 0.5
-#define 	EPSILON 0.0001
+# define HITBOX_RADIUS 0.55
 # define PLAYER_COLOUR 0x002776FF
 # define MINIMAP_HEIGHT (Height / 3)
 # define MINIMAP_WIDTH (Width / 3)
