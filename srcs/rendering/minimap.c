@@ -6,20 +6,11 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:55:52 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/26 19:07:42 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 17:22:15 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-# define player_colour 0xFFFF0000
-# define MINIMAP_HEIGHT (Height / 3) // little margin
-# define MINIMAP_WIDTH (Width / 3)
-# define X_OFFSET 10              // Start position X
-# define Y_OFFSET 20              // Start position Y  // should these be changed?
-# define BORDER_COLOUR 0x00808080
-# define WALL_COLOUR 0xFFFF0000
-# define FLOOR_COLOUR 0x80FF0000
 
 void minimap_struct_init(t_calc *value, t_cub_data *data)
 {
@@ -58,7 +49,9 @@ static void draw_map_loop(int *pixel_x_start_end, int *pixel_y_start_end, t_cub_
 			{
 				map_loc = data->map_info->map_grid[value->map_y][value->map_x];
 				if (map_loc == '1')
-					mlx_put_pixel(data->img->img, pixel_x, pixel_y, 0x604560AA);
+					mlx_put_pixel(data->img->img, pixel_x, pixel_y, WALL_COLOUR);
+				else
+					mlx_put_pixel(data->img->img, pixel_x, pixel_y, FLOOR_COLOUR);
 			}
 		}
 	}

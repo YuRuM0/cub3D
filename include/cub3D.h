@@ -6,25 +6,33 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/28 17:29:36 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/28 18:37:03 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "libft.h"
-#include <errno.h>
-#include <math.h>
-#include "MLX42/MLX42.h"
+# include "libft.h"
+# include <errno.h>
+# include <math.h>
+# include "MLX42/MLX42.h"
 
-# define	PI 3.1415926535
-# define	Width 1920
-# define	Height 1080
-# define	ROTATION_SPEED 0.07
-#define		MOVE_SPEED 0.05
-#define 	HITBOX_RADIUS 0.5
-#define 	EPSILON 2
+# define PI 3.1415926535
+# define Width 1920
+# define Height 1080
+# define ROTATION_SPEED 0.07
+# define MOVE_SPEED 0.05
+# define HITBOX_RADIUS 0.5
+#define 	EPSILON 0.0001
+# define PLAYER_COLOUR 0x002776FF
+# define MINIMAP_HEIGHT (Height / 3)
+# define MINIMAP_WIDTH (Width / 3)
+# define X_OFFSET 10
+# define Y_OFFSET 20
+# define BORDER_COLOUR 0x00808080
+# define WALL_COLOUR 0x009739FF
+# define FLOOR_COLOUR 0xFFCC00FF
 
 /* Info variables DDA algorithm
 distToSideX - distance from player position to the nearest X side (ray)
@@ -35,8 +43,8 @@ deltaDistY - constant? distance from one Y side to the next Y sidlxe (ray)
     * Special case: when the ray is vertical or horizontal — in these cases, one of the variables (...X or ...Y) is zero because the ray never crosses one of them.
 */
 
-typedef struct s_cub_data t_cub_data;
-typedef struct s_map t_map;
+typedef struct	s_cub_data t_cub_data;
+typedef struct	s_map t_map;
 
 typedef struct	s_vetor2D
 {
@@ -172,28 +180,41 @@ struct s_cub_data
 	t_map		*map_info;
 	t_rayEngine	*engine;
 	t_image		*img;
+	int			show_map;
 };
 
-
-//parsing
+////parsing/////////////////////////////////////////////////////////////
 //utils
-void 	free_double(char **s);
-void 	struct_alloc(t_cub_data *data);
-t_errno	validate_RGB_values(char **color);
-int		find_map_start(t_cub_data *data);
-void	game_settings(t_cub_data *data);
+void		struct_alloc(t_cub_data *data);
+t_errno		validate_RGB_values(char **color);
+int			find_map_start(t_cub_data *data);
 
 //parse
-t_errno	read_mapfile(char **argv, t_cub_data *data);
-void 	parse(char **argv, t_cub_data *data);
-t_errno get_colors(t_cub_data *data);
+t_errno		read_mapfile(char **argv, t_cub_data *data);
+void		parse(char **argv, t_cub_data *data);
 
-//free and error_handlers
-void	status_error_handler(t_cub_data *data, t_errno status);
-void	free_all_data(t_cub_data *data);
-void	clean_game_window(t_cub_data *data);
-t_errno grep_map(t_cub_data *data);
-t_errno grep_texture_all(t_cub_data *data);
+//get_from_map
+t_errno		get_colors(t_cub_data *data);
+t_errno		grep_map(t_cub_data *data);
+t_errno		grep_texture_all(t_cub_data *data);
+
+////erros_n_free/////////////////////////////////////////////////////////////
+//error_handler_msg
+void		status_error_handler(t_cub_data *data, t_errno status);
+
+//free_all_data
+void		free_double(char **s);
+void		free_all_data(t_cub_data *data);
+void		free_textures(t_cub_data *data);
+void		clean_game_window(t_cub_data *data);
+
+////engine_ray_casting////////////////////////////////////////////////////////////////
+//DDA_utils
+void		init_vetors(t_rayEngine *engine, t_map *map);
+void		init_dda_struct(t_ddaVars *dda);
+t_vetor2D	calc_cameraPixel(t_rayEngine *engine, unsigned int pixel);
+void		calc_distToSides(t_rayEngine *engine, t_vetor2D rayDir, t_ddaVars *dda);
+void		hitWallDir(t_ddaVars *dda, int	fromSide);
 
 //DDA
 t_vetor2D	multiVetor(t_vetor2D v1, t_vetor2D v2);
@@ -201,37 +222,50 @@ t_vetor2D	subVetor(t_vetor2D v1, t_vetor2D v2);
 t_vetor2D	sumVetor(t_vetor2D v1, t_vetor2D v2);
 double		magVetor(double x, double y);
 void		rotateVetor(t_vetor2D *vetor, double angle_rad);
-t_vetor2D	calc_cameraPixel(t_rayEngine *engine, unsigned int pixel);
-void		calc_distToSides(t_rayEngine *engine, t_vetor2D rayDir, t_ddaVars *dda);
-void		init_dda_struct(t_ddaVars *dda);
-void		hitWallDir(t_ddaVars *dda, int	fromSide);
-void		init_dda_struct(t_ddaVars *dda);
-void		init_vetors(t_rayEngine *engine, t_map *map);
-void			ray_loop(void *param);
-void	get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel);
 
-//player commands
+//player_control_utils
+void	rotate_player(t_rayEngine *engine, double rotation);
+void	move_forward(t_rayEngine *engine);
+void	move_backward(t_rayEngine *engine);
+void	move_left(t_rayEngine *engine);
+void	move_right(t_rayEngine *engine);
+
+//player_controls
+bool	is_move_free(char **map, t_collision *collision, double x, double y);
 void	key_hook(mlx_key_data_t keydata, void *param);
 
-// rendering
-// floor ceiling
-uint32_t rgb_to_binary(long *colours, uint8_t alpha);
-void draw_floor_ceiling(t_image *image, t_colours *colours);
+//utils
+void	game_settings(t_cub_data *data);
+
+//vector
+t_vetor2D	multiVetor(t_vetor2D v1, t_vetor2D v2);
+t_vetor2D	subVetor(t_vetor2D v1, t_vetor2D v2);
+t_vetor2D	sumVetor(t_vetor2D v1, t_vetor2D v2);
+double		magVetor(double x, double y);
+void		rotateVetor(t_vetor2D *vetor, double angle_rad);
+
+//DDA
+void		ray_loop(void *param);
+void		get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel);
+
+// rendering///////////////////////////////////////////////////////
+//// floor ceiling
+uint32_t	rgb_to_binary(long *colours, uint8_t alpha);
+void		draw_floor_ceiling(t_image *image, t_colours *colours);
 
 //minimap
-void minimap_struct_init(t_calc *value, t_cub_data *data);
-void draw_map_border(t_cub_data *data);
-void draw_map(t_cub_data *data, t_calc *value);
-void drawPlayer(t_cub_data *data, t_calc *value);
+void		minimap_struct_init(t_calc *value, t_cub_data *data);
+void		draw_map(t_cub_data *data, t_calc *value);
+void		drawPlayer(t_cub_data *data, t_calc *value);
 
 //window
-t_errno start_window(t_cub_data *data);
-void	casting_rays(t_cub_data *data, t_rayEngine *engine);
+t_errno		start_window(t_cub_data *data);
+void		casting_rays(t_cub_data *data, t_rayEngine *engine);
 
 // utils
-void find_colour(t_ddaVars *dda, t_texture *tex, int dir, long *colour);
-t_errno load_texture(t_cub_data *data);
+void		find_colour(t_ddaVars *dda, t_texture *tex, int dir, long *colour);
+t_errno		load_texture(t_cub_data *data);
 
 //main
-int main(int argc, char **argv);
+int			main(int argc, char **argv);
 #endif

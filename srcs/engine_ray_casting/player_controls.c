@@ -6,17 +6,11 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 13:27:31 by flima             #+#    #+#             */
-/*   Updated: 2025/06/28 17:58:58 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/28 18:38:02 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void	rotate_player(t_rayEngine *engine, double rotation)
-{
-	rotateVetor(&engine->dir, rotation);
-	rotateVetor(&engine->planeCamera, rotation);
-}
 
 bool	is_move_free(char **map, t_collision *collision, double x, double y)
 {
@@ -49,59 +43,6 @@ bool	is_move_free(char **map, t_collision *collision, double x, double y)
 	return (true);
 }
 
-void	move_forward(t_rayEngine *engine)
-{
-	double	x;
-	double	y;
-
-	x = engine->posPlayer.x + engine->dir.x * MOVE_SPEED;
-	y = engine->posPlayer.y + engine->dir.y * MOVE_SPEED;
-	printf("x = %.10f, y = %.10f, dir = (%.10f, %.10f)\n", x, y, engine->dir.x, engine->dir.y);
-	if (is_move_free(engine->map->map_grid, &engine->collision, x, engine->posPlayer.y))
-		engine->posPlayer.x = x;
-	if (is_move_free(engine->map->map_grid, &engine->collision, engine->posPlayer.x, y))
-		engine->posPlayer.y = y;
-}
-
-void	move_backward(t_rayEngine *engine)
-{
-	double	x;
-	double	y;
-
-	x = engine->posPlayer.x - engine->dir.x * MOVE_SPEED;
-	y = engine->posPlayer.y - engine->dir.y * MOVE_SPEED;
-	if (is_move_free(engine->map->map_grid, &engine->collision, x, engine->posPlayer.y))
-		engine->posPlayer.x = x;
-	if (is_move_free(engine->map->map_grid, &engine->collision, engine->posPlayer.x, y))
-		engine->posPlayer.y = y;
-}
-
-void	move_left(t_rayEngine *engine)
-{
-	double	x;
-	double	y;
-
-	x = engine->posPlayer.x - engine->planeCamera.x * MOVE_SPEED;
-	y = engine->posPlayer.y - engine->planeCamera.y * MOVE_SPEED;
-	if (is_move_free(engine->map->map_grid, &engine->collision, x, engine->posPlayer.y))
-		engine->posPlayer.x = x;
-	if (is_move_free(engine->map->map_grid, &engine->collision, engine->posPlayer.x, y))
-		engine->posPlayer.y = y;
-}
-
-void	move_right(t_rayEngine *engine)
-{
-	double	x;
-	double	y;
-
-	x = engine->posPlayer.x + engine->planeCamera.x * MOVE_SPEED;
-	y = engine->posPlayer.y + engine->planeCamera.y * MOVE_SPEED;
-	if (is_move_free(engine->map->map_grid, &engine->collision, x, engine->posPlayer.y))
-		engine->posPlayer.x = x;
-	if (is_move_free(engine->map->map_grid, &engine->collision, engine->posPlayer.x, y))
-		engine->posPlayer.y = y;
-}
-
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_cub_data *data;
@@ -121,4 +62,11 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		move_left(data->engine);
 	else if (keydata.key == MLX_KEY_D && (keydata.action = MLX_PRESS || keydata.action == MLX_REPEAT))
 		move_right(data->engine);
+	else if (keydata.key == MLX_KEY_M && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+	{
+		if (data->show_map == true)
+			data->show_map = false;
+		else
+			data->show_map = true;
+	}
 }
