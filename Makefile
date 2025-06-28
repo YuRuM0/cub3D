@@ -6,7 +6,7 @@
 #    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/06/28 18:32:28 by yulpark          ###   ########.fr        #
+#    Updated: 2025/06/28 18:34:39 by yulpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,11 @@ $(MLX42_LIB):
 $(NAME): $(LIBFT) $(OBJS) Makefile $(MLX42_LIB)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX42_LIB) $(MLX_FLAGS) -o $(NAME)
 	@echo "\n$(GREEN)cub3D  ✅$(RESET)\n"
+
+delete_MLX:
+	@if [ -d $(MLX42_DIR) ]; then \
+		rm -rf $(MLX42_DIR); \
+	fi
 
 clean:
 	@$(MAKE) --no-print-directory clean -C $(LIBFT_DIR)
