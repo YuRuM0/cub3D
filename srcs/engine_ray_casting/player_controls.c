@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 13:27:31 by flima             #+#    #+#             */
-/*   Updated: 2025/06/28 19:01:11 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 21:36:07 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ bool	is_move_free(char **map, t_collision *collision, double x, double y)
 	int	map_x;
 	int	map_y;
 
-	map_x = (int)x;
-	map_y = (int)y;
+	map_x = (int)(x + 0.15);
+	map_y = (int)(y + 0.15);
 	if (map[map_y][map_x] == '1')
 		return (false);
 	collision->tilex = -1;
@@ -69,4 +69,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		else
 			data->show_map = true;
 	}
+	//add the cross handler
+
 }

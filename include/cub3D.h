@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/28 19:25:47 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 21:35:14 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define HEIGHT 1080
 # define ROTATION_SPEED 0.07
 # define MOVE_SPEED 0.05
-# define HITBOX_RADIUS 0.5
+# define HITBOX_RADIUS 0.55
 # define EPSILON 0.0001
 # define PLAYER_COLOUR 0x002776FF
 # define MINIMAP_HEIGHT 360
