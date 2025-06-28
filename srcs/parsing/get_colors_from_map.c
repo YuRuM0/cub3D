@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:30:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/28 17:54:18 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 19:21:54 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static t_errno	split_color_values(char *color, char ***_color)
 
 static t_errno	convert_color_type(long *array, char ***color)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (validate_RGB_values(*color) != SUCCESS)
@@ -80,10 +80,9 @@ static t_errno	convert_color_type(long *array, char ***color)
 			return (free_double(*color), ERR_INVALID_RBG_VALUES);
 	}
 	return (free_double(*color), SUCCESS);
-
 }
 
-static t_errno get_RGB_values(t_cub_data *data)
+static t_errno	get_rgb_values(t_cub_data *data)
 {
 	t_errno	status;
 	char	**floor_color;
@@ -106,16 +105,15 @@ static t_errno get_RGB_values(t_cub_data *data)
 	return (SUCCESS);
 }
 
-t_errno get_colors(t_cub_data *data)
+t_errno	get_colors(t_cub_data *data)
 {
 	t_errno	status;
 
 	status = grep_colors(data);
 	if (status != SUCCESS)
 		return (status);
-	status = get_RGB_values(data);
+	status = get_rgb_values(data);
 	if (status != SUCCESS)
 		return (status);
 	return (SUCCESS);
 }
-

@@ -6,15 +6,15 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:00:28 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/27 22:14:52 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 18:39:43 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static t_errno input_checker(int argc, char **argv)
+static t_errno	input_checker(int argc, char **argv)
 {
-	char *end;
+	char	*end;
 
 	if (argc != 2)
 		return (ERR_INVALID_INPUT);
@@ -27,9 +27,9 @@ static t_errno input_checker(int argc, char **argv)
 	return (ERR_INVALID_INPUT);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_cub_data data;
+	t_cub_data	data;
 
 	if (input_checker(argc, argv) != SUCCESS)
 		return (write(1, "Invalid input\n", 15), 1);

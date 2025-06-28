@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:55:52 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/28 17:22:15 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 18:37:15 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,6 @@ void minimap_struct_init(t_calc *value, t_cub_data *data)
 	value->map_x = -1;
 	value->map_y = -1;
 }
-
-//static uint32_t colour_pixels(t_cub_data *data, t_calc *value)
-//{
-//	char map_loc;
-
-//	//printf("%s\n",data->map_info->map_grid[value->map_y]);
-//	map_loc = data->map_info->map_grid[value->map_y][value->map_x];
-//	if (map_loc == '1')
-//		return (0xAA604560);
-//	else
-//		return FLOOR_COLOUR;
-//}
 
 static void draw_map_loop(int *pixel_x_start_end, int *pixel_y_start_end, t_cub_data *data, t_calc *value)
 {

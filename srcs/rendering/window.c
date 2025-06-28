@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/28 17:32:30 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 19:24:10 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,30 @@ mlx_delete_texture(texture);
 so you convert to image -> display the image
 */
 
-
 static void map_buffer(t_ddaVars *dda, t_cub_data *data)
 {
 	double wall;
 	int side;
 	int line_len;
 
-	wall = dda->wall_hitX;
+	wall = dda->wall_hitx;
 	side = dda->hitside;
-	dda->tex_x = (int)(wall * data->texture[side].texture->width); // how much to sample from the texture
+	dda->tex_x = (int)(wall * data->texture[side].texture->width);
 	if (side == NO || side == WE)
-		dda->tex_x = data->texture[side].texture->width - dda->tex_x - 1; //for flipping
-	line_len = (dda->drawEnd - dda->drawStart);
+		dda->tex_x = data->texture[side].texture->width - dda->tex_x - 1;
+	line_len = (dda->drawend - dda->drawstart);
 	dda->increment = (float)data->texture[side].texture->height / line_len;
 	dda->texture_position = 0.0;
-	//printf("wall_hitX = %d, tex_x = %d\n", dda->wall_hitX, dda->tex_x);
 }
 
-static void texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture *tex)
+static void	texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture *tex)
 {
-	uint32_t colour_converted;
-	int y;
-	long colour[4];
+	uint32_t	colour_converted;
+	int			y;
+	long		colour[4];
 
-	y = dda->drawStart;
-	while (y < dda->drawEnd)
+	y = dda->drawstart;
+	while (y < dda->drawend)
 	{
 		if (dda->texture_position < 0)
 			dda->texture_position = 0;
@@ -53,34 +51,33 @@ static void texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture
 			dda->texture_position = tex[dda->hitside].texture->height - 1;
 		find_colour(dda, tex, dda->hitside, colour);
 		colour_converted = rgb_to_binary(colour, 255);
-		if (y >= 0 && y < Height)
+		if (y >= 0 && y < HEIGHT)
 			mlx_put_pixel(img->img, pixel, y, colour_converted);
 		dda->texture_position += dda->increment;
 		y++;
 	}
 }
 
- static void minimap_main(t_calc *value, t_cub_data *data)
+ static void	minimap_main(t_calc *value, t_cub_data *data)
  {
 	minimap_struct_init(value, data);
  	draw_map(data, value);
 	data->map_info->player_info->player_dx = data->engine->dir.x;
 	data->map_info->player_info->player_dy = data->engine->dir.y;
- 	drawPlayer(data, value);
+ 	drawplayer(data, value);
  }
 
 void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 {
 	int	pixel;
-	int errnum;
+	int	errnum;
 
 	pixel = -1;
 	draw_floor_ceiling(data->img, data->colours);
 	errnum = load_texture(data);
 	if (errnum != SUCCESS)
 		status_error_handler(data, errnum);
-	//load_texture(data);
-	while (++pixel < Width)
+	while (++pixel < WIDTH)
 	{
 		init_dda_struct(engine->dda);
 		get_distance(engine->dda, engine, pixel);
@@ -92,12 +89,12 @@ void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 	mlx_image_to_window(data->mlx, data->img->img, 0, 0);
 }
 
-t_errno start_window(t_cub_data *data)
+t_errno	start_window(t_cub_data *data)
 {
-	data->mlx = mlx_init(Width, Height, "cub3D", false);
+	data->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (!data->mlx)
 		return (ERR_MLX_FAIL);
-	data->img->img = mlx_new_image(data->mlx, Width, Height);
+	data->img->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->img->img)
 		return (ERR_MLX_FAIL);
 	return (SUCCESS);

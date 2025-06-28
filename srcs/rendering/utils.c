@@ -6,15 +6,14 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:46:17 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/28 15:15:30 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 19:26:33 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3D.h"
+#include "cub3D.h"
+#define PNG 1
 
-# define PNG 1
-
-static int check_texture_file_type(char *path)
+static int	check_texture_file_type(char *path)
 {
 	int	len;
 
@@ -25,10 +24,10 @@ static int check_texture_file_type(char *path)
 		return (0);
 }
 
-t_errno load_texture(t_cub_data *data)
+t_errno	load_texture(t_cub_data *data)
 {
-	int i;
-	int file_type;
+	int	i;
+	int	file_type;
 
 	i = NO;
 	while (i < 4)
@@ -40,7 +39,8 @@ t_errno load_texture(t_cub_data *data)
 			data->texture[i].texture = mlx_load_png(data->texture[i].path);
 		if (!data->texture[i].texture)
 			return (ERR_MLX_FAIL);
-		data->texture[i].image = mlx_texture_to_image(data->mlx, data->texture[i].texture);
+		data->texture[i].image = mlx_texture_to_image(data->mlx, \
+			data->texture[i].texture);
 		if (!data->texture[i].image)
 			return (ERR_MLX_FAIL);
 		i++;
@@ -48,12 +48,12 @@ t_errno load_texture(t_cub_data *data)
 	return (SUCCESS);
 }
 
-void find_colour(t_ddaVars *dda, t_texture *tex, int dir, long *colour)
+void	find_colour(t_ddaVars *dda, t_texture *tex, int dir, long *colour)
 {
-	int tex_y;
-	uint8_t *pixels;
-	int width;
-	int index;
+	int		tex_y;
+	uint8_t	*pixels;
+	int		width;
+	int		index;
 
 	tex_y = (int)dda->texture_position;
 	width = tex[dir].texture->width;

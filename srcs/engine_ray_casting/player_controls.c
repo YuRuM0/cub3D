@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 13:27:31 by flima             #+#    #+#             */
-/*   Updated: 2025/06/28 18:35:12 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 19:01:11 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,24 @@ bool	is_move_free(char **map, t_collision *collision, double x, double y)
 	map_y = (int)y;
 	if (map[map_y][map_x] == '1')
 		return (false);
-	collision->tileX = -1;
-	while (collision->tileX <= 1)
+	collision->tilex = -1;
+	while (collision->tilex <= 1)
 	{
-		collision->tileY = -1;
-		while (collision->tileY <= 1)
+		collision->tiley = -1;
+		while (collision->tiley <= 1)
 		{
-			collision->newX = map_x + collision->tileX;
-			collision->newY = map_y + collision->tileY;
-			if (map[collision->newY][collision->newX] == '1')
+			collision->newx = map_x + collision->tilex;
+			collision->newy = map_y + collision->tiley;
+			if (map[collision->newy][collision->newx] == '1')
 			{
-				collision->distVetor.x = fabs(x - (collision->newX + 0.5) + EPSILON);
-				collision->distVetor.y = fabs(y - (collision->newY + 0.5) + EPSILON);
-				if (magVetor(collision->distVetor.x, collision->distVetor.y) < HITBOX_RADIUS - EPSILON)
+				collision->distvetor.x = fabs(x - (collision->newx + 0.5) + EPSILON);
+				collision->distvetor.y = fabs(y - (collision->newy + 0.5) + EPSILON);
+				if (magVetor(collision->distvetor.x, collision->distvetor.y) < HITBOX_RADIUS - EPSILON)
 					return (false);
 			}
-			collision->tileY++;
+			collision->tiley++;
 		}
-		collision->tileX++;
+		collision->tilex++;
 	}
 	return (true);
 }

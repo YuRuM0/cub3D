@@ -6,13 +6,13 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 19:49:58 by flima             #+#    #+#             */
-/*   Updated: 2025/06/28 17:55:59 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 19:19:19 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void free_double(char **s)
+void	free_double(char **s)
 {
 	int	i;
 

@@ -6,21 +6,22 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:20:09 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/28 17:46:33 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/28 19:23:52 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cub3D.h"
 
-static void drawLine(t_cub_data *data, float x, float y, t_vetor2D arrow, t_image *img)
+static void	drawline(t_cub_data *data, float x, float y, t_vetor2D arrow, t_image *img)
 {
-	float xinc;
-	float yinc;
-	int	i;
+	float	xinc;
+	float	yinc;
+	int		i;
 
 	data->map_info->player_info->dx = arrow.x - x;
 	data->map_info->player_info->dy = arrow.y - y;
-	data->map_info->player_info->steps = fmax(fabsf(data->map_info->player_info->dx), fabsf(data->map_info->player_info->dy));
+	data->map_info->player_info->steps = fmax(fabsf(data->map_info->player_info->dx)\
+	, fabsf(data->map_info->player_info->dy));
 	xinc = data->map_info->player_info->dx / (float)data->map_info->player_info->steps;
 	yinc = data->map_info->player_info->dy / (float)data->map_info->player_info->steps;
 	i = 0;
@@ -35,8 +36,8 @@ static void drawLine(t_cub_data *data, float x, float y, t_vetor2D arrow, t_imag
 
 static void player_square(t_image *img, float x, float y, long colour)
 {
-	float a;
-	float b;
+	float	a;
+	float	b;
 
 	a = x - 5;
 	b = y - 5;
@@ -48,24 +49,20 @@ static void player_square(t_image *img, float x, float y, long colour)
 	}
 }
 
-void drawPlayer(t_cub_data *data, t_calc *value)
+void drawplayer(t_cub_data *data, t_calc *value)
 {
-	//(void)data;
-	//float pa;
-	double pdx;
-	double pdy;
-	t_vetor2D arrow;
-	float x;
-	float y;
+	double		pdx;
+	double		pdy;
+	t_vetor2D	arrow;
+	float		x;
+	float		y;
 
-	x = (data->engine->posPlayer.x * value->scale_x);
-	y = (data->engine->posPlayer.y * value->scale_y);
-	//printf("%f\n", data->engine->posPlayer.x);
-	//pa = data->map_info->player_info->player_angle;
+	x = (data->engine->posplayer.x * value->scale_x);
+	y = (data->engine->posplayer.y * value->scale_y);
 	pdx = data->map_info->player_info->player_dx;
 	pdy = data->map_info->player_info->player_dy;
 	arrow.x = x + (pdx * 20);
 	arrow.y = y + (pdy * 20);
 	player_square(data->img, x, y, PLAYER_COLOUR);
-	drawLine(data, x, y, arrow, data->img);
+	drawline(data, x, y, arrow, data->img);
 }
