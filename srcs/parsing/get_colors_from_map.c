@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_colors_from_map.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:30:45 by flima             #+#    #+#             */
-/*   Updated: 2025/05/25 20:08:02 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/27 20:50:56 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static t_errno	split_color_values(char *color, char ***_color)
 	if (i != 2)
 		return (free_double(color_values), ERR_INVALID_COLORS);
 	*_color = ft_split(color_values[1], ',');
-	free_double(color_values);
 	if (*_color == NULL)
 		return (ERR_MEM_ALLOC);
 	i = 0;
@@ -80,7 +79,7 @@ t_errno	convert_color_type(long *array, char ***color)
 			return (free_double(*color), ERR_INVALID_RBG_VALUES);
 	}
 	return (free_double(*color), SUCCESS);
-	
+
 }
 
 t_errno get_RGB_values(t_cub_data *data)
@@ -88,7 +87,7 @@ t_errno get_RGB_values(t_cub_data *data)
 	t_errno	status;
 	char	**floor_color;
 	char	**celling_color;
-	
+
 	floor_color = NULL;
 	celling_color = NULL;
 	status = split_color_values(data->colours->f_colour_str, &floor_color);

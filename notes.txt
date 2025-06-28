@@ -2,4 +2,49 @@
 * modify Makefile to clean libft and mlx .o and .a
 still gets stuck when the player gets too close to the wall
 
-fix collision system - if go straight to a wall it gets stuck 
+
+NO textures/eagle.png
+SO textures/bluestone.png
+WE textures/redbrick.png
+EA .png
+
+F 153,204,102
+C 0,204,245
+
+1111111111
+1100000001
+111111011
+1000010001
+1000000101
+1000000001
+1010000011111111
+1000000N0000001
+1100000011111111
+1000000001
+100000001
+1100101001
+11111111111
+
+
+This input gives a few leaks - from ft_split from split color values
+
+
+Direct leak of 143064 byte(s) in 5961 object(s) allocated from:
+    #0 0x49a3ad in malloc (/home/yulpark/Desktop/cub3D/cub3D+0x49a3ad)
+    #1 0x4d2f80 in mlx_load_png (/home/yulpark/Desktop/cub3D/cub3D+0x4d2f80)
+    #2 0x4cda44 in casting_rays /home/yulpark/Desktop/cub3D/srcs/rendering/window.c:79:10
+    #3 0x4cede4 in ray_loop /home/yulpark/Desktop/cub3D/srcs/engine_ray_casting/DDA.c:141:2
+    #4 0x4d2665 in mlx_loop (/home/yulpark/Desktop/cub3D/cub3D+0x4d2665)
+
+Direct leak of 176 byte(s) in 1 object(s) allocated from:
+    #0 0x49a3ad in malloc (/home/yulpark/Desktop/cub3D/cub3D+0x49a3ad)
+    #1 0x4cc781 in read_mapfile /home/yulpark/Desktop/cub3D/srcs/parsing/parse.c:43:13
+    #2 0x4cc8dc in parse /home/yulpark/Desktop/cub3D/srcs/parsing/parse.c:80:11
+    #3 0x4cfb45 in main /home/yulpark/Desktop/cub3D/srcs/main.c:37:2
+    #4 0x7f9e5d92cd8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+Direct leak of 120 byte(s) in 1 object(s) allocated from:
+    #0 0x49a3ad in malloc (/home/yulpark/Desktop/cub3D/cub3D+0x49a3ad)
+    #1 0x4cc154 in struct_alloc /home/yulpark/Desktop/cub3D/srcs/parsing/utils.c:45:17
+    #2 0x4cfb38 in main /home/yulpark/Desktop/cub3D/srcs/main.c:36:2
+    #3 0x7f9e5d92cd8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
