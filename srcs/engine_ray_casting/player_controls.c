@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_controls.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 13:27:31 by flima             #+#    #+#             */
-/*   Updated: 2025/06/26 16:28:40 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/27 20:41:59 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ bool	is_move_free(char **map, t_collision *collision, double x, double y)
 			collision->newY = map_y + collision->tileY;
 			if (map[collision->newY][collision->newX] == '1')
 			{
-				collision->distVetor.x = fabs(x - (collision->newX + 0.5));
-				collision->distVetor.y = fabs(y - (collision->newY + 0.5));
-				if (magVetor(collision->distVetor.x, collision->distVetor.y) < HITBOX_RADIUS)
+				collision->distVetor.x = fabs(x - (collision->newX + 0.5) + EPSILON);
+				collision->distVetor.y = fabs(y - (collision->newY + 0.5) + EPSILON);
+				if (magVetor(collision->distVetor.x, collision->distVetor.y) < HITBOX_RADIUS - EPSILON)
 					return (false);
 			}
 			collision->tileY++;
