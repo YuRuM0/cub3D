@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 13:27:31 by flima             #+#    #+#             */
-/*   Updated: 2025/06/29 15:08:12 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 15:22:28 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	is_move_free(char **map, t_collision *collision, double x, double y)
 				collision->max_y = collision->newy + 1 + HITBOX_RADIUS;
 				if (x >= collision->min_x && x <= collision->max_x && \
 					y >= collision->min_y && y <= collision->max_y)
-					return false;
+					return (false);
 			}
 			collision->offset_x++;
 		}
@@ -46,17 +46,17 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	data = (t_cub_data *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		status_error_handler(data, SUCCESS);
-	if (keydata.key == MLX_KEY_LEFT && (keydata.action = MLX_PRESS || keydata.action == MLX_REPEAT))
+	if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		rotate_player(data->engine, -ROTATION_SPEED);
-	else if (keydata.key == MLX_KEY_RIGHT && (keydata.action = MLX_PRESS || keydata.action == MLX_REPEAT))
+	else if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		rotate_player(data->engine, ROTATION_SPEED);
-	else if (keydata.key == MLX_KEY_W && (keydata.action = MLX_PRESS || keydata.action == MLX_REPEAT))
+	else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		move_forward(data->engine);
-	else if (keydata.key == MLX_KEY_S && (keydata.action = MLX_PRESS || keydata.action == MLX_REPEAT))
+	else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		move_backward(data->engine);
-	else if (keydata.key == MLX_KEY_A && (keydata.action = MLX_PRESS || keydata.action == MLX_REPEAT))
+	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		move_left(data->engine);
-	else if (keydata.key == MLX_KEY_D && (keydata.action = MLX_PRESS || keydata.action == MLX_REPEAT))
+	else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		move_right(data->engine);
 	else if (keydata.key == MLX_KEY_M && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 	{
@@ -65,5 +65,4 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		else
 			data->show_map = true;
 	}
-	//add the cross handler
 }

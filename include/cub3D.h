@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/29 15:07:44 by yulpark          ###   ########.fr       */
+/*   Created: 2025/06/29 15:24:49 by                   #+#    #+#             */
+/*   Updated: 2025/06/29 15:24:57 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -24,7 +23,7 @@
 # define HEIGHT 1080
 # define ROTATION_SPEED 0.07
 # define MOVE_SPEED 0.05
-# define HITBOX_RADIUS 0.1
+# define HITBOX_RADIUS 0.2
 # define PLAYER_COLOUR 0x002776FF
 # define MINIMAP_HEIGHT 360
 # define MINIMAP_WIDTH 640
@@ -91,9 +90,9 @@ typedef struct s_collision
 	int			newx;
 	int			newy;
 	double		min_x;
-	double 		max_x;
-	double 		min_y;
-	double 		max_y;
+	double		max_x;
+	double		min_y;
+	double		max_y;
 }				t_collision;
 
 typedef struct s_rayEngine

@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/29 14:49:57 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 15:20:47 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 
 t_errno	start_window(t_cub_data *data)
 {
-	int errnum;
-	
+	int	errnum;
+
 	data->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (!data->mlx)
 		return (ERR_MLX_FAIL);
