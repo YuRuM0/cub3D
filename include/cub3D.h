@@ -6,7 +6,7 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/29 14:36:25 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/29 14:54:18 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define HEIGHT 1080
 # define ROTATION_SPEED 0.07
 # define MOVE_SPEED 0.05
-# define HITBOX_RADIUS 0.2
+# define HITBOX_RADIUS 0.1
 # define PLAYER_COLOUR 0x002776FF
 # define MINIMAP_HEIGHT 360
 # define MINIMAP_WIDTH 640
@@ -85,11 +85,14 @@ typedef struct s_ddaVars
 
 typedef struct s_collision
 {
-	int			tilex;
-	int			tiley;
+	int			offset_y;
+	int			offset_x;
 	int			newx;
 	int			newy;
-	t_vetor2D	distvector;
+	double		min_x;
+	double 		max_x;
+	double 		min_y;
+	double 		max_y;
 }				t_collision;
 
 typedef struct s_rayEngine
