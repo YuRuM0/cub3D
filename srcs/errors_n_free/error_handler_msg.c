@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 19:00:20 by flima             #+#    #+#             */
-/*   Updated: 2025/06/28 19:20:25 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 14:45:42 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,15 @@ void	free_textures(t_cub_data *data)
 	while (i < 4)
 	{
 		if (data->texture[i].image)
+		{
 			mlx_delete_image(data->mlx, data->texture[i].image);
+			data->texture[i].image = NULL;
+		}
 		if (data->texture[i].texture)
+		{
 			mlx_delete_texture(data->texture[i].texture);
+			data->texture[i].texture = NULL;
+		}
 		if (data->texture[i].path)
 			free(data->texture[i].path);
 		i++;

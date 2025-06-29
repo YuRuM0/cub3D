@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/29 03:11:15 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 14:49:57 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,9 @@ static void	minimap_main(t_calc *value, t_cub_data *data)
 void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 {
 	int	pixel;
-	int	errnum;
 
 	pixel = -1;
 	draw_floor_ceiling(data->img, data->colours);
-	errnum = load_texture(data);
-	if (errnum != SUCCESS)
-		status_error_handler(data, errnum);
 	while (++pixel < WIDTH)
 	{
 		init_dda_struct(engine->dda);
@@ -92,11 +88,16 @@ void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 
 t_errno	start_window(t_cub_data *data)
 {
+	int errnum;
+	
 	data->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (!data->mlx)
 		return (ERR_MLX_FAIL);
 	data->img->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->img->img)
 		return (ERR_MLX_FAIL);
+	errnum = load_texture(data);
+	if (errnum != SUCCESS)
+		status_error_handler(data, errnum);
 	return (SUCCESS);
 }
