@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 13:27:31 by flima             #+#    #+#             */
-/*   Updated: 2025/06/29 15:04:53 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 15:08:12 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,27 @@
 
 bool	is_move_free(char **map, t_collision *collision, double x, double y)
 {
-	int	map_x;
-	int	map_y;
-
-	map_x = (int)(x + 0.15);
-	map_y = (int)(y + 0.15);
-	if (map[map_y][map_x] == '1')
-		return (false);
-	collision->tilex = -1;
-	while (collision->tilex <= 1)
+	collision->offset_y = -1;
+	while (collision->offset_y <= 1)
 	{
-		collision->tiley = -1;
-		while (collision->tiley <= 1)
+		collision->offset_x = -1;
+		while (collision->offset_x <= 1)
 		{
-			collision->newx = map_x + collision->tilex;
-			collision->newy = map_y + collision->tiley;
+			collision->newx = (int)x + collision->offset_x;
+			collision->newy = (int)y + collision->offset_y;
 			if (map[collision->newy][collision->newx] == '1')
 			{
-				collision->distvector.x = fabs(x - (collision->newx + 0.5) + EPSILON);
-				collision->distvector.y = fabs(y - (collision->newy + 0.5) + EPSILON);
-				if (magvetor(collision->distvector.x, collision->distvector.y) < HITBOX_RADIUS - EPSILON)
-					return (false);
+				collision->min_x = collision->newx - HITBOX_RADIUS;
+				collision->max_x = collision->newx + 1 + HITBOX_RADIUS;
+				collision->min_y = collision->newy - HITBOX_RADIUS;
+				collision->max_y = collision->newy + 1 + HITBOX_RADIUS;
+				if (x >= collision->min_x && x <= collision->max_x && \
+					y >= collision->min_y && y <= collision->max_y)
+					return false;
 			}
-			collision->tiley++;
+			collision->offset_x++;
 		}
-		collision->tilex++;
+		collision->offset_y++;
 	}
 	return (true);
 }
