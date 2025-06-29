@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/29 14:37:06 by yulpark          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/06/29 14:37:37 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -23,8 +24,7 @@
 # define HEIGHT 1080
 # define ROTATION_SPEED 0.07
 # define MOVE_SPEED 0.05
-# define HITBOX_RADIUS 0.55
-# define EPSILON 0.0001
+# define HITBOX_RADIUS 0.2
 # define PLAYER_COLOUR 0x002776FF
 # define MINIMAP_HEIGHT 360
 # define MINIMAP_WIDTH 640
@@ -226,6 +226,7 @@ t_vetor2D	calc_camerapixel(t_rayEngine *engine, unsigned int pixel);
 void		calc_disttosides(t_rayEngine *engine, t_vetor2D rayDir, \
 	t_ddaVars *dda);
 void		hitwalldir(t_ddaVars *dda, int fromSide);
+double		dda_algorithm(t_rayEngine *engine, t_ddaVars *dda);
 
 //DDA_dis_utils
 void		calc_deltadist(t_ddaVars *dda, t_vetor2D rayDir);
