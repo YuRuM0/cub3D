@@ -6,9 +6,10 @@
 /*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/29 14:54:18 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/29 15:07:06 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -259,6 +260,7 @@ void		rotatevetor(t_vetor2D *vetor, double angle_rad);
 
 //DDA
 void		ray_loop(void *param);
+double		dda_algorithm(t_rayEngine *engine, t_ddaVars *dda);
 
 // rendering//////////////////////////////////////////////
 //// floor ceiling
