@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/29 03:12:59 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 14:37:06 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,7 @@ void		rotatevetor(t_vetor2D *vetor, double angle_rad);
 
 //DDA
 void		ray_loop(void *param);
+double		dda_algorithm(t_rayEngine *engine, t_ddaVars *dda);
 
 // rendering//////////////////////////////////////////////
 //// floor ceiling
