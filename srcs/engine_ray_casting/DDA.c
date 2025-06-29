@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DDA.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/28 21:35:34 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 13:16:11 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static double	get_disttowall(t_ddaVars *dda, t_rayEngine *engine)
 	return (euclideandist);
 }
 
-static double	dda_algorithm(t_rayEngine *engine, t_ddaVars *dda)
+double	dda_algorithm(t_rayEngine *engine, t_ddaVars *dda)
 {
 	double	perpendiculardist;
 

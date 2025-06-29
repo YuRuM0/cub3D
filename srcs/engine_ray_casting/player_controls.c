@@ -3,45 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   player_controls.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 13:27:31 by flima             #+#    #+#             */
-/*   Updated: 2025/06/29 03:11:48 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 14:20:57 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-bool	is_move_free(char **map, t_collision *collision, double x, double y)
+bool is_move_free(char **map, t_collision *collision, double x, double y)
 {
-	int	map_x;
-	int	map_y;
+	int map_x = (int)x;
+	int map_y = (int)y;
 
-	map_x = (int)(x + 0.15);
-	map_y = (int)(y + 0.15);
-	if (map[map_y][map_x] == '1')
-		return (false);
-	collision->tilex = -1;
-	while (collision->tilex <= 1)
+	(void)collision;
+	for (int offset_y = -1; offset_y <= 1; offset_y++)
 	{
-		collision->tiley = -1;
-		while (collision->tiley <= 1)
+		for (int offset_x = -1; offset_x <= 1; offset_x++)
 		{
-			collision->newx = map_x + collision->tilex;
-			collision->newy = map_y + collision->tiley;
-			if (map[collision->newy][collision->newx] == '1')
+			int neighbor_x = map_x + offset_x;
+			int neighbor_y = map_y + offset_y;
+
+			// Segurança de acesso ao mapa
+			if (neighbor_y < 0 || neighbor_x < 0 || !map[neighbor_y] || !map[neighbor_y][neighbor_x])
+				continue;
+
+			if (map[neighbor_y][neighbor_x] == '1')
 			{
-				collision->distvector.x = fabs(x - (collision->newx + 0.5) + EPSILON);
-				collision->distvector.y = fabs(y - (collision->newy + 0.5) + EPSILON);
-				if (magVetor(collision->distvector.x, collision->distvector.y) < HITBOX_RADIUS - EPSILON)
-					return (false);
+				double min_x = neighbor_x - HITBOX_RADIUS;
+				double max_x = neighbor_x + 1 + HITBOX_RADIUS;
+				double min_y = neighbor_y - HITBOX_RADIUS;
+				double max_y = neighbor_y + 1 + HITBOX_RADIUS;
+
+				// Checa se o jogador entrou na caixa com folga
+				if (x >= min_x && x <= max_x && y >= min_y && y <= max_y)
+					return false;
 			}
-			collision->tiley++;
 		}
-		collision->tilex++;
 	}
-	return (true);
+	return true;
 }
+
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {

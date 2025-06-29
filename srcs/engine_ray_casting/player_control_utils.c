@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_control_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:00:21 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/28 19:16:49 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 13:19:19 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	rotate_player(t_rayEngine *engine, double rotation)
 {
-	rotateVetor(&engine->dir, rotation);
-	rotateVetor(&engine->planecamera, rotation);
+	rotatevetor(&engine->dir, rotation);
+	rotatevetor(&engine->planecamera, rotation);
 }
 
 void	move_forward(t_rayEngine *engine)
