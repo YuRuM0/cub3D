@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:58:51 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 20:39:43 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 02:55:26 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static int get_file_rows(char **argv)
+static int	get_file_rows(char **argv)
 {
-	char *current_line;
-	int	i;
-	int fd;
+	char	*current_line;
+	int		i;
+	int		fd;
 
 	fd = open(argv[1], O_RDONLY);
 	i = 0;
@@ -31,16 +31,16 @@ static int get_file_rows(char **argv)
 	return (i);
 }
 
-t_errno read_mapfile(char **argv, t_cub_data *data)
+t_errno	read_mapfile(char **argv, t_cub_data *data)
 {
-	char **wholemap;
-	int rows;
-	int i;
-	int fd;
+	char	**wholemap;
+	int		rows;
+	int		i;
+	int		fd;
 
 	fd = open(argv[1], O_RDONLY);
 	rows = get_file_rows(argv);
-	wholemap = malloc(sizeof(char*) * (rows + 1));
+	wholemap = malloc(sizeof(char *) * (rows + 1));
 	if (!wholemap)
 		return (close (fd), ERR_MEM_ALLOC);
 	i = 0;
@@ -57,10 +57,10 @@ t_errno read_mapfile(char **argv, t_cub_data *data)
 	return (SUCCESS);
 }
 
- static void	get_map_col(t_map *map)
- {
-	int i;
-	int longest;
+static void	get_map_col(t_map *map)
+{
+	int	i;
+	int	longest;
 
 	i = 0;
 	longest = 0;
@@ -71,9 +71,9 @@ t_errno read_mapfile(char **argv, t_cub_data *data)
 		i++;
 	}
 	map->map_col = longest;
- }
+}
 
-void parse(char **argv, t_cub_data *data)
+void	parse(char **argv, t_cub_data *data)
 {
 	t_errno	status;
 

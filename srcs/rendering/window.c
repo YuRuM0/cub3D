@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:10:45 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/28 19:24:10 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 03:11:15 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ mlx_delete_texture(texture);
 so you convert to image -> display the image
 */
 
-static void map_buffer(t_ddaVars *dda, t_cub_data *data)
+static void	map_buffer(t_ddaVars *dda, t_cub_data *data)
 {
-	double wall;
-	int side;
-	int line_len;
+	double	wall;
+	int		side;
+	int		line_len;
 
 	wall = dda->wall_hitx;
 	side = dda->hitside;
@@ -36,7 +36,8 @@ static void map_buffer(t_ddaVars *dda, t_cub_data *data)
 	dda->texture_position = 0.0;
 }
 
-static void	texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture *tex)
+static void	texture_to_buffer(t_ddaVars *dda, t_image *img, \
+int pixel, t_texture *tex)
 {
 	uint32_t	colour_converted;
 	int			y;
@@ -58,14 +59,14 @@ static void	texture_to_buffer(t_ddaVars *dda, t_image *img, int pixel, t_texture
 	}
 }
 
- static void	minimap_main(t_calc *value, t_cub_data *data)
- {
+static void	minimap_main(t_calc *value, t_cub_data *data)
+{
 	minimap_struct_init(value, data);
- 	draw_map(data, value);
+	draw_map(data, value);
 	data->map_info->player_info->player_dx = data->engine->dir.x;
 	data->map_info->player_info->player_dy = data->engine->dir.y;
- 	drawplayer(data, value);
- }
+	drawplayer(data, value);
+}
 
 void	casting_rays(t_cub_data *data, t_rayEngine *engine)
 {

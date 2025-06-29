@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   get_texture_from_map.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:24:25 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/23 19:20:37 by flima            ###   ########.fr       */
+/*   Updated: 2025/06/29 03:04:46 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static t_errno grep_texture(t_cub_data *data, t_texture *texture, char *position)
+static t_errno	grep_texture(t_cub_data *data, t_texture *texture, \
+char *position)
 {
-	int	i;
-	char **texture_line;
+	int		i;
+	char	**texture_line;
 
 	i = -1;
 	while (data->wholemap[++i])
@@ -38,7 +39,7 @@ static t_errno grep_texture(t_cub_data *data, t_texture *texture, char *position
 	return (SUCCESS);
 }
 
-t_errno grep_texture_all(t_cub_data *data)
+t_errno	grep_texture_all(t_cub_data *data)
 {
 	int	errnoo;
 
@@ -56,6 +57,6 @@ t_errno grep_texture_all(t_cub_data *data)
 		return (errnoo);
 	if (data->texture[NO].path == NULL || data->texture[SO].path == NULL
 		|| data->texture[WE].path == NULL || data->texture[EA].path == NULL)
-			return (ERR_MISSING_MAP_ELEMENT);
+		return (ERR_MISSING_MAP_ELEMENT);
 	return (SUCCESS);
 }

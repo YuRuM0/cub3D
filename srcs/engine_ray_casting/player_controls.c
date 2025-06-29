@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_controls.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 13:27:31 by flima             #+#    #+#             */
-/*   Updated: 2025/06/28 21:36:44 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 03:11:48 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	is_move_free(char **map, t_collision *collision, double x, double y)
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_cub_data *data;
+	t_cub_data	*data;
 
 	data = (t_cub_data *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
@@ -70,5 +70,4 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 			data->show_map = true;
 	}
 	//add the cross handler
-
 }

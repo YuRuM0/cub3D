@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/28 17:52:21 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 03:05:12 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	struct_init(t_cub_data *data)
 {
-	int i;
+	int	i;
 
 	data->engine->map = data->map_info;
 	data->engine->data = data;
@@ -48,14 +48,16 @@ void	struct_alloc(t_cub_data *data)
 	data->img = malloc(sizeof(t_image));
 	data->map_info->calc = malloc(sizeof(t_map));
 	data->map_info->player_info = malloc(sizeof(t_player_info));
-	if (data->colours == NULL || data->texture == NULL || data->map_info == NULL\
-		 || data->engine == NULL || data->engine->dda == NULL || data->img == NULL\
-		 || data->map_info->calc == NULL || data->map_info->player_info == NULL)
+	if (data->colours == NULL || data->texture == NULL || \
+		data->map_info == NULL || data->engine == NULL || \
+		data->engine->dda == NULL || data->img == NULL \
+		|| data->map_info->calc == NULL \
+		|| data->map_info->player_info == NULL)
 		status_error_handler(data, ERR_MEM_ALLOC);
 	struct_init(data);
 }
 
-t_errno	validate_RGB_values(char **color)
+t_errno	validate_rgb_values(char **color)
 {
 	int	i;
 	int	j;
@@ -79,7 +81,7 @@ t_errno	validate_RGB_values(char **color)
 
 static void	get_biggest_col(t_map *map, char **wholeMap, int i)
 {
-	int j;
+	int	j;
 	int	biggest;
 
 	biggest = 0;

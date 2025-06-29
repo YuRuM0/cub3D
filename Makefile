@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+         #
+#    By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 20:28:14 by flima             #+#    #+#              #
-#    Updated: 2025/06/28 19:08:13 by yulpark          ###   ########.fr        #
+#    Updated: 2025/06/29 03:02:11 by yulpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ MLX_FLAGS = -L$(MLX42_DIR)/build -lmlx42 -lglfw -ldl -lm -lGL -pthread
 SRCS_DIR = srcs
 PARSE_DIR = $(SRCS_DIR)/parsing
 PARSE_FILES = $(PARSE_DIR)/get_map_from_map.c\
+				$(PARSE_DIR)/get_map_from_map_utils.c\
 				$(PARSE_DIR)/get_texture_from_map.c\
 				$(PARSE_DIR)/utils.c\
 				$(PARSE_DIR)/parse.c\

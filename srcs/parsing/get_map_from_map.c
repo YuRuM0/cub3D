@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_from_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:02:48 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/26 19:04:06 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 03:10:24 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	get_map_row(t_cub_data *data)
 	}
 }
 
-static int check_player_location(t_cub_data *data)
+static int	check_player_location(t_cub_data *data)
 {
 	int	i;
 	int	j;
@@ -71,110 +71,15 @@ static int check_player_location(t_cub_data *data)
 	return (SUCCESS);
 }
 
-//wall surrounding
-	//if space, mustbe surrounded by 1s
-	//if 0, not first line nor last lines
-
-// first line = not 0
-// YOU NOT BUT ABOVE WAS A SPACE,THEN IT MUST BE 1
-
-static t_errno check_map_sides_wall(char **map_grid, int i, int j)
-{
-	i = 1;
-	while (map_grid[i + 1] != NULL)
-	{
-		if (map_grid[i][0] != '1' && map_grid[i][0] != ' ')
-			return (ERR_INVALID_MAP);
-		j = ft_strlen(map_grid[i]) - 1;
-		if (map_grid[i][j] != '1' && map_grid[i][j] != ' ')
-			return (ERR_INVALID_MAP);
-		i++;
-	}
-	return (SUCCESS);
-}
-
-static t_errno check_map_first_last_wall(char **map_grid)
-{
-	int j;
-	int	i;
-
-	i = 0;
-	while (map_grid[i] != NULL)
-	{
-		j = 0;
-		while (map_grid[i][j])
-		{
-			if (map_grid[i][j] != '1' && map_grid[i][j] != ' ')
-				return (ERR_INVALID_MAP);
-			j++;
-		}
-		if (map_grid[i + 1] == NULL)
-			break;
-		while (map_grid[i + 1] != NULL)
-			i++;
-	}
-	if (check_map_sides_wall(map_grid, i, j) != SUCCESS)
-		return (ERR_INVALID_MAP);
-	return (SUCCESS);
-}
-static t_errno	check_surrounding_wall(char **map_grid)
-{
-	int j;
-	int	i;
-
-	i = 1;
-	if (check_map_first_last_wall(map_grid) != SUCCESS)
-		return (ERR_INVALID_MAP);
-	while (map_grid[i + 1] != NULL)
-	{
-		j = 1;
-		while (map_grid[i][j])
-		{
-			if (map_grid[i][j] != ' ' && map_grid[i][j] != '1')
-			{
-				if (map_grid[i + 1][j] == ' ' || map_grid[i - 1][j] == ' ' ||\
-				 map_grid[i][j + 1] == ' ' ||  map_grid[i][j - 1] == ' ')
-					return (ERR_INVALID_MAP);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (SUCCESS);
-}
-
-static char	*ft_strdup_no_newline(const char *s, t_map *map)
-{
-	char	*newstr;
-	int		i;
-
-	newstr = (char *)malloc(sizeof(char) * (map->biggest_col + 1));
-	if (newstr == NULL)
-		return (NULL);
-	i = 0;
-	while (s[i] != '\n' && s[i] != '\0')
-	{
-		newstr[i] = s[i];
-		i++;
-	}
-	while (i < map->biggest_col)
-	{
-		newstr[i] = ' ';
-		i++;
-	}
-	newstr[i] = '\0';
-	return (newstr);
-}
-
-t_errno grep_map(t_cub_data *data)
+t_errno	grep_map(t_cub_data *data)
 {
 	int	i;
-	int map_start;
+	int	map_start;
 
 	i = -1;
 	get_map_row(data);
 	if (data->map_info->map_row == 0)
-		return(ERR_MISSING_MAP_ELEMENT);
+		return (ERR_MISSING_MAP_ELEMENT);
 	if (data->map_info->map_row < 3)
 		return (ERR_INVALID_MAP);
 	map_start = find_map_start(data);

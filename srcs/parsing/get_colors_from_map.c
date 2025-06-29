@@ -3,43 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_colors_from_map.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:30:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/28 19:21:54 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 03:00:45 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-static t_errno	grep_colors(t_cub_data *data)
-{
-	int	i;
-
-	i = -1;
-	while (data->wholemap[++i])
-	{
-		if (errno == ENOMEM)
-			return (ERR_MEM_ALLOC);
-		else if (ft_strncmp(data->wholemap[i], "F", 1) == 0)
-		{
-			if (data->colours->f_colour_str == NULL)
-				data->colours->f_colour_str = ft_strdup(data->wholemap[i]);
-			else
-				return (ERR_DUPLICATE);
-		}
-		else if (ft_strncmp(data->wholemap[i], "C", 1) == 0)
-		{
-			if (data->colours->c_colour_str == NULL)
-				data->colours->c_colour_str = ft_strdup(data->wholemap[i]);
-			else
-				return (ERR_DUPLICATE);
-		}
-	}
-	if (data->colours->c_colour_str == NULL || data->colours->f_colour_str == NULL)
-		return (ERR_MISSING_MAP_ELEMENT);
-	return (SUCCESS);
-}
 
 static t_errno	split_color_values(char *color, char ***_color)
 {
@@ -71,7 +42,7 @@ static t_errno	convert_color_type(long *array, char ***color)
 	int	i;
 
 	i = -1;
-	if (validate_RGB_values(*color) != SUCCESS)
+	if (validate_rgb_values(*color) != SUCCESS)
 		return (free_double(*color), ERR_INVALID_RBG_VALUES);
 	while ((*color)[++i])
 	{
@@ -109,7 +80,7 @@ t_errno	get_colors(t_cub_data *data)
 {
 	t_errno	status;
 
-	status = grep_colors(data);
+	status = grep_colors(data, data->colours);
 	if (status != SUCCESS)
 		return (status);
 	status = get_rgb_values(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:01:23 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/28 21:36:38 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 03:12:59 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,12 +189,19 @@ struct s_cub_data
 ////parsing/////////////////////////////////////////////////////////////
 //utils
 void		struct_alloc(t_cub_data *data);
-t_errno		validate_RGB_values(char **color);
+t_errno		validate_rgb_values(char **color);
 int			find_map_start(t_cub_data *data);
 
 //parse
 t_errno		read_mapfile(char **argv, t_cub_data *data);
 void		parse(char **argv, t_cub_data *data);
+
+//get_map_from_map_utils
+t_errno		grep_colors(t_cub_data *data, t_colours *col);
+t_errno		check_map_sides_wall(char **map_grid, int i, int j);
+t_errno		check_map_first_last_wall(char **map_grid);
+char		*ft_strdup_no_newline(const char *s, t_map *map);
+t_errno		check_surrounding_wall(char **map_grid);
 
 //get_from_map
 t_errno		get_colors(t_cub_data *data);
@@ -222,7 +229,8 @@ void		hitwalldir(t_ddaVars *dda, int fromSide);
 
 //DDA_dis_utils
 void		calc_deltadist(t_ddaVars *dda, t_vetor2D rayDir);
-void		get_distance(t_ddaVars *dda, t_rayEngine *engine,unsigned int pixel);
+void		get_distance(t_ddaVars *dda, t_rayEngine *engine, \
+unsigned int pixel);
 
 //player_control_utils
 void		rotate_player(t_rayEngine *engine, double rotation);
