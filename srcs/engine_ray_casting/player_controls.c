@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_controls.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 13:27:31 by flima             #+#    #+#             */
-/*   Updated: 2025/06/29 15:22:28 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 16:47:06 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,21 @@ bool	is_move_free(char **map, t_collision *collision, double x, double y)
 	return (true);
 }
 
+static void	key_hook2(mlx_key_data_t keydata, t_cub_data *data)
+{
+	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS \
+		|| keydata.action == MLX_REPEAT))
+		move_right(data->engine);
+	else if (keydata.key == MLX_KEY_M && (keydata.action == MLX_PRESS \
+		|| keydata.action == MLX_REPEAT))
+	{
+		if (data->show_map == true)
+			data->show_map = false;
+		else
+			data->show_map = true;
+	}
+}
+
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_cub_data	*data;
@@ -46,23 +61,21 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	data = (t_cub_data *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		status_error_handler(data, SUCCESS);
-	if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+	if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_PRESS \
+		|| keydata.action == MLX_REPEAT))
 		rotate_player(data->engine, -ROTATION_SPEED);
-	else if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+	else if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_PRESS \
+		|| keydata.action == MLX_REPEAT))
 		rotate_player(data->engine, ROTATION_SPEED);
-	else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+	else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS \
+		|| keydata.action == MLX_REPEAT))
 		move_forward(data->engine);
-	else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+	else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS \
+		|| keydata.action == MLX_REPEAT))
 		move_backward(data->engine);
-	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS \
+		|| keydata.action == MLX_REPEAT))
 		move_left(data->engine);
-	else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-		move_right(data->engine);
-	else if (keydata.key == MLX_KEY_M && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-	{
-		if (data->show_map == true)
-			data->show_map = false;
-		else
-			data->show_map = true;
-	}
+	else
+		key_hook2(keydata, data);
 }

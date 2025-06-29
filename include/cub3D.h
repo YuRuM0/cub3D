@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:24:49 by                   #+#    #+#             */
-/*   Updated: 2025/06/29 15:24:57 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 18:31:48 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define PI 3.1415926535
 # define WIDTH 1920
 # define HEIGHT 1080
-# define ROTATION_SPEED 0.07
+# define ROTATION_SPEED 0.1
 # define MOVE_SPEED 0.05
 # define HITBOX_RADIUS 0.2
 # define PLAYER_COLOUR 0x002776FF
@@ -204,6 +204,7 @@ t_errno		check_map_sides_wall(char **map_grid, int i, int j);
 t_errno		check_map_first_last_wall(char **map_grid);
 char		*ft_strdup_no_newline(const char *s, t_map *map);
 t_errno		check_surrounding_wall(char **map_grid);
+t_errno		check_player_location(t_cub_data *data, int i, int j);
 
 //get_from_map
 t_errno		get_colors(t_cub_data *data);

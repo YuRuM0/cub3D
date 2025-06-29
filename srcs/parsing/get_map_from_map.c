@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_from_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:02:48 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/29 03:10:24 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/06/29 17:47:26 by flima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,31 +40,39 @@ static void	get_map_row(t_cub_data *data)
 	}
 }
 
-static int	check_player_location(t_cub_data *data)
+static bool	is_valid_map_chars(t_cub_data *data, int i, int j)
 {
-	int	i;
-	int	j;
+	if (data->map_info->map_grid[i][j] != '1' && \
+		data->map_info->map_grid[i][j] != '0' &&
+		data->map_info->map_grid[i][j] != ' ' && \
+		data->map_info->map_grid[i][j] != '\n')
+		return (false);
+	return (true);
+}
 
-	i = -1;
+t_errno	check_player_location(t_cub_data *data, int i, int j)
+{
 	while (data->map_info->map_grid[++i])
 	{
 		j = -1;
 		while (data->map_info->map_grid[i][++j])
 		{
-			if (data->map_info->map_grid[i][j] == 'W' || data->map_info->map_grid[i][j] == 'S' ||
-				data->map_info->map_grid[i][j] == 'E' || data->map_info->map_grid[i][j] == 'N')
+			if (data->map_info->map_grid[i][j] == 'W' \
+				|| data->map_info->map_grid[i][j] == 'S' ||
+				data->map_info->map_grid[i][j] == 'E' \
+				|| data->map_info->map_grid[i][j] == 'N')
 			{
 				if (data->map_info->player_dir == '0')
 				{
-					data->map_info->player_dir = data->map_info->map_grid[i][j];
+					data->map_info->player_dir = \
+					data->map_info->map_grid[i][j];
 					data->map_info->player_row = i;
 					data->map_info->player_col = j;
 				}
 				else
 					return (ERR_DUPLICATE);
 			}
-			else if (data->map_info->map_grid[i][j] != '1' && data->map_info->map_grid[i][j] != '0' &&
-			data->map_info->map_grid[i][j] != ' ' && data->map_info->map_grid[i][j] != '\n')
+			else if (!is_valid_map_chars(data, i, j))
 				return (ERR_INVALID_MAP);
 		}
 	}
@@ -83,19 +91,19 @@ t_errno	grep_map(t_cub_data *data)
 	if (data->map_info->map_row < 3)
 		return (ERR_INVALID_MAP);
 	map_start = find_map_start(data);
-	data->map_info->map_grid = malloc(sizeof(char *) * (data->map_info->map_row + 1));
+	data->map_info->map_grid = malloc(sizeof(char *) * \
+	(data->map_info->map_row + 1));
 	if (!data->map_info->map_grid)
 		return (ERR_MEM_ALLOC);
 	while (data->wholemap[map_start + (++i)] && i < data->map_info->map_row)
 	{
 		if (data->wholemap[map_start + i][0] == '\n')
 			return (ERR_INVALID_MAP);
-		data->map_info->map_grid[i] = ft_strdup_no_newline(data->wholemap[map_start + i], data->map_info);
+		data->map_info->map_grid[i] = \
+		ft_strdup_no_newline(data->wholemap[map_start + i], data->map_info);
 		if (!data->map_info->map_grid[i])
 			return (ERR_MEM_ALLOC);
 	}
 	data->map_info->map_grid[i] = NULL;
-	if (check_player_location(data) != SUCCESS || data->map_info->player_dir == '0')
-		return (ERR_INVALID_MAP);
-	return (check_surrounding_wall(data->map_info->map_grid));
+	return (SUCCESS);
 }
