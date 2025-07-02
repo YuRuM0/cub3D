@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_control_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:00:21 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/29 13:19:19 by flima            ###   ########.fr       */
+/*   Updated: 2025/07/02 18:58:27 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	move_forward(t_rayEngine *engine)
 
 	x = engine->posplayer.x + engine->dir.x * MOVE_SPEED;
 	y = engine->posplayer.y + engine->dir.y * MOVE_SPEED;
-	if (is_move_free(engine->map->map_grid, &engine->collision, \
-		x, engine->posplayer.y))
+	if (is_move_free(engine->map->map_grid, &engine->collision,
+			x, engine->posplayer.y))
 		engine->posplayer.x = x;
-	if (is_move_free(engine->map->map_grid, &engine->collision, \
-		engine->posplayer.x, y))
+	if (is_move_free(engine->map->map_grid, &engine->collision,
+			engine->posplayer.x, y))
 		engine->posplayer.y = y;
 }
 
@@ -40,11 +40,11 @@ void	move_backward(t_rayEngine *engine)
 
 	x = engine->posplayer.x - engine->dir.x * MOVE_SPEED;
 	y = engine->posplayer.y - engine->dir.y * MOVE_SPEED;
-	if (is_move_free(engine->map->map_grid, &engine->collision, x, \
-		engine->posplayer.y))
+	if (is_move_free(engine->map->map_grid, &engine->collision, x,
+			engine->posplayer.y))
 		engine->posplayer.x = x;
-	if (is_move_free(engine->map->map_grid, &engine->collision, \
-		engine->posplayer.x, y))
+	if (is_move_free(engine->map->map_grid, &engine->collision,
+			engine->posplayer.x, y))
 		engine->posplayer.y = y;
 }
 
@@ -55,11 +55,11 @@ void	move_left(t_rayEngine *engine)
 
 	x = engine->posplayer.x - engine->planecamera.x * MOVE_SPEED;
 	y = engine->posplayer.y - engine->planecamera.y * MOVE_SPEED;
-	if (is_move_free(engine->map->map_grid, &engine->collision, x, \
-		engine->posplayer.y))
+	if (is_move_free(engine->map->map_grid, &engine->collision, x,
+			engine->posplayer.y))
 		engine->posplayer.x = x;
-	if (is_move_free(engine->map->map_grid, &engine->collision, \
-		engine->posplayer.x, y))
+	if (is_move_free(engine->map->map_grid, &engine->collision,
+			engine->posplayer.x, y))
 		engine->posplayer.y = y;
 }
 
@@ -70,10 +70,10 @@ void	move_right(t_rayEngine *engine)
 
 	x = engine->posplayer.x + engine->planecamera.x * MOVE_SPEED;
 	y = engine->posplayer.y + engine->planecamera.y * MOVE_SPEED;
-	if (is_move_free(engine->map->map_grid, &engine->collision, x, \
-		engine->posplayer.y))
+	if (is_move_free(engine->map->map_grid, &engine->collision, x,
+			engine->posplayer.y))
 		engine->posplayer.x = x;
-	if (is_move_free(engine->map->map_grid, &engine->collision, \
-		engine->posplayer.x, y))
+	if (is_move_free(engine->map->map_grid, &engine->collision,
+			engine->posplayer.x, y))
 		engine->posplayer.y = y;
 }

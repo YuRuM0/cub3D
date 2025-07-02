@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:55:52 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/29 18:28:03 by flima            ###   ########.fr       */
+/*   Updated: 2025/07/02 19:05:04 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	minimap_struct_init(t_calc *value, t_cub_data *data)
 	value->map_y = -1;
 }
 
-static void	draw_map_loop(int *pixel_x_start_end, \
+static void	draw_map_loop(int *pixel_x_start_end,
 	int *pixel_y_start_end, t_cub_data *data, t_calc *value)
 {
 	uint32_t	pixel_y;
@@ -33,15 +33,15 @@ static void	draw_map_loop(int *pixel_x_start_end, \
 		pixel_x = (uint32_t)pixel_x_start_end[0] - 1;
 		while (++pixel_x < (uint32_t)pixel_x_start_end[1])
 		{
-			if (pixel_x >= 0 && pixel_x < MINIMAP_WIDTH && \
-				pixel_y >= 0 && pixel_y < MINIMAP_HEIGHT)
+			if (pixel_x >= 0 && pixel_x < MINIMAP_WIDTH
+				&& pixel_y >= 0 && pixel_y < MINIMAP_HEIGHT)
 			{
 				map_loc = data->map_info->map_grid[value->map_y][value->map_x];
 				if (map_loc == '1')
-					mlx_put_pixel(data->img->img, pixel_x, pixel_y, \
+					mlx_put_pixel(data->img->img, pixel_x, pixel_y,
 						WALL_COLOUR);
 				else
-					mlx_put_pixel(data->img->img, pixel_x, pixel_y, \
+					mlx_put_pixel(data->img->img, pixel_x, pixel_y,
 						FLOOR_COLOUR);
 			}
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:22:04 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/29 03:05:12 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/07/02 19:07:15 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	struct_alloc(t_cub_data *data)
 	data->img = malloc(sizeof(t_image));
 	data->map_info->calc = malloc(sizeof(t_map));
 	data->map_info->player_info = malloc(sizeof(t_player_info));
-	if (data->colours == NULL || data->texture == NULL || \
-		data->map_info == NULL || data->engine == NULL || \
-		data->engine->dda == NULL || data->img == NULL \
-		|| data->map_info->calc == NULL \
+	if (data->colours == NULL || data->texture == NULL
+		|| data->map_info == NULL || data->engine == NULL
+		|| data->engine->dda == NULL || data->img == NULL
+		|| data->map_info->calc == NULL
 		|| data->map_info->player_info == NULL)
 		status_error_handler(data, ERR_MEM_ALLOC);
 	struct_init(data);

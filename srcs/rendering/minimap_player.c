@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:20:09 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/29 17:57:29 by flima            ###   ########.fr       */
+/*   Updated: 2025/07/02 19:07:43 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ t_vetor2D arrow, t_image *img)
 
 	data->map_info->player_info->dx = arrow.x - player.x;
 	data->map_info->player_info->dy = arrow.y - player.y;
-	data->map_info->player_info->steps = \
-	fmax(fabsf(data->map_info->player_info->dx) \
-	, fabsf(data->map_info->player_info->dy));
-	xinc = data->map_info->player_info->dx / \
-	(float)data->map_info->player_info->steps;
-	yinc = data->map_info->player_info->dy / \
-	(float)data->map_info->player_info->steps;
+	data->map_info->player_info->steps
+		= fmax(fabsf(data->map_info->player_info->dx),
+			fabsf(data->map_info->player_info->dy));
+	xinc = data->map_info->player_info->dx
+		/ (float)data->map_info->player_info->steps;
+	yinc = data->map_info->player_info->dy
+		/ (float)data->map_info->player_info->steps;
 	i = 0;
 	while (i < data->map_info->player_info->steps)
 	{

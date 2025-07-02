@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:46:17 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/28 21:35:42 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/07/02 19:08:19 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ t_errno	load_texture(t_cub_data *data)
 			data->texture[i].texture = mlx_load_png(data->texture[i].path);
 		if (!data->texture[i].texture)
 			return (ERR_MLX_FAIL);
-		data->texture[i].image = mlx_texture_to_image(data->mlx, \
-			data->texture[i].texture);
+		data->texture[i].image = mlx_texture_to_image(data->mlx,
+				data->texture[i].texture);
 		if (!data->texture[i].image)
 			return (ERR_MLX_FAIL);
 		i++;

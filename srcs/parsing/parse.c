@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:58:51 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/29 17:01:34 by flima            ###   ########.fr       */
+/*   Updated: 2025/07/02 19:33:53 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ static t_errno	check_player_n_wall(t_cub_data *data)
 
 	i = -1;
 	j = -1;
-	if (check_player_location(data, i, j) != SUCCESS || \
-	data->map_info->player_dir == '0')
+	if (check_player_location(data, i, j) != SUCCESS
+		|| data->map_info->player_dir == '0')
 		return (ERR_INVALID_MAP);
 	if (check_surrounding_wall(data->map_info->map_grid) != SUCCESS)
 		return (ERR_INVALID_MAP);
@@ -91,7 +91,9 @@ static t_errno	check_player_n_wall(t_cub_data *data)
 void	parse(char **argv, t_cub_data *data)
 {
 	t_errno	status;
+	int		i;
 
+	i = -1;
 	status = read_mapfile(argv, data);
 	if (status != SUCCESS)
 		status_error_handler(data, status);
@@ -101,7 +103,7 @@ void	parse(char **argv, t_cub_data *data)
 	status = get_colors(data);
 	if (status != SUCCESS)
 		status_error_handler(data, status);
-	status = grep_map(data);
+	status = grep_map(data, &i);
 	if (status != SUCCESS)
 		status_error_handler(data, status);
 	status = check_player_n_wall(data);

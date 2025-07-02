@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:58 by flima             #+#    #+#             */
-/*   Updated: 2025/06/28 21:35:55 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/07/02 18:57:03 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,16 @@ void	calc_disttosides(t_rayEngine *engine, t_vetor2D rayDir, t_ddaVars *dda)
 		dda->stepdirx = -1;
 	}
 	else
-		dda->disttosidex = ((mappos.x + 1) - engine->posplayer.x) \
-		* dda->deltadistx;
+		dda->disttosidex = ((mappos.x + 1) - engine->posplayer.x)
+			* dda->deltadistx;
 	if (rayDir.y < 0)
 	{
 		dda->disttosidey = (engine->posplayer.y - mappos.y) * dda->deltadisty;
 		dda->stepdiry = -1;
 	}
 	else
-		dda->disttosidey = ((mappos.y + 1) - engine->posplayer.y) \
-		* dda->deltadisty;
+		dda->disttosidey = ((mappos.y + 1) - engine->posplayer.y)
+			* dda->deltadisty;
 }
 
 void	hitwalldir(t_ddaVars *dda, int fromSide)

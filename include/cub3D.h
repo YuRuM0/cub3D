@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flima <flima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:24:49 by                   #+#    #+#             */
-/*   Updated: 2025/06/29 18:31:48 by flima            ###   ########.fr       */
+/*   Updated: 2025/07/02 19:11:44 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ t_errno		check_player_location(t_cub_data *data, int i, int j);
 
 //get_from_map
 t_errno		get_colors(t_cub_data *data);
-t_errno		grep_map(t_cub_data *data);
+t_errno		grep_map(t_cub_data *data, int *i);
 t_errno		grep_texture_all(t_cub_data *data);
 
 ////erros_n_free//////////////////////////////////
@@ -226,15 +226,15 @@ void		clean_game_window(t_cub_data *data);
 void		init_vetors(t_rayEngine *engine, t_map *map);
 void		init_dda_struct(t_ddaVars *dda);
 t_vetor2D	calc_camerapixel(t_rayEngine *engine, unsigned int pixel);
-void		calc_disttosides(t_rayEngine *engine, t_vetor2D rayDir, \
-	t_ddaVars *dda);
+void		calc_disttosides(t_rayEngine *engine, t_vetor2D rayDir,
+				t_ddaVars *dda);
 void		hitwalldir(t_ddaVars *dda, int fromSide);
 double		dda_algorithm(t_rayEngine *engine, t_ddaVars *dda);
 
 //DDA_dis_utils
 void		calc_deltadist(t_ddaVars *dda, t_vetor2D rayDir);
-void		get_distance(t_ddaVars *dda, t_rayEngine *engine, \
-unsigned int pixel);
+void		get_distance(t_ddaVars *dda, t_rayEngine *engine,
+				unsigned int pixel);
 
 //player_control_utils
 void		rotate_player(t_rayEngine *engine, double rotation);
@@ -244,8 +244,8 @@ void		move_left(t_rayEngine *engine);
 void		move_right(t_rayEngine *engine);
 
 //player_controls
-bool		is_move_free(char **map, t_collision *collision, \
-	double x, double y);
+bool		is_move_free(char **map, t_collision *collision,
+				double x, double y);
 void		key_hook(mlx_key_data_t keydata, void *param);
 
 //utils

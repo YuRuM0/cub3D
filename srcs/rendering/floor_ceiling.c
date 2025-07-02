@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floor_ceiling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 12:23:08 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/29 03:11:30 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/07/02 19:07:56 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	draw_floor_ceiling(t_image *image, t_colours *colours)
 		while (y < HEIGHT)
 		{
 			if (y < HEIGHT / 2)
-				mlx_put_pixel(image->img, x, y, \
-				rgb_to_binary(colours->c_colour, 255));
+				mlx_put_pixel(image->img, x, y,
+					rgb_to_binary(colours->c_colour, 255));
 			if (y >= HEIGHT / 2)
-				mlx_put_pixel(image->img, x, y, \
-				rgb_to_binary(colours->f_colour, 255));
+				mlx_put_pixel(image->img, x, y,
+					rgb_to_binary(colours->f_colour, 255));
 			y++;
 		}
 		x++;

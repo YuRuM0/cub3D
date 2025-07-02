@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_from_map_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yulpark <yulpark@student.codam.nl>         +#+  +:+       +#+        */
+/*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 03:00:33 by yulpark           #+#    #+#             */
-/*   Updated: 2025/06/29 03:04:27 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/07/02 19:00:06 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ t_errno	check_surrounding_wall(char **map_grid)
 		{
 			if (map_grid[i][j] != ' ' && map_grid[i][j] != '1')
 			{
-				if (map_grid[i + 1][j] == ' ' || map_grid[i - 1][j] == ' ' || \
-				map_grid[i][j + 1] == ' ' || map_grid[i][j - 1] == ' ')
+				if (map_grid[i + 1][j] == ' ' || map_grid[i - 1][j] == ' '
+					|| map_grid[i][j + 1] == ' ' || map_grid[i][j - 1] == ' ')
 					return (ERR_INVALID_MAP);
 			}
 			j++;

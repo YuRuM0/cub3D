@@ -6,7 +6,7 @@
 /*   By: yulpark <yulpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:51:45 by flima             #+#    #+#             */
-/*   Updated: 2025/06/29 14:37:44 by yulpark          ###   ########.fr       */
+/*   Updated: 2025/07/02 18:57:26 by yulpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,17 @@ static double	get_disttowall(t_ddaVars *dda, t_rayEngine *engine)
 	double	euclideandist;
 
 	if (dda->hitside == NO)
-		euclideandist = fabs(dda->raywall.y + 1 - engine->posplayer.y) \
-		/ fabs(engine->raydir.y);
+		euclideandist = fabs(dda->raywall.y + 1 - engine->posplayer.y)
+			/ fabs(engine->raydir.y);
 	else if (dda->hitside == SO)
-		euclideandist = fabs(dda->raywall.y - engine->posplayer.y) \
-		/ fabs(engine->raydir.y);
+		euclideandist = fabs(dda->raywall.y - engine->posplayer.y)
+			/ fabs(engine->raydir.y);
 	else if (dda->hitside == WE)
-		euclideandist = fabs(dda->raywall.x + 1 - engine->posplayer.x) \
-		/ fabs(engine->raydir.x);
+		euclideandist = fabs(dda->raywall.x + 1 - engine->posplayer.x)
+			/ fabs(engine->raydir.x);
 	else
-		euclideandist = fabs(dda->raywall.x - engine->posplayer.x) \
-		/ fabs(engine->raydir.x);
+		euclideandist = fabs(dda->raywall.x - engine->posplayer.x)
+			/ fabs(engine->raydir.x);
 	return (euclideandist);
 }
 
